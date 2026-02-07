@@ -43,14 +43,14 @@ Cycle 2 was triggered by merging `dev → main` on jaan-to repo, which fixed the
 
 ### From Cycle 1 Gap Report — Items Still Open
 
-| # | Gap | Status | Notes |
-|---|-----|--------|-------|
-| 5 | API design / OpenAPI spec | OPEN | No skill exists. Frontend tasks reference undefined API contracts — #1 integration risk |
-| 6 | Database schema design | PARTIALLY RESOLVED | Prisma schema generated within backend task breakdown. Standalone data model skill still doesn't exist |
-| 7 | Backend code generation | OPEN | No skill exists. Task breakdown is complete but no code scaffold |
-| 8 | Security threat model | OPEN | No skill exists. Auth system (Google OAuth, JWT, guest sessions) needs threat analysis |
-| 9 | UX persona creation | OPEN | No skill exists. PRD references personas without formal definitions |
-| 10 | CI/CD / deployment | OPEN | No skill exists. Not yet urgent (pre-implementation) |
+| # | Gap | Status | Roadmap Skill | Notes |
+|---|-----|--------|---------------|-------|
+| 5 | API design / OpenAPI spec | ROADMAP | `dev-api-contract` (dev.md) | OpenAPI contract with payloads, errors, versioning. Needs OpenAPI MCP |
+| 6 | Database schema design | ROADMAP | `dev-be-data-model` (dev.md) | Tables + constraints + indexes + migration notes. Prisma schema already generated in Cycle 2 via `dev-be-task-breakdown` |
+| 7 | Backend code generation | OPEN | — | No roadmap skill generates code files. Need: `dev-be-scaffold` — generate Fastify routes, Prisma models, service files from task breakdown |
+| 8 | Security threat model | ROADMAP | `sec-threat-model-lite` (sec.md) | Threats + mitigations checklist, high-risk areas, verification steps |
+| 9 | UX persona creation | ROADMAP | `ux-persona-create` (ux.md) | Personas with goals, pain points, behaviors, JTBD. AI Score 5, Rank #16 |
+| 10 | CI/CD / deployment | OPEN | — | No roadmap skill creates CI/CD pipelines. Need: `sre-pipeline-create` — generate GitHub Actions workflows, Dockerfile, deploy manifests |
 
 ### New Gaps Discovered in Cycle 2
 
