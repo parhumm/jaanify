@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaanify Dashboard — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+       JAANIFY DESIGN TOKENS
+       Warm, trustworthy, neurodivergent-friendly
+       ═══════════════════════════════════════════ */
+    :root {
+      /* Colors — Warm sage & cream palette */
+      --color-bg: #FAF8F5;
+      --color-surface: #FFFFFF;
+      --color-surface-raised: #F5F2EE;
+      --color-primary: #6B8F71;
+      --color-primary-light: #8FB596;
+      --color-primary-subtle: #E8F0E9;
+      --color-accent: #C4836A;
+      --color-accent-light: #F0DDD5;
+      --color-text: #3D4550;
+      --color-text-secondary: #6B7280;
+      --color-text-muted: #9CA3AF;
+      --color-border: #E5E1DC;
+      --color-success: #6B8F71;
+      --color-warning: #D4A843;
+      --color-confidence-high: #6B8F71;
+      --color-confidence-med: #D4A843;
+      --color-confidence-low: #C4836A;
+
+      /* Typography — DM Sans: warm, readable */
+      --font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --font-size-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+      --font-size-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+      --font-size-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+      --font-size-lg: clamp(1.05rem, 1rem + 0.25vw, 1.125rem);
+      --font-size-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+      --font-size-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
+      --line-height-tight: 1.25;
+      --line-height-normal: 1.5;
+      --line-height-relaxed: 1.65;
+
+      /* Spacing — Generous breathing room */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 0.75rem;
+      --space-lg: 1rem;
+      --space-xl: 1.5rem;
+      --space-2xl: 2rem;
+      --space-3xl: 3rem;
+
+      /* Borders */
+      --radius-sm: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.25rem;
+      --radius-full: 50%;
+
+      /* Shadows — Soft, not harsh */
+      --shadow-sm: 0 1px 2px rgba(61, 69, 80, 0.04);
+      --shadow-md: 0 2px 8px rgba(61, 69, 80, 0.06);
+      --shadow-lg: 0 4px 16px rgba(61, 69, 80, 0.08);
+      --shadow-focus: 0 0 0 3px rgba(107, 143, 113, 0.3);
+
+      /* Transitions */
+      --transition-fast: 150ms ease-out;
+      --transition-normal: 200ms ease-out;
+      --transition-slow: 300ms ease-out;
+    }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #1A1D21;
+        --color-surface: #242830;
+        --color-surface-raised: #2D323A;
+        --color-primary: #8FB596;
+        --color-primary-light: #A8C9AE;
+        --color-primary-subtle: #2A3B2D;
+        --color-accent: #D4996A;
+        --color-accent-light: #3D2E24;
+        --color-text: #E8E6E3;
+        --color-text-secondary: #9CA3AF;
+        --color-text-muted: #6B7280;
+        --color-border: #374151;
+        --color-success: #8FB596;
+        --color-warning: #D4A843;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       BASE RESET & LAYOUT
+       ═══════════════════════════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .dashboard {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+      padding-bottom: 6rem; /* Space for FAB */
+      min-height: 100vh;
+    }
+
+    /* ═══════════════════════════════════════════
+       HEADER — Greeting & Date
+       ═══════════════════════════════════════════ */
+    .header {
+      padding: var(--space-xl) 0 var(--space-lg);
+    }
+
+    .header__greeting {
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: var(--line-height-tight);
+      letter-spacing: -0.01em;
+    }
+
+    .header__date {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      margin-top: var(--space-xs);
+    }
+
+    /* ═══════════════════════════════════════════
+       STATS ROW — Productivity at a glance
+       ═══════════════════════════════════════════ */
+    .stats {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .stat-card {
+      flex: 1;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-card__value {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: var(--line-height-tight);
+    }
+
+    .stat-card__label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ═══════════════════════════════════════════
+       DAILY PLAN — Morning focus section
+       ═══════════════════════════════════════════ */
+    .daily-plan {
+      background: var(--color-primary-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      border: 1px solid rgba(107, 143, 113, 0.15);
+    }
+
+    .daily-plan__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-md);
+    }
+
+    .daily-plan__title {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .daily-plan__badge {
+      font-size: var(--font-size-xs);
+      background: var(--color-primary);
+      color: white;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+    }
+
+    .daily-plan__summary {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .daily-plan__reasoning {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(107, 143, 113, 0.15);
+      font-size: var(--font-size-xs);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .daily-plan__reasoning-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION HEADER
+       ═══════════════════════════════════════════ */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-header__title {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+    }
+
+    .section-header__count {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+    }
+
+    /* ═══════════════════════════════════════════
+       TASK LIST — Cards with Reasoning
+       ═══════════════════════════════════════════ */
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .task-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+      cursor: pointer;
+    }
+
+    .task-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary-light);
+    }
+
+    .task-card:focus-within {
+      box-shadow: var(--shadow-focus);
+      border-color: var(--color-primary);
+      outline: none;
+    }
+
+    .task-card--priority-1 {
+      border-left: 3px solid var(--color-accent);
+    }
+
+    .task-card--priority-2 {
+      border-left: 3px solid var(--color-warning);
+    }
+
+    .task-card--priority-3 {
+      border-left: 3px solid var(--color-primary);
+    }
+
+    .task-card__top {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .task-card__checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+      margin-top: 1px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .task-card__checkbox:hover {
+      border-color: var(--color-primary);
+    }
+
+    .task-card__checkbox:focus-visible {
+      box-shadow: var(--shadow-focus);
+      outline: none;
+    }
+
+    .task-card__checkbox:checked {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .task-card__checkbox:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .task-card__content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-card__title {
+      font-size: var(--font-size-base);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: var(--line-height-tight);
+    }
+
+    .task-card__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+      flex-wrap: wrap;
+    }
+
+    .task-card__tag {
+      font-size: var(--font-size-xs);
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--color-surface-raised);
+      color: var(--color-text-secondary);
+    }
+
+    .task-card__time {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+
+    /* ─── Tier 1 Reasoning (always visible) ─── */
+    .reasoning-t1 {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+    }
+
+    .reasoning-t1__icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      color: var(--color-primary);
+    }
+
+    .reasoning-t1__text {
+      flex: 1;
+    }
+
+    .reasoning-t1__expand {
+      width: 16px;
+      height: 16px;
+      color: var(--color-text-muted);
+      transition: transform var(--transition-normal);
+      flex-shrink: 0;
+    }
+
+    .reasoning-t1__expand--open {
+      transform: rotate(180deg);
+    }
+
+    /* ─── Tier 2 Reasoning (expandable) ─── */
+    .reasoning-t2 {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-slow);
+    }
+
+    .reasoning-t2--open {
+      max-height: 300px;
+    }
+
+    .reasoning-t2__content {
+      padding-top: var(--space-md);
+    }
+
+    .reasoning-t2__factors {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .factor {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .factor__label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      min-width: 72px;
+    }
+
+    .factor__bar-bg {
+      flex: 1;
+      height: 6px;
+      background: var(--color-surface-raised);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .factor__bar {
+      height: 100%;
+      border-radius: 3px;
+      transition: width var(--transition-slow);
+    }
+
+    .factor__bar--high { background: var(--color-confidence-high); }
+    .factor__bar--med { background: var(--color-confidence-med); }
+    .factor__bar--low { background: var(--color-confidence-low); }
+
+    .factor__value {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      min-width: 28px;
+      text-align: right;
+    }
+
+    .reasoning-t2__confidence {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var(--space-md);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .confidence__label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+
+    .confidence__value {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .reasoning-t2__override {
+      display: block;
+      width: 100%;
+      margin-top: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+      font-family: var(--font-family);
+      font-size: var(--font-size-xs);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-align: center;
+    }
+
+    .reasoning-t2__override:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .reasoning-t2__override:focus-visible {
+      box-shadow: var(--shadow-focus);
+      outline: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       VOICE FAB — Floating action button
+       ═══════════════════════════════════════════ */
+    .fab {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 12px rgba(107, 143, 113, 0.35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      z-index: 100;
+    }
+
+    .fab:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(107, 143, 113, 0.4);
+    }
+
+    .fab:focus-visible {
+      box-shadow: 0 0 0 3px rgba(107, 143, 113, 0.4), 0 4px 12px rgba(107, 143, 113, 0.35);
+      outline: none;
+    }
+
+    .fab:active {
+      transform: scale(0.96);
+    }
+
+    .fab__icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ═══════════════════════════════════════════
+       ADD TASK — Inline quick add
+       ═══════════════════════════════════════════ */
+    .add-task {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-surface);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      margin-top: var(--space-md);
+    }
+
+    .add-task:hover {
+      border-color: var(--color-primary-light);
+      color: var(--color-primary);
+    }
+
+    .add-task__icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — Tablet & Desktop
+       ═══════════════════════════════════════════ */
+    @media (min-width: 768px) {
+      .dashboard {
+        max-width: 640px;
+        padding: var(--space-2xl);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .dashboard {
+        max-width: 720px;
+        padding: var(--space-3xl) var(--space-2xl);
+      }
+
+      .stats {
+        gap: var(--space-lg);
+      }
+
+      .stat-card {
+        padding: var(--space-lg);
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       SCREEN READER ONLY
+       ═══════════════════════════════════════════ */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="dashboard" role="main">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__greeting">Good morning, Alex</h1>
+      <p class="header__date">Friday, February 7, 2026</p>
+    </header>
+
+    <!-- Productivity Stats -->
+    <section class="stats" aria-label="Productivity summary">
+      <div class="stat-card" role="status">
+        <div class="stat-card__value">5/8</div>
+        <div class="stat-card__label">Tasks</div>
+      </div>
+      <div class="stat-card" role="status">
+        <div class="stat-card__value">3h</div>
+        <div class="stat-card__label">Focus</div>
+      </div>
+      <div class="stat-card" role="status">
+        <div class="stat-card__value">7</div>
+        <div class="stat-card__label">Streak</div>
+      </div>
+    </section>
+
+    <!-- Daily Plan -->
+    <section class="daily-plan" aria-label="AI daily plan">
+      <div class="daily-plan__header">
+        <h2 class="daily-plan__title">Your Plan Today</h2>
+        <span class="daily-plan__badge" aria-label="AI generated">AI Plan</span>
+      </div>
+      <p class="daily-plan__summary">
+        Focus on the Johnson proposal first — it blocks 3 other tasks and the deadline is close. After lunch, batch your quick admin tasks when energy dips.
+      </p>
+      <div class="daily-plan__reasoning" role="button" tabindex="0" aria-expanded="false" aria-label="View plan reasoning">
+        <svg class="daily-plan__reasoning-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="8" cy="8" r="6"/>
+          <path d="M8 5v3M8 10.5v.5"/>
+        </svg>
+        <span>Plan based on: deadline urgency + dependency chains + your energy pattern</span>
+      </div>
+    </section>
+
+    <!-- Task List -->
+    <section aria-label="Today's tasks">
+      <div class="section-header">
+        <h2 class="section-header__title">Today</h2>
+        <span class="section-header__count">3 remaining</span>
+      </div>
+
+      <div class="task-list" role="list">
+        <!-- Task 1 — High Priority -->
+        <article class="task-card task-card--priority-1" role="listitem" tabindex="0" aria-label="Call Sarah about Johnson proposal, priority 1, due 2 PM">
+          <div class="task-card__top">
+            <input type="checkbox" class="task-card__checkbox" aria-label="Mark task complete">
+            <div class="task-card__content">
+              <h3 class="task-card__title">Call Sarah about Johnson proposal</h3>
+              <div class="task-card__meta">
+                <span class="task-card__tag">Client</span>
+                <span class="task-card__time">Due 2:00 PM</span>
+              </div>
+            </div>
+          </div>
+          <div class="reasoning-t1" role="button" tabindex="0" aria-expanded="false" aria-controls="reasoning-1" onclick="toggleReasoning(this)">
+            <svg class="reasoning-t1__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 8h12M8 2v12" stroke-linecap="round"/>
+            </svg>
+            <span class="reasoning-t1__text">#1 because: deadline in 2h + blocks 3 tasks</span>
+            <svg class="reasoning-t1__expand" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="reasoning-t2" id="reasoning-1" aria-hidden="true">
+            <div class="reasoning-t2__content">
+              <div class="reasoning-t2__factors" aria-label="Priority factors">
+                <div class="factor">
+                  <span class="factor__label">Deadline</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--high" style="width: 92%"></div></div>
+                  <span class="factor__value">92%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Blocks</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--high" style="width: 85%"></div></div>
+                  <span class="factor__value">85%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Importance</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--high" style="width: 78%"></div></div>
+                  <span class="factor__value">78%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Energy</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--med" style="width: 60%"></div></div>
+                  <span class="factor__value">60%</span>
+                </div>
+              </div>
+              <div class="reasoning-t2__confidence">
+                <span class="confidence__label">AI Confidence</span>
+                <span class="confidence__value">94%</span>
+              </div>
+              <button class="reasoning-t2__override" aria-label="Override this recommendation">
+                Not now — tell AI why
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Task 2 — Medium Priority -->
+        <article class="task-card task-card--priority-2" role="listitem" tabindex="0" aria-label="Review Q1 budget spreadsheet, priority 2, 45 minutes">
+          <div class="task-card__top">
+            <input type="checkbox" class="task-card__checkbox" aria-label="Mark task complete">
+            <div class="task-card__content">
+              <h3 class="task-card__title">Review Q1 budget spreadsheet</h3>
+              <div class="task-card__meta">
+                <span class="task-card__tag">Finance</span>
+                <span class="task-card__time">~45 min</span>
+              </div>
+            </div>
+          </div>
+          <div class="reasoning-t1" role="button" tabindex="0" aria-expanded="false" aria-controls="reasoning-2" onclick="toggleReasoning(this)">
+            <svg class="reasoning-t1__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 8h12M8 2v12" stroke-linecap="round"/>
+            </svg>
+            <span class="reasoning-t1__text">#2 because: due tomorrow + high importance flagged</span>
+            <svg class="reasoning-t1__expand" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="reasoning-t2" id="reasoning-2" aria-hidden="true">
+            <div class="reasoning-t2__content">
+              <div class="reasoning-t2__factors" aria-label="Priority factors">
+                <div class="factor">
+                  <span class="factor__label">Deadline</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--high" style="width: 70%"></div></div>
+                  <span class="factor__value">70%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Importance</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--high" style="width: 82%"></div></div>
+                  <span class="factor__value">82%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Energy</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--med" style="width: 55%"></div></div>
+                  <span class="factor__value">55%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Blocks</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--low" style="width: 20%"></div></div>
+                  <span class="factor__value">20%</span>
+                </div>
+              </div>
+              <div class="reasoning-t2__confidence">
+                <span class="confidence__label">AI Confidence</span>
+                <span class="confidence__value">87%</span>
+              </div>
+              <button class="reasoning-t2__override" aria-label="Override this recommendation">
+                Not now — tell AI why
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Task 3 — Lower Priority -->
+        <article class="task-card task-card--priority-3" role="listitem" tabindex="0" aria-label="Batch admin emails, priority 3, 20 minutes">
+          <div class="task-card__top">
+            <input type="checkbox" class="task-card__checkbox" aria-label="Mark task complete">
+            <div class="task-card__content">
+              <h3 class="task-card__title">Batch admin emails</h3>
+              <div class="task-card__meta">
+                <span class="task-card__tag">Admin</span>
+                <span class="task-card__time">~20 min</span>
+              </div>
+            </div>
+          </div>
+          <div class="reasoning-t1" role="button" tabindex="0" aria-expanded="false" aria-controls="reasoning-3" onclick="toggleReasoning(this)">
+            <svg class="reasoning-t1__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 8h12M8 2v12" stroke-linecap="round"/>
+            </svg>
+            <span class="reasoning-t1__text">#3 because: low energy task + afternoon energy dip slot</span>
+            <svg class="reasoning-t1__expand" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="reasoning-t2" id="reasoning-3" aria-hidden="true">
+            <div class="reasoning-t2__content">
+              <div class="reasoning-t2__factors" aria-label="Priority factors">
+                <div class="factor">
+                  <span class="factor__label">Energy fit</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--high" style="width: 88%"></div></div>
+                  <span class="factor__value">88%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Time est.</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--high" style="width: 90%"></div></div>
+                  <span class="factor__value">90%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Deadline</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--low" style="width: 30%"></div></div>
+                  <span class="factor__value">30%</span>
+                </div>
+                <div class="factor">
+                  <span class="factor__label">Importance</span>
+                  <div class="factor__bar-bg"><div class="factor__bar factor__bar--low" style="width: 35%"></div></div>
+                  <span class="factor__value">35%</span>
+                </div>
+              </div>
+              <div class="reasoning-t2__confidence">
+                <span class="confidence__label">AI Confidence</span>
+                <span class="confidence__value">91%</span>
+              </div>
+              <button class="reasoning-t2__override" aria-label="Override this recommendation">
+                Not now — tell AI why
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Add Task -->
+      <div class="add-task" role="button" tabindex="0" aria-label="Add a new task">
+        <svg class="add-task__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 3v10M3 8h10" stroke-linecap="round"/>
+        </svg>
+        <span>What's on your mind?</span>
+      </div>
+    </section>
+
+    <!-- Voice Capture FAB -->
+    <button class="fab" aria-label="Capture task by voice">
+      <svg class="fab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <rect x="9" y="2" width="6" height="12" rx="3"/>
+        <path d="M5 10a7 7 0 0 0 14 0"/>
+        <path d="M12 18v4M8 22h8"/>
+      </svg>
+    </button>
+    <span class="sr-only" aria-live="polite" id="voice-status"></span>
+  </main>
+
+  <script>
+    /* ═══════════════════════════════════════════
+       REASONING CARD TOGGLE (Tier 1 → Tier 2)
+       ═══════════════════════════════════════════ */
+    function toggleReasoning(trigger) {
+      const card = trigger.closest('.task-card');
+      const t2 = card.querySelector('.reasoning-t2');
+      const arrow = trigger.querySelector('.reasoning-t1__expand');
+      const isOpen = t2.classList.contains('reasoning-t2--open');
+
+      // Toggle state
+      t2.classList.toggle('reasoning-t2--open');
+      arrow.classList.toggle('reasoning-t1__expand--open');
+      trigger.setAttribute('aria-expanded', !isOpen);
+      t2.setAttribute('aria-hidden', isOpen);
+    }
+
+    // Keyboard support for reasoning cards
+    document.querySelectorAll('.reasoning-t1').forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleReasoning(el);
+        }
+      });
+    });
+
+    // Checkbox interactions
+    document.querySelectorAll('.task-card__checkbox').forEach(cb => {
+      cb.addEventListener('change', function() {
+        const card = this.closest('.task-card');
+        if (this.checked) {
+          card.style.opacity = '0.5';
+          card.querySelector('.task-card__title').style.textDecoration = 'line-through';
+        } else {
+          card.style.opacity = '1';
+          card.querySelector('.task-card__title').style.textDecoration = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
