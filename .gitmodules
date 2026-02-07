@@ -1,0 +1,3 @@
+[submodule "vendor/jaan-to"]
+	path = vendor/jaan-to
+	url = https://github.com/parhumm/jaan-to.git

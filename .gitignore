@@ -1,0 +1,37 @@
+# Secrets & credentials — PUBLIC REPO, never commit these
+.env
+.env.*
+*.key
+*.pem
+credentials.*
+.secret*
+*.p12
+*.pfx
+**/api_key*
+**/token.json
+**/service-account*.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Build
+dist/
+build/
+*.log
