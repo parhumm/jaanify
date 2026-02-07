@@ -9,6 +9,7 @@ Source: git submodule at vendor/jaan-to/ → https://github.com/parhumm/jaan-to/
 ### Skills (19 total)
 
 **Product skills (12):**
+
 | # | Skill | Domain |
 |---|-------|--------|
 | 1 | jaan-to-pm-research-about | PM - Market research |
@@ -25,6 +26,7 @@ Source: git submodule at vendor/jaan-to/ → https://github.com/parhumm/jaan-to/
 | 12 | jaan-to-ux-research-synthesize | UX - Research synthesis |
 
 **Meta skills (7):**
+
 | # | Skill | Domain |
 |---|-------|--------|
 | 13 | to-jaan-docs-create | Docs - Create documentation |
