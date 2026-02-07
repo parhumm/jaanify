@@ -1,17 +1,17 @@
 # Integrations & Tools {#integrations}
 
-> Auto-detected by `/jaan-to-dev-stack-detect` on 2026-02-03
-> Status: **Seed template** - Minimal detection (Git only)
+> Auto-detected by `/jaan-to-dev-stack-detect` on 2026-02-07
+> Status: **Pre-implementation** - Tech stack planned in tech.md, no source code yet
 
 ---
 
 ## Source Control {#source-control}
 
-- **Tool**: Git (local only)
-- **Platform**: {No remote configured}
-- **Organization**: {To be configured}
-- **Repository**: test-plugin
-- **Main Branch**: {To be configured}
+- **Tool**: Git
+- **Platform**: GitHub
+- **Organization**: parhumm
+- **Repository**: jaanify
+- **Main Branch**: main
 - **Code Owners**: {To be configured}
 - **PR/MR Template**: {To be configured}
 
@@ -34,10 +34,8 @@
 
 ## Issue Tracking {#issue-tracking}
 
-> **Manual Entry Required** - Cannot auto-detect
-
-- **Tool**: {Jira/Linear/GitHub Issues}
-- **Project Key**: {To be configured}
+- **Tool**: GitHub Issues
+- **Project Key**: parhumm/jaanify
 - **Workflow**: {To be configured}
 
 ---
