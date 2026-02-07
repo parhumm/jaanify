@@ -40,6 +40,7 @@ This project follows an iterative co-evolution cycle with jaan-to:
 - Write gap reports in gap-reports/NN-cycle/NN-{scan|gaps}.md
 - Verify skill outputs match jaan-to documentation
 - Check v3.0.0 compliance: env vars, ID structure, no hardcoded paths
+- Commit after each completed task — never batch multiple tasks into one commit
 
 ## Never Do
 - Skip the jaan-to scan at cycle start
