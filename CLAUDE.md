@@ -37,7 +37,7 @@ This project follows an iterative co-evolution cycle with jaan-to:
 - Record jaan-to version (tag/commit SHA) in every scan, scorecard, and gap report
 - Use jaan-to skills for ALL product work — no shortcuts outside the plugin
 - Write per-skill scorecards in scorecards/{skill-name}.md
-- Write gap reports in gap-reports/cycle-NN-{scan|gaps}.md
+- Write gap reports in gap-reports/NN-cycle/NN-{scan|gaps}.md
 - Verify skill outputs match jaan-to documentation
 - Check v3.0.0 compliance: env vars, ID structure, no hardcoded paths
 
@@ -52,4 +52,4 @@ This project follows an iterative co-evolution cycle with jaan-to:
 - vendor/jaan-to/ — Git submodule (read-only, always pull latest main before scanning)
 - jaan-to/ — Plugin workspace (outputs, templates, learn, context, docs)
 - scorecards/ — Per-skill scorecards (living documents, updated each cycle)
-- gap-reports/ — Per-cycle scan results and gap reports
+- gap-reports/ — Per-cycle subfolders (NN-cycle/NN-{scan|gaps}.md)
