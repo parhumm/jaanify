@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "feature": "Jaanify Core Screens",
+    "languages": ["en", "fa", "tr", "de", "fr", "ru", "tg"],
+    "tone_profile": "Warm, Direct & Human",
+    "categories": ["placeholders", "labels", "helper_text", "success", "empty_states", "ctas", "planner"],
+    "generated": "2026-02-07",
+    "version": "1.0.0",
+    "warnings": ["Native speaker review required for all non-English content"]
+  },
+  "microcopy": [
+    {
+      "id": "placeholder-task-input",
+      "category": "placeholders",
+      "item": "Main task input placeholder",
+      "context": "Primary input on onboarding and task input screen",
+      "translations": {
+        "en": { "text": "What's on your mind?", "direction": "ltr", "chars": 21 },
+        "fa": { "text": "چی تو ذهنته؟", "direction": "rtl", "chars": 13, "script": "Perso-Arabic" },
+        "tr": { "text": "Aklında ne var?", "direction": "ltr", "chars": 15 },
+        "de": { "text": "Was beschäftigt dich?", "direction": "ltr", "chars": 21 },
+        "fr": { "text": "Qu'avez-vous en tête ?", "direction": "ltr", "chars": 22 },
+        "ru": { "text": "Что у вас на уме?", "direction": "ltr", "chars": 17, "script": "Cyrillic" },
+        "tg": { "text": "Дар зеҳнатон чӣ ҳаст?", "direction": "ltr", "chars": 21, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "label-save-task",
+      "category": "labels",
+      "item": "Save task button",
+      "context": "Primary action on task input screen",
+      "translations": {
+        "en": { "text": "Save Task", "direction": "ltr", "chars": 9 },
+        "fa": { "text": "ذخیره کار", "direction": "rtl", "chars": 9, "script": "Perso-Arabic" },
+        "tr": { "text": "Görevi Kaydet", "direction": "ltr", "chars": 13 },
+        "de": { "text": "Aufgabe speichern", "direction": "ltr", "chars": 17 },
+        "fr": { "text": "Enregistrer la tâche", "direction": "ltr", "chars": 20 },
+        "ru": { "text": "Сохранить задачу", "direction": "ltr", "chars": 16, "script": "Cyrillic" },
+        "tg": { "text": "Захира кардани вазифа", "direction": "ltr", "chars": 21, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "label-cancel",
+      "category": "labels",
+      "item": "Cancel button",
+      "translations": {
+        "en": { "text": "Cancel", "direction": "ltr", "chars": 6 },
+        "fa": { "text": "لغو", "direction": "rtl", "chars": 3, "script": "Perso-Arabic" },
+        "tr": { "text": "İptal", "direction": "ltr", "chars": 5 },
+        "de": { "text": "Abbrechen", "direction": "ltr", "chars": 9 },
+        "fr": { "text": "Annuler", "direction": "ltr", "chars": 7 },
+        "ru": { "text": "Отмена", "direction": "ltr", "chars": 6, "script": "Cyrillic" },
+        "tg": { "text": "Бекор кардан", "direction": "ltr", "chars": 12, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "label-create-with-ai",
+      "category": "labels",
+      "item": "Create with AI CTA on onboarding",
+      "translations": {
+        "en": { "text": "Create with AI", "direction": "ltr", "chars": 14 },
+        "fa": { "text": "ساخت با هوش مصنوعی", "direction": "rtl", "chars": 18, "script": "Perso-Arabic" },
+        "tr": { "text": "Yapay zekâ ile oluştur", "direction": "ltr", "chars": 22 },
+        "de": { "text": "Mit KI erstellen", "direction": "ltr", "chars": 16 },
+        "fr": { "text": "Créer avec l'IA", "direction": "ltr", "chars": 15 },
+        "ru": { "text": "Создать с помощью ИИ", "direction": "ltr", "chars": 20, "script": "Cyrillic" },
+        "tg": { "text": "Эҷод бо зеҳни сунъӣ", "direction": "ltr", "chars": 20, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "label-override",
+      "category": "labels",
+      "item": "Override AI recommendation",
+      "context": "Tier 2 Reasoning Card override button",
+      "translations": {
+        "en": { "text": "Not now — tell AI why", "direction": "ltr", "chars": 21 },
+        "fa": { "text": "الان نه — دلیلش رو بگو", "direction": "rtl", "chars": 22, "script": "Perso-Arabic" },
+        "tr": { "text": "Şimdi değil — yapay zekâya nedenini söyle", "direction": "ltr", "chars": 41 },
+        "de": { "text": "Nicht jetzt — sag der KI warum", "direction": "ltr", "chars": 30 },
+        "fr": { "text": "Pas maintenant — dites à l'IA pourquoi", "direction": "ltr", "chars": 38 },
+        "ru": { "text": "Не сейчас — объясните ИИ почему", "direction": "ltr", "chars": 31, "script": "Cyrillic" },
+        "tg": { "text": "На ҳозир — ба зеҳни сунъӣ сабабашро гӯед", "direction": "ltr", "chars": 41, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "label-voice-capture",
+      "category": "labels",
+      "item": "Voice input button aria label",
+      "translations": {
+        "en": { "text": "Speak your task", "direction": "ltr", "chars": 15 },
+        "fa": { "text": "کارت رو بگو", "direction": "rtl", "chars": 11, "script": "Perso-Arabic" },
+        "tr": { "text": "Görevini söyle", "direction": "ltr", "chars": 14 },
+        "de": { "text": "Sprich deine Aufgabe", "direction": "ltr", "chars": 20 },
+        "fr": { "text": "Dites votre tâche", "direction": "ltr", "chars": 17 },
+        "ru": { "text": "Скажите вашу задачу", "direction": "ltr", "chars": 19, "script": "Cyrillic" },
+        "tg": { "text": "Вазифаатонро бигӯед", "direction": "ltr", "chars": 19, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "helper-parsing-active",
+      "category": "helper_text",
+      "item": "AI parsing indicator",
+      "translations": {
+        "en": { "text": "AI is reading your task...", "direction": "ltr", "chars": 25 },
+        "fa": { "text": "هوش مصنوعی داره کارت رو میخونه...", "direction": "rtl", "chars": 32, "script": "Perso-Arabic" },
+        "tr": { "text": "Yapay zekâ görevini okuyor...", "direction": "ltr", "chars": 28 },
+        "de": { "text": "KI liest deine Aufgabe...", "direction": "ltr", "chars": 25 },
+        "fr": { "text": "L'IA lit votre tâche...", "direction": "ltr", "chars": 22 },
+        "ru": { "text": "ИИ читает вашу задачу...", "direction": "ltr", "chars": 23, "script": "Cyrillic" },
+        "tg": { "text": "Зеҳни сунъӣ вазифаи шуморо мехонад...", "direction": "ltr", "chars": 36, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "helper-reasoning-card-label",
+      "category": "helper_text",
+      "item": "Reasoning Card header",
+      "context": "Humanizes AI — 'thinks' not 'calculates'",
+      "translations": {
+        "en": { "text": "Why Jaanify thinks this", "direction": "ltr", "chars": 23 },
+        "fa": { "text": "چرا جانیفای اینطور فکر میکنه", "direction": "rtl", "chars": 28, "script": "Perso-Arabic" },
+        "tr": { "text": "Jaanify bunu neden düşünüyor", "direction": "ltr", "chars": 28 },
+        "de": { "text": "Warum Jaanify das denkt", "direction": "ltr", "chars": 23 },
+        "fr": { "text": "Pourquoi Jaanify pense cela", "direction": "ltr", "chars": 27 },
+        "ru": { "text": "Почему Jaanify так считает", "direction": "ltr", "chars": 25, "script": "Cyrillic" },
+        "tg": { "text": "Чаро Jaanify ин тавр фикр мекунад", "direction": "ltr", "chars": 33, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "success-task-saved",
+      "category": "success",
+      "item": "Task saved confirmation",
+      "translations": {
+        "en": { "text": "Task saved! It's in your plan.", "direction": "ltr", "chars": 30 },
+        "fa": { "text": "کار ذخیره شد! توی برنامه‌ات هست.", "direction": "rtl", "chars": 31, "script": "Perso-Arabic" },
+        "tr": { "text": "Görev kaydedildi! Planında yerini aldı.", "direction": "ltr", "chars": 38 },
+        "de": { "text": "Aufgabe gespeichert! Sie ist in deinem Plan.", "direction": "ltr", "chars": 44 },
+        "fr": { "text": "Tâche enregistrée ! Elle est dans votre plan.", "direction": "ltr", "chars": 46 },
+        "ru": { "text": "Задача сохранена! Она в вашем плане.", "direction": "ltr", "chars": 35, "script": "Cyrillic" },
+        "tg": { "text": "Вазифа захира шуд! Дар нақшаи шумо ҳаст.", "direction": "ltr", "chars": 40, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "success-onboarding-complete",
+      "category": "success",
+      "item": "Onboarding completion",
+      "translations": {
+        "en": { "text": "You're all set! Your task is waiting.", "direction": "ltr", "chars": 36 },
+        "fa": { "text": "آماده‌ای! کارت منتظرته.", "direction": "rtl", "chars": 22, "script": "Perso-Arabic" },
+        "tr": { "text": "Hazırsın! Görevin seni bekliyor.", "direction": "ltr", "chars": 32 },
+        "de": { "text": "Alles bereit! Deine Aufgabe wartet.", "direction": "ltr", "chars": 35 },
+        "fr": { "text": "Tout est prêt ! Votre tâche vous attend.", "direction": "ltr", "chars": 40 },
+        "ru": { "text": "Всё готово! Ваша задача ждёт вас.", "direction": "ltr", "chars": 33, "script": "Cyrillic" },
+        "tg": { "text": "Ҳама чиз тайёр аст! Вазифаатон интизори шумост.", "direction": "ltr", "chars": 47, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "empty-no-tasks-headline",
+      "category": "empty_states",
+      "item": "Empty task list headline",
+      "translations": {
+        "en": { "text": "No tasks yet", "direction": "ltr", "chars": 12 },
+        "fa": { "text": "هنوز کاری نیست", "direction": "rtl", "chars": 14, "script": "Perso-Arabic" },
+        "tr": { "text": "Henüz görev yok", "direction": "ltr", "chars": 15 },
+        "de": { "text": "Noch keine Aufgaben", "direction": "ltr", "chars": 19 },
+        "fr": { "text": "Pas encore de tâches", "direction": "ltr", "chars": 20 },
+        "ru": { "text": "Задач пока нет", "direction": "ltr", "chars": 14, "script": "Cyrillic" },
+        "tg": { "text": "Ҳанӯз вазифае нест", "direction": "ltr", "chars": 18, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "empty-no-tasks-motivation",
+      "category": "empty_states",
+      "item": "Empty task list motivation line",
+      "translations": {
+        "en": { "text": "Your day is yours. Add a task to get started.", "direction": "ltr", "chars": 45 },
+        "fa": { "text": "روزت مال خودته. یه کار اضافه کن تا شروع کنی.", "direction": "rtl", "chars": 44, "script": "Perso-Arabic" },
+        "tr": { "text": "Gün senin. Başlamak için bir görev ekle.", "direction": "ltr", "chars": 39 },
+        "de": { "text": "Dein Tag gehört dir. Füge eine Aufgabe hinzu.", "direction": "ltr", "chars": 45 },
+        "fr": { "text": "Votre journée est à vous. Ajoutez une tâche pour commencer.", "direction": "ltr", "chars": 59 },
+        "ru": { "text": "Ваш день — ваш. Добавьте задачу, чтобы начать.", "direction": "ltr", "chars": 47, "script": "Cyrillic" },
+        "tg": { "text": "Рӯзи шумо аз они шумост. Як вазифа илова кунед.", "direction": "ltr", "chars": 48, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "cta-continue-google",
+      "category": "ctas",
+      "item": "Google sign-in button",
+      "translations": {
+        "en": { "text": "Continue with Google", "direction": "ltr", "chars": 20 },
+        "fa": { "text": "ادامه با گوگل", "direction": "rtl", "chars": 13, "script": "Perso-Arabic" },
+        "tr": { "text": "Google ile devam et", "direction": "ltr", "chars": 19 },
+        "de": { "text": "Mit Google fortfahren", "direction": "ltr", "chars": 21 },
+        "fr": { "text": "Continuer avec Google", "direction": "ltr", "chars": 21 },
+        "ru": { "text": "Продолжить с Google", "direction": "ltr", "chars": 19, "script": "Cyrillic" },
+        "tg": { "text": "Идома додан бо Google", "direction": "ltr", "chars": 21, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "cta-skip-account",
+      "category": "ctas",
+      "item": "Skip account creation",
+      "translations": {
+        "en": { "text": "Skip for now — I'll use it locally", "direction": "ltr", "chars": 34 },
+        "fa": { "text": "فعلاً رد شو — محلی استفاده میکنم", "direction": "rtl", "chars": 32, "script": "Perso-Arabic" },
+        "tr": { "text": "Şimdilik atla — yerel olarak kullanacağım", "direction": "ltr", "chars": 41 },
+        "de": { "text": "Jetzt überspringen — ich nutze es lokal", "direction": "ltr", "chars": 39 },
+        "fr": { "text": "Passer pour l'instant — je l'utiliserai localement", "direction": "ltr", "chars": 50 },
+        "ru": { "text": "Пропустить — буду использовать локально", "direction": "ltr", "chars": 40, "script": "Cyrillic" },
+        "tg": { "text": "Ҳозир гузаред — маҳаллӣ истифода мебарам", "direction": "ltr", "chars": 40, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "cta-privacy-note",
+      "category": "ctas",
+      "item": "Privacy reassurance",
+      "translations": {
+        "en": { "text": "Your tasks stay private. We never sell data or show ads.", "direction": "ltr", "chars": 55 },
+        "fa": { "text": "کارهات خصوصی میمونن. ما هرگز داده نمیفروشیم و تبلیغات نشون نمیدیم.", "direction": "rtl", "chars": 65, "script": "Perso-Arabic" },
+        "tr": { "text": "Görevlerin gizli kalır. Asla veri satmayız veya reklam göstermeyiz.", "direction": "ltr", "chars": 65 },
+        "de": { "text": "Deine Aufgaben bleiben privat. Wir verkaufen keine Daten und zeigen keine Werbung.", "direction": "ltr", "chars": 81 },
+        "fr": { "text": "Vos tâches restent privées. Nous ne vendons jamais de données et n'affichons pas de publicité.", "direction": "ltr", "chars": 93 },
+        "ru": { "text": "Ваши задачи остаются приватными. Мы не продаём данные и не показываем рекламу.", "direction": "ltr", "chars": 77, "script": "Cyrillic" },
+        "tg": { "text": "Вазифаҳои шумо хусусӣ мемонанд. Мо ҳеҷ гоҳ маълумот намефурӯшем ва таблиғот нишон намедиҳем.", "direction": "ltr", "chars": 93, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "planner-greeting-morning",
+      "category": "planner",
+      "item": "Morning greeting with name variable",
+      "translations": {
+        "en": { "text": "Good morning, {name}", "direction": "ltr", "chars": 20 },
+        "fa": { "text": "صبح بخیر، {name}", "direction": "rtl", "chars": 16, "script": "Perso-Arabic" },
+        "tr": { "text": "Günaydın, {name}", "direction": "ltr", "chars": 17 },
+        "de": { "text": "Guten Morgen, {name}", "direction": "ltr", "chars": 20 },
+        "fr": { "text": "Bonjour, {name}", "direction": "ltr", "chars": 15 },
+        "ru": { "text": "Доброе утро, {name}", "direction": "ltr", "chars": 19, "script": "Cyrillic" },
+        "tg": { "text": "Субҳ ба хайр, {name}", "direction": "ltr", "chars": 20, "script": "Cyrillic" }
+      }
+    },
+    {
+      "id": "planner-your-plan-today",
+      "category": "planner",
+      "item": "Daily plan section header",
+      "translations": {
+        "en": { "text": "Your Plan Today", "direction": "ltr", "chars": 15 },
+        "fa": { "text": "برنامه امروزت", "direction": "rtl", "chars": 13, "script": "Perso-Arabic" },
+        "tr": { "text": "Bugünkü Planın", "direction": "ltr", "chars": 14 },
+        "de": { "text": "Dein Plan für heute", "direction": "ltr", "chars": 19 },
+        "fr": { "text": "Votre plan du jour", "direction": "ltr", "chars": 18 },
+        "ru": { "text": "Ваш план на сегодня", "direction": "ltr", "chars": 19, "script": "Cyrillic" },
+        "tg": { "text": "Нақшаи имрӯзаи шумо", "direction": "ltr", "chars": 20, "script": "Cyrillic" }
+      }
+    }
+  ]
+}

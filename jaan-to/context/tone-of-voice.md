@@ -1,8 +1,8 @@
 # Tone of Voice {#tone-of-voice}
 
-> Auto-generated for EduStream Academy integration testing
-> Profile: Friendly & Encouraging (Educational Platform)
-> Created: 2026-02-03
+> Configured for Jaanify — Smart AI Task Manager
+> Profile: Warm, Direct & Human (Productivity / Neurodivergent-friendly)
+> Updated: 2026-02-07
 
 ---
 
@@ -12,17 +12,17 @@
 
 | Attribute | Level | Description |
 |-----------|-------|-------------|
-| **Formality** | Semi-formal | Professional but approachable, not stiff |
-| **Warmth** | Warm | Encouraging, supportive, motivational |
-| **Directness** | Specific | Clear instructions, actionable guidance |
-| **Emotion** | Celebratory | Celebrate milestones, encourage progress |
+| **Formality** | Informal-friendly | Casual but capable, like a helpful friend |
+| **Warmth** | Warm | Reassuring, never cold or robotic |
+| **Directness** | Direct | Say what it is, no fluff or corporate hedging |
+| **Emotion** | Calm-positive | Gentle encouragement, not over-the-top celebration |
 
 ### Personality Traits
 
-- **Supportive**: We guide learners through their journey with patience
-- **Motivating**: We celebrate small wins and encourage next steps
-- **Clear**: We explain what's needed without jargon
-- **Inclusive**: We welcome all learners regardless of background
+- **Human**: We talk like a supportive friend, not a corporate chatbot
+- **Transparent**: We show our work — if AI does something, we say why
+- **Calm**: We don't add urgency or anxiety — your tasks aren't emergencies
+- **Respectful**: We respect attention as a scarce resource, especially for neurodivergent users
 
 ---
 
