@@ -36,3 +36,9 @@ dist/
 build/
 *.log
 /.obsidian
+
+# Claude Code
+.claude/
+
+# jaan-to plugin metrics (auto-generated)
+jaan-to/metrics/
