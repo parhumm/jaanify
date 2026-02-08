@@ -98,14 +98,14 @@ IMPLEMENTATION ░░░░░░░░░░░░░░░░░░░░░�
 
 ### Still Open (Carried from Previous Cycles)
 
-| # | Gap | Original Cycle | Priority | Notes |
-|---|-----|----------------|----------|-------|
-| 7 | Backend code scaffolding | Cycle 2 | CRITICAL | Fastify routes + Prisma models from task breakdown + API contract |
-| 11 | Frontend code from designs | Cycle 2 | CRITICAL | HTML → React v19 / Next.js v15 + TailwindCSS v4 conversion |
-| 8 | Security threat model | Cycle 1 | HIGH | OAuth, JWT, guest sessions need threat analysis |
-| 10 | CI/CD / deployment | Cycle 2 | HIGH | GitHub Actions workflows, Docker, deploy manifests |
-| 9 | UX persona creation | Cycle 1 | MEDIUM | Formalize neurodivergent + freelancer personas |
-| 12 | Story-to-task linking | Cycle 2 | MEDIUM | Cross-reference IDs between PRD → Stories → Tasks → Tests |
+| # | Gap | Original Cycle | Priority | Mapped Skill | Notes |
+|---|-----|----------------|----------|--------------|-------|
+| 7 | Backend code scaffolding | Cycle 2 | CRITICAL | ❌ Not in catalog | Fastify routes + Prisma models from task breakdown + API contract |
+| 11 | Frontend code from designs | Cycle 2 | CRITICAL | ❌ Not in catalog | HTML → React v19 / Next.js v15 + TailwindCSS v4 conversion |
+| 8 | Security threat model | Cycle 1 | HIGH | ✅ `sec-threat-model-lite` (planned) | OAuth, JWT, guest sessions need threat analysis |
+| 10 | CI/CD / deployment | Cycle 2 | HIGH | ⚠️ `sre-pipeline-audit` (audit only) | GitHub Actions workflows, Docker, deploy manifests — creation skill missing |
+| 9 | UX persona creation | Cycle 1 | MEDIUM | ✅ `ux-persona-create` + `pm-persona-card` (planned) | Formalize neurodivergent + freelancer personas |
+| 12 | Story-to-task linking | Cycle 2 | MEDIUM | ❌ Not in catalog | Cross-reference IDs between PRD → Stories → Tasks → Tests |
 
 ### New Gaps Discovered in Cycle 3
 
@@ -116,6 +116,62 @@ IMPLEMENTATION ░░░░░░░░░░░░░░░░░░░░░�
 | 18 | **Named examples on API operations** | api.yaml has property-level examples but no named media type examples for mock server scenarios | LOW |
 | 19 | **Rate limit headers** | API contract defines 429 responses but doesn't document rate limit headers (X-RateLimit-*) | LOW |
 | 20 | **Legacy learn file cleanup** | 19 duplicate learn files (jaan-to-* prefix) from v3.16.2 naming migration | LOW |
+
+### Missing Skill Definitions
+
+Gaps marked ❌ "Not in catalog" have no matching skill in the jaan-to role-skills catalog. Definitions below follow the format from `vendor/jaan-to/roadmaps/jaan-to/tasks/role-skills/*.md`.
+
+#### Gap #7 → `dev-be-scaffold` (DEV)
+
+- **Logical**: `dev-be-scaffold`
+- **Description**: Generate production-ready backend code from specifications: Fastify routes, Prisma schema, service layer, middleware, validation
+- **Input**: API contract (OpenAPI YAML) + task breakdown + data model
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/scaffold/` — routes, services, Prisma schema, middleware
+- **Key Points**:
+  - Map OpenAPI operations to Fastify route handlers (TypeScript)
+  - Generate Prisma models from data model with relations and indexes
+  - Include validation schemas (Zod) derived from API contract
+  - Generate error handling middleware matching RFC 9457
+  - Output includes setup README
+
+#### Gap #11 → `dev-fe-scaffold` (DEV)
+
+- **Logical**: `dev-fe-scaffold`
+- **Description**: Convert HTML design previews to React v19 / Next.js v15 components with TailwindCSS v4, TypeScript, and state management
+- **Input**: HTML design files + frontend task breakdown + API contract
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/scaffold/` — components, pages, stores, API client, types
+- **Key Points**:
+  - Extract semantic HTML structure and preserve accessibility
+  - Convert to TailwindCSS v4 utility classes
+  - Generate TypeScript interfaces from API contract
+  - Create composable component hierarchy with loading/error/empty states
+  - Generate typed API client hooks
+
+#### Gap #10 → `sre-pipeline-create` (SRE)
+
+- **Logical**: `sre-pipeline-create`
+- **Description**: Generate CI/CD pipeline configuration: GitHub Actions workflows, Dockerfile, deployment manifests, testing stages
+- **Input**: Tech stack + project structure + deployment target
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/cicd/{slug}/pipeline/` — workflows, Dockerfile, docker-compose, deploy manifests
+- **Key Points**:
+  - Multi-stage Docker builds for optimization
+  - Parallel test/lint/type-check jobs
+  - Environment-specific deployment with approval gates
+  - Secrets management pattern (GitHub Secrets)
+  - Note: complements existing `sre-pipeline-audit` (audit-only)
+
+#### Gap #12 → `pm-trace-links` (PM)
+
+- **Logical**: `pm-trace-links`
+- **Description**: Generate traceability matrix linking PRD requirements → User Stories → Tasks → Tests with bi-directional references
+- **Input**: PRD + stories directory + tasks directory + test cases directory
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/trace/{slug}/traceability-matrix.md`
+- **Key Points**:
+  - Parse and extract IDs from existing artifacts (US-01, TASK-BE-01, etc.)
+  - Build dependency graph with forward/backward links
+  - Detect orphaned items (tasks with no story, tests with no task)
+  - Generate coverage metrics (% requirements with tests)
+  - Include Mermaid diagrams for visual traceability
 
 ---
 
@@ -145,6 +201,53 @@ IMPLEMENTATION ░░░░░░░░░░░░░░░░░░░░░�
 | 6 | `ux-persona-create` | Formalize neurodivergent + freelancer personas |
 | 7 | Cross-artifact linking | Auto-traceability PRD → Stories → Tasks → Tests |
 | 8 | Skill chaining | Output of one skill auto-feeds next |
+
+---
+
+## Section E — Critical Path to Launch
+
+All 13 skills needed to take Jaanify from specification (100%) to production launch, in dependency order.
+
+### Phase 1: Unblock Implementation (CRITICAL — no code exists without these)
+
+| Skill | Catalog Status | Input Ready | Output |
+|-------|---------------|-------------|--------|
+| `dev-be-scaffold` | ❌ Not in catalog | API contract + task breakdown + data model | Fastify routes, Prisma schema, services, middleware |
+| `dev-fe-scaffold` | ❌ Not in catalog | HTML previews + FE tasks + API contract | React v19 components, Next.js pages, stores, API client |
+
+### Phase 2: Integration & Testing
+
+| Skill | Catalog Status | Input Ready | Output |
+|-------|---------------|-------------|--------|
+| `dev-fe-state-machine` | ✅ In catalog | Screen designs + FE tasks | UI states + transitions per screen |
+| `dev-integration-plan` | ✅ In catalog | API contract + provider docs | API call sequence, retry, failure modes |
+| `dev-integration-mock-stubs` | ✅ In catalog | Integration plan | Stub interfaces, fake responses for local dev |
+| `dev-test-plan` | ✅ In catalog | All specs + code | Unit/integration/e2e scope, fixtures, mocks |
+
+### Phase 3: Security & Infrastructure
+
+| Skill | Catalog Status | Input Ready | Output |
+|-------|---------------|-------------|--------|
+| `sec-threat-model-lite` | ✅ In catalog | API contract + auth design + data model | STRIDE analysis, risk matrix, mitigations |
+| `sre-pipeline-create` | ❌ Not in catalog | Tech stack + project structure | GitHub Actions CI/CD, Docker, deploy manifests |
+| `dev-ws-events` | ❌ Not in catalog | Real-time requirements from PRD | Socket.io event schema / AsyncAPI spec |
+
+### Phase 4: Ship
+
+| Skill | Catalog Status | Input Ready | Output |
+|-------|---------------|-------------|--------|
+| `dev-observability-events` | ✅ In catalog | Feature specs | Structured logs, metrics, trace spans |
+| `dev-observability-alerts` | ✅ In catalog | Observability events | Alert thresholds, severity, noise reduction |
+| `dev-docs-generate` | ✅ In catalog | Code + API contract | README, API docs, runbooks |
+| `dev-ship-check` | ✅ In catalog | All artifacts | Feature flags, migrations, Go/No-Go |
+
+### Summary
+
+```
+❌ Not in catalog (must be created):   3 skills  (dev-be-scaffold, dev-fe-scaffold, sre-pipeline-create + dev-ws-events)
+✅ In catalog (must be implemented):  10 skills
+                               Total: 13 skills to launch
+```
 
 ---
 
