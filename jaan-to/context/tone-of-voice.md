@@ -30,17 +30,17 @@
 
 ### Pronoun Guidelines
 
-| Language | Formal | Informal | EduStream Uses |
-|----------|--------|----------|----------------|
+| Language | Formal | Informal | Jaanify Uses |
+|----------|--------|----------|--------------|
 | **English (EN)** | You | You | You (neutral) |
-| **Persian (FA)** | شما (shomā) | تو (to) | شما (formal - educational context) |
+| **Persian (FA)** | شما (shomā) | تو (to) | شما (formal - supportive productivity context) |
 | **Turkish (TR)** | Siz | sen | Siz (formal - respectful) |
 | **German (DE)** | Sie | du | Sie (formal - professional) |
 | **French (FR)** | Vous | tu | Vous (formal - respectful) |
-| **Russian (RU)** | Вы | ты | Вы (formal - educational) |
+| **Russian (RU)** | Вы | ты | Вы (formal - professional) |
 | **Tajik (TG)** | Шумо | ту | Шумо (formal - respectful) |
 
-**Rationale**: Educational platforms benefit from formal pronouns to establish professionalism while maintaining warmth through word choice and phrasing.
+**Rationale**: A productivity tool for neurodivergent users benefits from formal pronouns to establish trust and professionalism while maintaining warmth through word choice and phrasing.
 
 ---
 
@@ -58,8 +58,8 @@
 
 ### 3. Be Specific, Not Vague
 
-✅ **Good**: "We need camera access to enable video during live classes"
-❌ **Bad**: "Camera access required"
+✅ **Good**: "We need notification access to remind you about your daily plan"
+❌ **Bad**: "Notification access required"
 
 ### 4. Remove Blame Language
 
@@ -68,7 +68,7 @@
 
 ### 5. Encourage Next Steps
 
-✅ **Good**: "Ready to explore courses? Let's find your first class"
+✅ **Good**: "Ready to plan your day? Let's organize your tasks"
 ❌ **Bad**: "Click here to continue"
 
 ---
@@ -77,19 +77,19 @@
 
 ### Welcome Messages
 
-**English**: "Welcome to EduStream! Let's set up your learning journey in just a few steps."
+**English**: "Welcome to Jaanify! Let's set up your task workflow in just a few steps."
 
-**Persian**: «به ادواستریم خوش آمدید! بیایید سفر یادگیری شما را در چند مرحله ساده راه‌اندازی کنیم.»
+**Persian**: «به جانیفای خوش آمدید! بیایید گردش کار وظایف شما را در چند مرحله ساده راه‌اندازی کنیم.»
 
-**German**: "Willkommen bei EduStream! Lassen Sie uns Ihre Lernreise in nur wenigen Schritten einrichten."
+**German**: "Willkommen bei Jaanify! Lassen Sie uns Ihren Aufgaben-Workflow in nur wenigen Schritten einrichten."
 
 ### Success Messages
 
-**English**: "Perfect! Your account is ready. Let's find the right course for you."
+**English**: "Perfect! Your account is ready. Let's plan your first day."
 
-**Russian**: "Отлично! Ваш аккаунт готов. Давайте найдём подходящий курс для Вас."
+**Russian**: "Отлично! Ваш аккаунт готов. Давайте спланируем Ваш первый день."
 
-**Turkish**: "Harika! Hesabınız hazır. Şimdi size uygun kursu bulalım."
+**Turkish**: "Harika! Hesabınız hazır. Şimdi ilk gününüzü planlayalım."
 
 ### Error Messages (Supportive)
 
@@ -136,7 +136,7 @@ Use this checklist when writing microcopy:
 ### ❌ Robot Language
 
 **Bad**: "Operation successful. Click OK to proceed."
-**Good**: "All done! You're ready to start learning."
+**Good**: "All done! You're ready to start planning your day."
 
 ---
 
@@ -171,4 +171,5 @@ Use this checklist when writing microcopy:
 
 ## Update History {#history}
 
-- **2026-02-03**: Initial profile (Friendly & Encouraging for educational platform)
+- **2026-02-08**: Cycle 3 — Replaced EduStream content with Jaanify task management context
+- **2026-02-03**: Initial profile (Friendly & Encouraging — originally generated for educational platform)
