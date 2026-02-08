@@ -1,7 +1,7 @@
 # Localization Preferences {#localization}
 
-> Auto-generated for EduStream Academy integration testing
-> Created: 2026-02-03
+> Configured for Jaanify — Smart AI Task Manager
+> Created: 2026-02-03 | Updated: 2026-02-08
 
 ---
 
@@ -47,7 +47,7 @@
 - Western numerals (0-9) for UI pragmatism (not Eastern Arabic numerals ۰-۹)
 
 **Pronoun Guidelines**:
-- Formal: شما (shomā) - Use for professional/educational contexts
+- Formal: شما (shomā) - Use for professional/productivity contexts
 - Informal: تو (to) - Use for casual/social contexts
 
 ---
@@ -97,7 +97,7 @@ Russian requires 3 plural forms based on numeric context:
 
 | Language | Script | Recommended Fonts |
 |----------|--------|------------------|
-| EN, TR, DE, FR | Latin | Inter, Roboto, Open Sans |
+| EN, TR, DE, FR | Latin | DM Sans, Inter, Open Sans |
 | FA | Perso-Arabic | Vazirmatn, IRANSans, Estedad |
 | RU, TG | Cyrillic | Roboto, Open Sans (Cyrillic subset) |
 
@@ -110,7 +110,7 @@ Russian requires 3 plural forms based on numeric context:
 - [ ] All enabled languages present in all microcopy packs
 - [ ] RTL layout tested for Persian (visual QA with native speaker)
 - [ ] Text expansion tested at 200% zoom (no overflow)
-- [ ] Pronoun formality consistent across all items (formal for EduStream)
+- [ ] Pronoun formality consistent across all items (formal for Jaanify)
 - [ ] Persian ZWNJ used for plurals
 - [ ] Russian pluralization uses ICU MessageFormat
 - [ ] German text doesn't break button layouts
@@ -120,4 +120,5 @@ Russian requires 3 plural forms based on numeric context:
 
 ## Update History {#history}
 
+- **2026-02-08**: Cycle 3 — Replaced EduStream references with Jaanify, updated fonts to DM Sans
 - **2026-02-03**: Initial configuration (all 7 languages enabled)
