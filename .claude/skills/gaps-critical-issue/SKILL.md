@@ -313,29 +313,15 @@ Ask in the user's conversation language:
 
 ---
 
-## Step 8: Create Issue
-
-Run via Bash:
-```bash
-gh issue create --repo {owner/repo} \
-  --title "{title}" \
-  --label "enhancement" \
-  --body "{body}"
-```
-
-Capture the returned issue URL.
-
-If the command fails (e.g., label doesn't exist), try without `--label` and inform the user.
-
-## Step 9: Save Local Copy
+## Step 8: Save Local Copy
 
 Write the issue body (plus metadata header) to `gap-reports/{N}-cycle/{N}-issue-report.md`:
 
 ```markdown
 ---
 title: "{issue_title}"
-issue_url: "{github_issue_url}"
-issue_number: {N}
+issue_url: ""
+issue_number: null
 repo: "{owner/repo}"
 date: "{YYYY-MM-DD}"
 source: "gap-reports/{N}-cycle/{N}-launch-gaps.md"
@@ -346,6 +332,30 @@ generated_by: "gaps-critical-issue"
 
 {full issue body}
 ```
+
+This ensures a local record exists before any network call. The `issue_url` and `issue_number` fields are populated in Step 10 after successful issue creation.
+
+## Step 9: Create Issue
+
+Run via Bash:
+```bash
+gh issue create --repo {owner/repo} \
+  --title "{title}" \
+  --label "enhancement" \
+  --body-file "gap-reports/{N}-cycle/{N}-issue-report.md"
+```
+
+**Note:** Use `--body-file` pointing to the local copy saved in Step 8 (the frontmatter will be included but is harmless in the issue body). Alternatively, use a separate temp file or `--body` with the body content directly.
+
+Capture the returned issue URL and extract the issue number.
+
+If the command fails (e.g., label doesn't exist), try without `--label` and inform the user.
+
+## Step 9b: Update Local Copy with Issue URL
+
+After successful issue creation, update the frontmatter in `gap-reports/{N}-cycle/{N}-issue-report.md`:
+- Set `issue_url` to the returned GitHub URL
+- Set `issue_number` to the extracted issue number
 
 ## Step 10: Confirm
 
@@ -375,7 +385,8 @@ If yes, append to `.claude/skills/gaps-critical-issue/LEARN.md` under the approp
 - [ ] Issue body follows PM tone model (The pain / What we have / What's missing / Why it matters / Expected output)
 - [ ] Issue body is in English regardless of conversation language
 - [ ] HARD STOP #2 approved by user (full preview shown)
-- [ ] GitHub issue created via `gh issue create`
-- [ ] Issue URL returned and displayed
 - [ ] Local copy saved to `gap-reports/{N}-cycle/{N}-issue-report.md`
+- [ ] GitHub issue created via `gh issue create`
+- [ ] Local copy updated with issue URL and number
+- [ ] Issue URL returned and displayed
 - [ ] User informed of next steps
