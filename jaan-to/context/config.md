@@ -1,8 +1,8 @@
 # jaan.to Configuration {#config}
 
 > Configured for Jaanify — Smart AI Task Manager
-> Last Updated: 2026-02-08
-> Status: **Active** — Cycle 3
+> Last Updated: 2026-02-09
+> Status: **Active** — Cycle 4
 
 ---
 
@@ -11,10 +11,11 @@
 Based on detected tech stack, these skill roles are enabled:
 
 - `pm` - Product Management (PRDs, stories, research)
-- `dev` - Development (task breakdowns, data models, API contracts, stack detection, component design)
-- `ux` - User Experience (microcopy, heatmap analysis)
+- `dev` - Development (task breakdowns, data models, API contracts, scaffolds, component design)
+- `ux` - User Experience (microcopy, heatmap analysis, flowcharts, research synthesis)
 - `data` - Data & Analytics (GTM tracking)
 - `qa` - Quality Assurance (testing, accessibility)
+- `release` - Release Management (changelogs, iteration)
 
 > **Note**: All roles enabled by default for empty projects. Refine based on actual usage.
 
@@ -90,7 +91,7 @@ Default set (7 languages):
 - **Project Type**: SaaS — AI Task Manager
 - **Product Name**: Jaanify
 - **Team Size**: Solo (AI-assisted via jaan-to)
-- **Stage**: Planning & Design (Cycle 3)
-- **jaan-to Version**: v3.19.0 (21 skills)
+- **Stage**: Implementation (Cycle 4)
+- **jaan-to Version**: v4.5.0 (31 skill directories, 32 per CHANGELOG)
 - **Primary Domain**: Productivity / Task Management
 - **Target Platforms**: Web (Next.js), Android (Kotlin), API (Fastify)
