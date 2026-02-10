@@ -17,5 +17,5 @@
 - **Total stories**: 7
 - **Critical priority**: 4 (US-01, US-02, US-04, US-05)
 - **High priority**: 3 (US-03, US-06, US-07)
-- **Source**: [Jaanify MVP PRD](../prd/01-jaanify-mvp/01-prd-jaanify-mvp.md)
+- **Source**: [Jaanify MVP PRD](../prd/01-jaanify-mvp/01-jaanify-mvp.md)
 - **Each story includes**: Gherkin acceptance criteria (3-7 scenarios), INVEST validation, scope boundaries, dependencies, technical notes
