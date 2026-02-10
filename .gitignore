@@ -37,8 +37,10 @@ build/
 *.log
 /.obsidian
 
-# Claude Code
-.claude/
+# Claude Code (skills tracked, settings/plans ignored)
+.claude/settings.json
+.claude/settings.local.json
+.claude/plans/
 
 # jaan-to plugin metrics (auto-generated)
 jaan-to/metrics/
