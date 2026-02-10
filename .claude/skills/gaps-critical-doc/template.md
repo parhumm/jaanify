@@ -107,8 +107,8 @@ progress:
 | Field | Value |
 |-------|-------|
 | Created | {{date}} |
-| Output Path | {{env:JAAN_OUTPUTS_DIR}}/gaps/{{id}}-launch-readiness-cycle-{{cycle_number}}/ |
-| Skill | skill-gaps-critical |
+| Output Path | gap-reports/{{cycle_pad}}-cycle/{{cycle_pad}}-launch-gaps.md |
+| Skill | gaps-critical-doc |
 | Version | 3.0 |
 | Status | {{status}} |
 

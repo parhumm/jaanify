@@ -1,24 +1,24 @@
 ---
-name: skill-gaps-critical
+name: gaps-critical-doc
 description: Launch readiness gap analysis with prioritized skills inventory and cycle-over-cycle tracking.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write(gap-reports/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[cycle-number]"
 user-invocable: true
 ---
 
-# skill-gaps-critical
+# gaps-critical-doc
 
 > Launch readiness gap analysis with prioritized skills inventory and cycle-over-cycle tracking.
 
 ## Context Files
 
 Read these before execution:
-- `$JAAN_LEARN_DIR/skill-gaps-critical.learn.md` - Past lessons (loaded in Pre-Execution)
-- `.claude/skills/skill-gaps-critical/template.md` - Output template
+- `$JAAN_LEARN_DIR/gaps-critical-doc.learn.md` - Past lessons (loaded in Pre-Execution)
+- `.claude/skills/gaps-critical-doc/template.md` - Output template
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration and skill catalog
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for implementation gap assessment)
 
-**Output path**: `$JAAN_OUTPUTS_DIR/gaps/{id}-launch-readiness-cycle-{N}/` — ID-based folders, one per cycle.
+**Output path**: `gap-reports/{NN}-cycle/{NN}-launch-gaps.md` — stored alongside other cycle gap reports.
 
 ## Input
 
@@ -35,7 +35,7 @@ Validate: cycle number must be a positive integer.
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/skill-gaps-critical.learn.md`
+`$JAAN_LEARN_DIR/gaps-critical-doc.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to data gathering steps
@@ -49,7 +49,7 @@ If the file does not exist, continue without it.
 
 **Read language preference** from `jaan-to/config/settings.yaml`:
 
-1. Check for per-skill override: `language_skill-gaps-critical` field
+1. Check for per-skill override: `language_gaps-critical-doc` field
 2. If no override, use the global `language` field
 3. Resolve:
 
@@ -220,9 +220,9 @@ Count totals:
 - Skills available but untested
 - Gaps already addressable with existing tested skills
 
-## Step 8: Read Previous skill-gaps-critical Output
+## Step 8: Read Previous gaps-critical-doc Output
 
-Glob `$JAAN_OUTPUTS_DIR/gaps/*launch-readiness*/` to find the most recent previous output.
+Glob `gap-reports/*-cycle/*-launch-gaps.md` to find the most recent previous output.
 
 If found, read it and extract:
 - Previous progress matrix percentages
@@ -316,7 +316,7 @@ Present as delta table:
 
 **If no previous output exists**:
 
-Note: "First run of skill-gaps-critical. No previous data for delta comparison. Future cycles will show progress changes here."
+Note: "First run of gaps-critical-doc. No previous data for delta comparison. Future cycles will show progress changes here."
 
 ---
 
@@ -346,7 +346,7 @@ CYCLE DELTA (vs Cycle {N-1})
   Progress: Scaffold {old}% → {new}%, Production {old}% → {new}%
 
 OUTPUT:
-  $JAAN_OUTPUTS_DIR/gaps/{id}-launch-readiness-cycle-{N}/{id}-gaps-launch-readiness-cycle-{N}.md
+  gap-reports/{NN}-cycle/{NN}-launch-gaps.md
 ```
 
 > "Proceed with writing launch readiness report? [y/n]"
@@ -359,22 +359,18 @@ OUTPUT:
 
 ## Step 12: Generate Output Path
 
-Determine the next ID by counting existing folders in `$JAAN_OUTPUTS_DIR/gaps/`:
+Derive the output path from the cycle number:
 
-1. Glob `$JAAN_OUTPUTS_DIR/gaps/*/` to find existing output folders
-2. Count them and add 1 to get the next ID (zero-padded to 2 digits)
-3. Set variables:
-   - `NEXT_ID` = next sequential number (e.g., "01", "02")
-   - `CYCLE` = cycle number from input
-   - `SLUG` = `launch-readiness-cycle-${CYCLE}`
-   - `OUTPUT_FOLDER` = `$JAAN_OUTPUTS_DIR/gaps/${NEXT_ID}-${SLUG}/`
-   - `MAIN_FILE` = `${OUTPUT_FOLDER}/${NEXT_ID}-gaps-${SLUG}.md`
+1. `CYCLE` = cycle number from input
+2. `CYCLE_PAD` = zero-padded to 2 digits (e.g., "03", "04")
+3. `OUTPUT_FOLDER` = `gap-reports/${CYCLE_PAD}-cycle/`
+4. `MAIN_FILE` = `${OUTPUT_FOLDER}/${CYCLE_PAD}-launch-gaps.md`
 
 Create the output folder if it doesn't exist.
 
 ## Step 13: Write Report
 
-Use the template from `.claude/skills/skill-gaps-critical/template.md` as the structural guide.
+Use the template from `.claude/skills/gaps-critical-doc/template.md` as the structural guide.
 
 Fill all template variables with data gathered in Phase 1. The output file must include:
 
@@ -455,8 +451,12 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Revise output, re-write
-- **Option 2**: Run `/jaan-to:learn-add skill-gaps-critical "{feedback}"`
+- **Option 2**: Run `/jaan-to:learn-add gaps-critical-doc "{feedback}"`
 - **Option 3**: Do both
+
+## Step 16: Suggest Issue Creation
+
+> "Run `/gaps-critical-issue` to create GitHub issues from these gaps? [y/n]"
 
 ---
 
@@ -468,12 +468,12 @@ If yes:
 - [ ] Deliverable inventory complete ($JAAN_OUTPUTS_DIR/**)
 - [ ] Implementation progress matrix calculated with concrete evidence
 - [ ] jaan-to skills catalog inventoried (vendor/jaan-to/skills/)
-- [ ] Previous skill-gaps-critical output read for delta (or first-run noted)
+- [ ] Previous gaps-critical-doc output read for delta (or first-run noted)
 - [ ] All gaps classified with P0–P3 priority levels
 - [ ] Each gap has: L-NN ID, title, description, key points, expected outputs, skill-exists status, blocks, related gaps
 - [ ] Critical path dependency diagram generated
 - [ ] Cycle-over-cycle delta computed (or first-run noted)
 - [ ] Summary table includes all gaps with priority/exists/blocks columns
 - [ ] Recommendations for next cycle provided
-- [ ] Output written to `$JAAN_OUTPUTS_DIR/gaps/{id}-launch-readiness-cycle-{N}/`
+- [ ] Output written to `gap-reports/{NN}-cycle/{NN}-launch-gaps.md`
 - [ ] User approved output

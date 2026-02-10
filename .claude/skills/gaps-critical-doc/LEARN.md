@@ -1,4 +1,4 @@
-# Lessons: skill-gaps-critical
+# Lessons: gaps-critical-doc
 
 > Last updated: 2026-02-10
 
@@ -84,7 +84,7 @@ Things to avoid based on past feedback:
   means the product is not functional
 - Do not present gap analysis as a criticism of the project — it is a roadmap
   for what to build next, framed constructively
-- Do not skip reading previous skill-gaps-critical output — the delta
+- Do not skip reading previous gaps-critical-doc output — the delta
   comparison is one of the most valuable sections for tracking progress
 - Do not hardcode deliverable counts from memory — always read and count from
   the actual output files in the current session
