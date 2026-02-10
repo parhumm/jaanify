@@ -1,6 +1,6 @@
 # Lessons: backend-scaffold
 
-> Last updated: 2026-02-09
+> Last updated: 2026-02-10
 
 > Plugin-side lessons. Project-specific lessons go in:
 > `$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md`
@@ -54,3 +54,5 @@ Things to avoid:
 - Using `instanceof ZodError` instead of `hasZodFastifySchemaValidationErrors` helper — fails across module boundaries
 - Missing Eloquent strictness modes in `AppServiceProvider::boot()`
 - `moduleResolution: "bundler"` for backend Node.js projects — allows vague imports that fail at runtime
+- Using `decodeJwt` for JWT verification only base64-decodes without signature verification, enabling token forgery — generate secure JWT verification using `jose` library by default
+- Scaffold services with all-TODO stubs and no test files — generate vitest test stubs (`.test.ts`) for each service function alongside scaffold code, covering happy path and primary error case
