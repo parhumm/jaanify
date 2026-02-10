@@ -1,7 +1,7 @@
 ---
 name: gaps-critical-doc
 description: Launch readiness gap analysis with prioritized skills inventory and cycle-over-cycle tracking.
-allowed-tools: Read, Glob, Grep, Write(gap-reports/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Bash(git *), Write(gap-reports/**), Edit(gap-reports/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[cycle-number]"
 user-invocable: true
 ---
@@ -443,6 +443,21 @@ Before confirming, verify:
 
 If any check fails, fix before confirming.
 
+## Step 14b: Commit Changes
+
+Stage and commit all files written or modified during this session:
+
+```bash
+git add "gap-reports/{NN}-cycle/{NN}-launch-gaps.md"
+git commit -m "docs(cycle-{N}): launch readiness gap analysis via gaps-critical-doc
+
+{total} gaps identified (P0: {p0}, P1: {p1}, P2: {p2}, P3: {p3}).
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
+
+If the user requests a push, run `git push` after committing.
+
 ## Step 15: Capture Feedback
 
 > "Any feedback on the launch readiness analysis? [y/n]"
@@ -476,4 +491,5 @@ If yes:
 - [ ] Summary table includes all gaps with priority/exists/blocks columns
 - [ ] Recommendations for next cycle provided
 - [ ] Output written to `gap-reports/{NN}-cycle/{NN}-launch-gaps.md`
+- [ ] Changes committed to git
 - [ ] User approved output

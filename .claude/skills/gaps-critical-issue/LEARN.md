@@ -22,6 +22,8 @@ Special cases to check:
 
 Process improvements:
 
+- **2026-02-10 (Issue #53)**: Always link the project name **Jaanify** to its GitHub repo `https://github.com/parhumm/jaanify` using markdown link syntax `[Jaanify](https://github.com/parhumm/jaanify)` — every mention in the issue body should be a clickable link to the project repo.
+
 - **2026-02-10 (Issue #51)**: Opening paragraph should reference specific deliverable counts (e.g., "17 deliverables", "21 endpoints", "74 BDD scenarios") — these concrete numbers make the PM voice credible and show the investment that's been made.
 - **2026-02-10 (Issue #51)**: Each gap section should include at least one direct code reference or command that fails (e.g., "`pnpm test` crashes immediately", "21 route handlers that return `// TODO: implement`") — abstract descriptions don't convey urgency.
 
