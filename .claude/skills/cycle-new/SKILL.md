@@ -343,6 +343,7 @@ These run at the end of every cycle:
 - `/jaan-to:detect-pack` — consolidate all detect outputs (ONLY if >= 3/5 domains analyzed)
 - `/jaan-to:release-iterate-changelog` — update CHANGELOG.md with this cycle's changes
 - `/gaps-critical-doc` — launch readiness analysis (local skill)
+- `/gaps-critical-issue` — convert gap analysis into GitHub issue requests (runs after gaps-critical-doc)
 
 ### Queue Rules
 
@@ -401,7 +402,8 @@ EXECUTION QUEUE ({n} jaan-to skill invocations):
   1. /jaan-to:{skill} — {purpose}
   2. /jaan-to:{skill} — {purpose}
   ...
-  N. /gaps-critical-doc — launch readiness analysis
+  N-1. /gaps-critical-doc — launch readiness analysis
+  N.   /gaps-critical-issue — convert gaps into GitHub issue requests
 
 MARKET IMPACT:
   This cycle advances: {which dimensions move forward}
@@ -639,13 +641,24 @@ This produces `gap-reports/{NN}-cycle/{NN}-launch-gaps.md` with:
 
 Commit: `docs(cycle-{N}): launch readiness gap analysis via gaps-critical-doc`
 
-### Step 4.7: Final Commits
+### Step 4.7: Run /gaps-critical-issue
+
+Invoke the local skill to convert gap analysis into GitHub issue requests:
+```
+Skill(gaps-critical-issue, args: "{cycle-number}")
+```
+
+This reads the `launch-gaps.md` produced by Step 4.6 and generates PM-voiced GitHub issue requests for gaps that need new or improved jaan-to skills.
+
+Commit: `docs(cycle-{N}): gap issue requests via gaps-critical-issue`
+
+### Step 4.8: Final Commits
 
 Commit all remaining Phase 4 outputs **individually** (one commit per file):
 - Gap report: `docs(cycle-{N}): gap report with launch readiness update`
 - Any other modified files
 
-### Step 4.8: Feedback Capture
+### Step 4.9: Feedback Capture
 
 > "Cycle {N} complete. Any feedback on this cycle? [y/n]"
 
@@ -688,6 +701,7 @@ Every cycle execution MUST satisfy all of these (from CLAUDE.md "Always Do" and 
 - [ ] BUILD: No secrets committed (security scan before each commit)
 - [ ] GAP REPORT: `gap-reports/{NN}-cycle/{NN}-gaps.md` written with Sections A-F
 - [ ] GAP REPORT: `/gaps-critical-doc` invoked → `launch-gaps.md` written
+- [ ] GAP REPORT: `/gaps-critical-issue` invoked → GitHub issue requests generated
 - [ ] GAP REPORT: Section E lists priorities but does NOT pre-plan next cycle
 
 **Market readiness:**
