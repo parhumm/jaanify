@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Complete 5-domain quality audit (design, writing, product, UX) with consolidated knowledge pack scoring 5.6/10 across 33 findings — 2 critical, 5 high, 10 medium, identifying 2 new launch gaps (monetization, i18n)
+- Generate 4 Mermaid user flow diagrams from PRD covering onboarding, task creation (text+voice), daily plan with reasoning cards, and authentication — 38 nodes with evidence map tracing each to PRD source
+- Research scaffold-to-production conversion strategy covering vertical slice architecture, testing pyramid (Vitest + Prisma mocks), CI/CD pipeline patterns for Fastify v5 + Next.js 15 + Prisma v6 monorepo (~45 sources)
+- Detect design system: 37 tokens (oklch color space, 6 categories), 26 React 19 components across 5 atomic levels, full dark mode — score 6.5/10
+- Detect writing system: ~55 strings with consistent friendly/encouraging tone, i18n maturity Level 0 (zero locale infrastructure despite 7-language microcopy specs) — score 5.0/10
+- Detect product reality: 21 endpoints + 3 pages fully specified but zero production code, no monetization path, analytics specified but not implemented — score 4.5/10
+- Detect UX: 4 routes, 4 user flows mapped, auth routing broken (TODO stub), missing /tasks/new page — score 6.0/10
+- Add autonomous co-evolution cycle executor (`cycle-new` local skill) for scanning, testing, building, and gap-reporting across jaan-to versions
+- Add launch readiness gap analysis skill (`gaps-critical-doc`) for prioritized skills inventory with cycle-over-cycle tracking
+- Add GitHub issue generation skill (`gaps-critical-issue`) for converting gap analysis into PM-voiced issue requests
+
+### Changed
+
+- Upgrade jaan-to plugin from v4.5.0 to v5.0.0 — token optimization extracting ~2,200 lines of boilerplate from 31 SKILL.md files with zero output quality degradation confirmed across 10 skills tested
+- Migrate all output paths to jaan-to v4.5.1 naming convention (subdomain/ID-slug structure)
+- Consolidate detect-pack from 1/5 domains (6.1/10) to 5/5 domains (5.6/10) with cross-domain pattern recognition and gap mapping
+
+### Fixed
+
+- Strip YAML frontmatter from GitHub issue body to prevent rendering issues in issue creation
+- Add auto-commit behavior to local skills for consistent git workflow
+
 ## [0.1.0] - 2026-02-09
 
 ### Added
@@ -37,19 +61,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### High Impact
 
-- Backend and frontend scaffolds provide the first runnable code for Jaanify — the project transitions from 100% specification to ~25% implementation
-- Critical security finding (E-DEV-001): JWT decode without signature verification must be remediated before any deployment
+- **5-domain quality audit complete**: Full knowledge pack with 33 findings across dev, design, writing, product, and UX domains. Two new critical launch gaps identified: no monetization path (L-06) and zero i18n infrastructure (L-07).
+- **jaan-to v5.0.0 validated**: Token optimization regression-tested across 10 skills with zero quality degradation — confirms the plugin's structural changes are safe.
+- Critical security finding (E-DEV-001): JWT decode without signature verification remains unresolved and must be remediated before any deployment.
 
 ### Medium Impact
 
-- All 21 API endpoints now have typed route handlers, validation schemas, and service layer stubs
-- 26 React components with Server/Client boundary strategy, accessibility patterns, and design token integration
-- Engineering audit provides prioritized remediation roadmap for scaffold hardening
+- Scaffold-to-production research provides actionable conversion strategy with vertical slice approach, testing pyramid, and stub priority ordering.
+- 4 Mermaid user flow diagrams enable visual communication of Jaanify's core experiences (onboarding, task creation, daily planning, auth).
+- 3 new local skills (cycle-new, gaps-critical-doc, gaps-critical-issue) automate the co-evolution loop workflow.
 
 ### Low Impact
 
-- Design token system (OKLCH colors, DM Sans typography) established for consistent UI
-- Test infrastructure configured but no test stubs generated yet
+- Output path migration to v4.5.1 convention — no functional change, improves file organization.
+- YAML frontmatter stripping fix prevents rendering issues in GitHub issues.
 
 ---
 
@@ -58,23 +83,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Known Issues
 
 - JWT auth middleware decodes tokens without cryptographic verification (E-DEV-001 — Critical)
+- No monetization path exists — zero billing, pricing, or tier enforcement code (E-PRD-001 — Critical)
 - No rate limiting on any endpoint (E-DEV-002 — High)
 - Access tokens stored in localStorage, vulnerable to XSS (E-DEV-003 — High)
-- No CSRF protection on mutation endpoints (E-DEV-005 — Medium)
-- No test files generated despite Vitest configured in both scaffolds (E-DEV-008 — Low)
+- Zero i18n infrastructure despite 7-language microcopy specs (E-WRT-001 — High)
+- All 21 backend service handlers are TODO stubs (E-PRD-002 — High)
+- Auth routing hardcoded to /onboarding for all visitors (E-UX-001 — High)
 
-### Migration Steps
+### Launch Gap Summary (7 gaps)
 
-- This is the initial release — no migration needed
-- Copy scaffold files to project directory and run `pnpm install`
-- Configure `.env` / `.env.local` with database URL, JWT secret, Google OAuth credentials
+| Gap | Priority | Description |
+|-----|----------|-------------|
+| L-01 | P0 | Service Implementation — TODO stubs → production code |
+| L-02 | P0 | Integration/Wiring — scaffold → runnable project |
+| L-03 | P1 | Test Stub Generation — zero test files |
+| L-04 | P0 | Security Hardening — JWT, rate limit, CSRF |
+| L-05 | P1 | CI/CD Scaffold — no pipeline |
+| L-06 | P1 | Monetization — no billing/pricing (NEW in Cycle 5) |
+| L-07 | P2 | i18n Infrastructure — zero locale support (NEW in Cycle 5) |
 
-### Suggested Help Articles
+### Suggested Next Steps
 
-- Getting started with Jaanify development environment
-- Understanding the backend scaffold architecture (routes, services, schemas)
-- Understanding the frontend scaffold architecture (components, hooks, stores)
-- Security hardening checklist for scaffold code
+1. Implement auth service with `@fastify/jwt` or `jose` (resolves E-DEV-001 + E-UX-001)
+2. Define pricing model in PRD and scaffold Stripe integration (resolves E-PRD-001)
+3. Run `cycle-new` to continue the co-evolution loop with new jaan-to skills
 
 ---
 
@@ -83,4 +115,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-> Generated by jaan.to | 2026-02-09 | Skill: release-iterate-changelog | Mode: auto-generate | Status: Draft
+> Generated by jaan.to | 2026-02-10 | Skill: release-iterate-changelog | Mode: auto-generate | Cycle: 5 | Status: Draft
