@@ -11,7 +11,7 @@ allowed-tools: >-
   Write(gap-reports/**), Write(scorecards/**),
   Edit(gap-reports/**), Edit(scorecards/**),
   Edit(jaan-to/context/**), Edit(jaan-to/config/settings.yaml),
-  Skill(jaan-to:*), Skill(gaps-critical-doc), Skill(gaps-critical-issue)
+  Skill(*), Skill(gaps-critical-doc), Skill(gaps-critical-issue)
 argument-hint: "[cycle-number] [--focus spec|scaffold|code|test|audit|gtm]"
 user-invocable: true
 ---
@@ -260,9 +260,9 @@ Record the bottleneck classification and focus skills.
 FOR EACH open gap in the launch-gaps summary table:
 
 1. **Find matching jaan-to skill(s)** from the catalog that can address this gap
-2. **If direct match exists**: Add `Skill(jaan-to:{skill-name})` with specific arguments
-3. **If no direct match but close skill exists**: Add `Skill(jaan-to:learn-add {skill})` to request improvement + `Skill(jaan-to:{skill-name})` to re-run with feedback
-4. **If no skill exists at all**: Add `Skill(jaan-to:pm-research-about)` to research the approach, then mark for `/gaps-critical-issue` to request new skill creation
+2. **If direct match exists**: Add `Skill({skill-name})` with specific arguments
+3. **If no direct match but close skill exists**: Add `Skill(learn-add {skill})` to request improvement + `Skill({skill-name})` to re-run with feedback
+4. **If no skill exists at all**: Add `Skill(pm-research-about)` to research the approach, then mark for `/gaps-critical-issue` to request new skill creation
 
 **RULE**: Every gap MUST map to at least one exact jaan-to skill invocation. No manual work items.
 
@@ -472,7 +472,7 @@ FOR EACH item in the execution queue:
 
 **3.3.1 — Invoke the exact jaan-to skill**:
 ```
-Skill(jaan-to:{skill-name}, args: "{arguments}")
+Skill({skill-name}, args: "{arguments}")
 ```
 
 Wait for skill to complete. If the skill presents a HARD STOP, the user will approve it — this is expected behavior for child skills.
@@ -554,7 +554,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 After executing all queued skills, submit learn feedback for each gap where an existing skill is insufficient:
 
 ```
-Skill(jaan-to:learn-add, args: "{skill-name} \"{specific improvement request based on this cycle's findings}\"")
+Skill(learn-add, args: "{skill-name} \"{specific improvement request based on this cycle's findings}\"")
 ```
 
 Commit each: `chore(cycle-{N}): learn-add feedback for {skill-name}`
@@ -588,7 +588,7 @@ Scorecard + commit each individually.
 
 If threshold met:
 ```
-Skill(jaan-to:detect-pack)
+Skill(detect-pack)
 ```
 
 Scorecard + commit.
@@ -596,7 +596,7 @@ Scorecard + commit.
 ### Step 4.3: Update Changelog
 
 ```
-Skill(jaan-to:release-iterate-changelog)
+Skill(release-iterate-changelog)
 ```
 
 This adds this cycle's entries to `$JAAN_OUTPUTS_DIR/CHANGELOG.md`.
