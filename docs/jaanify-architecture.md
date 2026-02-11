@@ -2,7 +2,7 @@
 title: Jaanify Architecture
 doc_type: concept
 created_date: 2026-02-10
-updated_date: 2026-02-10
+updated_date: 2026-02-11
 tags: [architecture, transparent-ai, reasoning-cards, pwa]
 related: [../jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md, ../jaan-to/context/tech.md]
 ---
@@ -66,7 +66,10 @@ JWT tokens with 1-hour expiry and refresh tokens. OAuth2 via Google (primary) an
 
 ## Related
 
+- [Jaanify Overview](jaanify-overview.md)
+- [Data Model](data-model.md)
+- [API Reference](extending/api-reference.md)
+- [Getting Started](extending/getting-started.md)
+- [Deployment](extending/deployment.md)
 - [PRD](../jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md)
 - [Tech Stack](../jaan-to/context/tech.md)
-- [API Contract](../jaan-to/outputs/backend/api-contract/)
-- [Data Model](../jaan-to/outputs/backend/data-model/)
