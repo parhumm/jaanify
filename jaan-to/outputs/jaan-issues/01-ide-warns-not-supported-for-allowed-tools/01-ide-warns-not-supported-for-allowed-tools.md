@@ -3,8 +3,8 @@ title: "[Bug] IDE warns \"not supported\" for custom skill frontmatter attribute
 type: "bug"
 label: "bug"
 repo: "parhumm/jaan-to"
-issue_url: ""
-issue_number: null
+issue_url: "https://github.com/parhumm/jaan-to/issues/66"
+issue_number: 66
 date: "2026-02-11"
 jaan_to_version: "6.0.0"
 os: "Darwin 25.1.0 arm64"
