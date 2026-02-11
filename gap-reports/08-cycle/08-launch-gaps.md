@@ -446,4 +446,16 @@ L-11 Landing Page ──→ Public Launch
 
 ---
 
+## GitHub Issue
+
+- **Issue URL:** https://github.com/parhumm/jaan-to/issues/70
+- **Issue report:** `jaan-to/outputs/jaan-issues/03-output-integrate-pipeline/03-output-integrate-pipeline.md`
+- **Created by:** `gaps-critical-issue` → `jaan-issue-report` (Cycle 7)
+- **Date:** 2026-02-11 (originally created), 2026-02-11 (referenced in Cycle 8)
+- **Priorities included:** P1
+- **Gaps included:** L-08, L-09
+- **Note:** Issue #70 remains open and unchanged. No new issue created — gaps are identical to Cycle 7.
+
+---
+
 > **Bottom line:** Cycle 8 established comprehensive project documentation — growing from 1 doc to 7 docs covering the full project lifecycle (overview, architecture, data model, API, setup, deployment). While no production code or infrastructure gaps were resolved, the documentation foundation improves contributor onboarding and project professionalism for the approaching beta. The critical path remains unchanged: L-08 (integrate generated artifacts) → L-09 (activate deployment pipeline) → beta launch. All 38 jaan-to skills maintain 100% test coverage with an average score of 4.34/5.
