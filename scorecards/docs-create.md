@@ -1,59 +1,46 @@
 # Scorecard: docs-create
 
-> Tested: 2026-02-10 | jaan-to v5.1.0 (SHA: fdbd3ac) | Cycle 6
-> Skill version: v5.1.0
-> Previous score: 4.2/5 (Cycle 1, v3.15.2 — scorecard authoritative, not launch-gaps 2.0/5)
+> Tested: 2026-02-11 | jaan-to v6.0.0 (SHA: 736820e) | Cycle 8
+> Skill version: v6.0.0
+> Previous score: 4.3/5 (Cycle 6, v5.1.0)
 
 ---
 
-## Score: 4.3 / 5.0
+## Score: 4.5 / 5.0
 
 | Dimension | Weight | Score | Notes |
 |-----------|--------|-------|-------|
-| Functionality | 30% | 4/5 | 12-step workflow with smart type detection, duplicate checking, STYLE.md validation, README index updates. `disable-model-invocation` means manual execution only. |
-| Output Quality | 25% | 5/5 | Generated concept doc follows template precisely: YAML frontmatter, H1/tagline/separators, content from PRD and tech.md. Under line limit. |
-| Context Awareness | 20% | 4/5 | Templates reference project context. Smart type detection probes ambiguity. Relies on executor for content gathering (Step 5). |
-| Learning Integration | 15% | 4/5 | LEARN.md framework with pre-execution loading. Template file exists at project level. Plugin-side LEARN.md available. |
-| Workflow Efficiency | 10% | 4/5 | Smart type detection avoids unnecessary questions. 6 doc types with clear output path mapping. README auto-update in Step 10.5 is good. |
+| Functionality | 30% | 5/5 | 12-step workflow executed 5 times across 2 doc types (concept, guide). Smart type detection, duplicate checking, STYLE.md validation, template filling all work correctly. |
+| Output Quality | 25% | 5/5 | All 5 docs follow templates precisely: YAML frontmatter, H1/tagline/separators, content derived from PRD/API contract/data model/infra specs. All within line limits. All internal links valid. |
+| Context Awareness | 20% | 4/5 | Templates reference project context well. Doc content accurately reflects Jaanify's architecture, API, and data model. Relies on executor for content gathering. |
+| Learning Integration | 15% | 4/5 | LEARN.md framework with pre-execution loading. No project-side lessons accumulated yet — learn file is empty. |
+| Workflow Efficiency | 10% | 4/5 | 6 doc types with clear output path mapping. README auto-update guidance in Step 10.5. `disable-model-invocation` still requires manual execution. |
 
 ---
 
 ## Strengths
 
-1. Comprehensive template system covering 6 doc types (skill, hook, config, guide, concept, index)
-2. Smart type detection with disambiguation questions — doesn't just ask "what type?" but probes the uncertainty
-3. STYLE.md validation before writing ensures consistent quality
-4. README index auto-update (Step 10.5) keeps navigation in sync — this was missing in v3.15.2
-5. Duplicate detection before creation prevents redundant docs
-6. YAML frontmatter with `related:` field enables cross-linking
+1. Template system covers all needed doc types — concept and guide templates produced well-structured output
+2. STYLE.md validation ensures consistent quality across all 5 docs
+3. YAML frontmatter with `related:` field enables cross-linking between docs
+4. Output path conventions are clear and predictable
+5. Duplicate detection step prevented conflicts with existing architecture doc
 
 ## Issues
 
-1. `disable-model-invocation: true` prevents autonomous execution — user must manually follow all 12 steps
-2. Output path `docs/{name}.md` assumes a project-level `docs/` directory. If project has no docs, the skill creates the directory but doesn't scaffold an index.
-3. No auto-discovery of project content for filling template — Step 5 "Gather Content" relies entirely on executor knowledge
+1. `disable-model-invocation: true` prevents autonomous execution — requires manual step-by-step following
+2. No batch mode — creating 5 docs requires following the full workflow 5 times (could benefit from a "scaffold docs" mode)
+3. Step 10.5 README auto-update is guidance only — doesn't auto-generate the index
 
 ## Gaps Discovered
 
-- **G-01**: The skill generates single docs well but can't scaffold an entire documentation structure (e.g., "create docs for this project" → generate index + key concept docs + API docs all at once)
-- **G-02**: The `disable-model-invocation` flag means only the host agent (Claude) can execute it, not as an autonomous sub-skill
-
-## Pre-v5 Comparison
-
-| Dimension | v3.15.2 (C1) | v5.1.0 (C6) | Delta |
-|-----------|-------------|-------------|-------|
-| Overall Score | 4.2/5 | 4.3/5 | +0.1 |
-| Template Quality | Good | Better (6 types, detailed placeholders) | Improved |
-| README Index Updates | Not present | Step 10.5 adds auto-update | New feature |
-| STYLE.md Integration | Present | Present with validation step | Same |
-| Smart Type Detection | Basic | Enhanced with disambiguation | Improved |
-| Learning Integration | Empty learn file | Framework with pre-execution protocol | Improved |
-
-**NOTE**: The launch-gaps.md listed docs-create at 2.0/5 — this was incorrect. The authoritative scorecard (to-jaan-docs-create.md) shows 4.2/5. The discrepancy should be corrected in future gap reports.
+- **G-01**: No batch documentation mode — creating multiple docs for a project requires repetitive workflow. A "scaffold project docs" meta-skill would help.
+- **G-02**: `disable-model-invocation` limits integration with cycle-new automation
 
 ## History
 
 | Cycle | jaan-to Ver | Score | Notes |
 |-------|-------------|-------|-------|
-| 1 | v3.15.2 | 4.2/5 | Clean execution, good output |
-| 6 | v5.1.0 | 4.3/5 | Retest: slight improvement, README auto-update is new, templates more detailed |
+| 1 | v3.15.2 | 4.2/5 | Clean execution, 1 doc |
+| 6 | v5.1.0 | 4.3/5 | Retest: README auto-update is new |
+| 8 | v6.0.0 | 4.5/5 | Retest: 5 docs created, larger workload validates template quality |
