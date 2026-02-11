@@ -45,7 +45,7 @@ If no arguments provided, auto-detect the latest gap report by globbing `gap-rep
 
 **CRITICAL LANGUAGE RULE:**
 - **Conversation** (questions, confirmations, HARD STOP): Use the resolved language preference
-- **Issue content**: Handled by `jaan-issue-report` (always English)
+- **Issue content**: Handled by `jaan-issue-report --submit` (always English)
 
 ## Step 1: Parse Input
 
@@ -101,13 +101,13 @@ GAPS TO INCLUDE ({total} gaps):
   {P2/P3 if selected}
 ```
 
-> "Create a combined issue for these {N} gaps via `/jaan-issue-report`? [y/n]"
+> "Create a combined issue for these {N} gaps via `/jaan-issue-report --submit`? [y/n]"
 
 **Do NOT proceed without explicit approval.**
 
 ---
 
-# PHASE 2: Invoke `jaan-issue-report`
+# PHASE 2: Invoke `jaan-issue-report --submit`
 
 ## Step 4: Compose Description
 
@@ -125,9 +125,9 @@ Full gap report: gap-reports/{N}-cycle/{N}-launch-gaps.md
 jaan-to version: {version}
 ```
 
-Include enough detail from each gap (title, description, blocks, expected outputs) so `jaan-issue-report` can generate a complete issue body.
+Include enough detail from each gap (title, description, blocks, expected outputs) so `jaan-issue-report --submit` can generate a complete issue body.
 
-## Step 5: Invoke `jaan-issue-report`
+## Step 5: Invoke `jaan-issue-report --submit`
 
 Call:
 ```
