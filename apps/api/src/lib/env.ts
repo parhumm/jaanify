@@ -28,3 +28,14 @@ export function validateEnv(): Env {
   }
   return result.data;
 }
+
+/** Lazy-initialized singleton — validated on first access. */
+let _env: Env | undefined;
+export const env: Env = new Proxy({} as Env, {
+  get(_target, prop: string) {
+    if (!_env) {
+      _env = validateEnv();
+    }
+    return _env[prop as keyof Env];
+  },
+});
