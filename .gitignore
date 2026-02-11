@@ -1,6 +1,7 @@
 # Secrets & credentials — PUBLIC REPO, never commit these
 .env
 .env.*
+!.env.example
 *.key
 *.pem
 credentials.*

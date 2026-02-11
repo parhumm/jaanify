@@ -1,0 +1,46 @@
+{
+  "name": "jaanify-api",
+  "version": "0.1.0",
+  "description": "Jaanify — AI Task Manager API (Fastify v5 + Prisma v6)",
+  "type": "module",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node --env-file=.env dist/server.js",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "prisma generate",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "clean": "rm -rf dist",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "fastify": "^5.7.0",
+    "@fastify/autoload": "^6.0.0",
+    "@fastify/cors": "^10.0.0",
+    "@fastify/cookie": "^11.0.0",
+    "@fastify/sensible": "^6.0.0",
+    "@fastify/swagger": "^9.0.0",
+    "@fastify/swagger-ui": "^5.0.0",
+    "@prisma/client": "^6.0.0",
+    "fastify-plugin": "^5.0.0",
+    "fastify-type-provider-zod": "^6.1.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0",
+    "fastify-tsconfig": "^2.0.0",
+    "prisma": "^6.0.0",
+    "tsx": "^4.0.0",
+    "vitest": "^2.0.0",
+    "eslint": "^9.0.0"
+  }
+}

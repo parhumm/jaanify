@@ -1,0 +1,138 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(uuid()) @db.Uuid
+  email           String?   @db.VarChar(255)
+  name            String?   @db.VarChar(100)
+  avatarUrl       String?   @map("avatar_url") @db.Text
+  authProvider    String    @default("guest") @map("auth_provider") @db.VarChar(20)
+  preferencesJson Json      @default("{}") @map("preferences_json") @db.JsonB
+  deletedAt       DateTime? @map("deleted_at") @db.Timestamptz()
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz()
+
+  tasks        Task[]
+  dailyPlans   DailyPlan[]
+  userFeedback UserFeedback[]
+
+  @@unique([email], map: "idx_users_on_email_active")
+  @@index([createdAt], map: "idx_users_on_created_at")
+  @@map("users")
+}
+
+model Task {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String    @map("user_id") @db.Uuid
+  title            String    @db.VarChar(500)
+  rawInput         String?   @map("raw_input") @db.Text
+  description      String?   @db.Text
+  deadline         DateTime? @db.Timestamptz()
+  category         String?   @db.VarChar(100)
+  priorityScore    Decimal   @default(0.5) @map("priority_score") @db.Decimal(5, 4)
+  priorityOverride Int?      @map("priority_override")
+  status           String    @default("active") @db.VarChar(20)
+  reasoningJson    Json?     @map("reasoning_json") @db.JsonB
+  energyLevel      String?   @map("energy_level") @db.VarChar(10)
+  estimatedMinutes Int?      @map("estimated_minutes")
+  completedAt      DateTime? @map("completed_at") @db.Timestamptz()
+  deletedAt        DateTime? @map("deleted_at") @db.Timestamptz()
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt        DateTime  @updatedAt @map("updated_at") @db.Timestamptz()
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Restrict)
+  dailyPlanSlots DailyPlanSlot[]
+  userFeedback   UserFeedback[]
+
+  @@index([userId, status], map: "idx_tasks_on_user_status")
+  @@index([deadline], map: "idx_tasks_on_deadline")
+  @@index([userId, priorityScore(sort: Desc)], map: "idx_tasks_on_user_priority")
+  @@map("tasks")
+}
+
+model DailyPlan {
+  id              String    @id @default(uuid()) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  date            DateTime  @db.Date
+  status          String    @default("generating") @db.VarChar(20)
+  reasoningMethod String    @default("ai") @map("reasoning_method") @db.VarChar(20)
+  generatedAt     DateTime? @map("generated_at") @db.Timestamptz()
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz()
+
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slots        DailyPlanSlot[]
+  userFeedback UserFeedback[]
+
+  @@unique([userId, date], map: "uq_daily_plans_user_date")
+  @@index([userId], map: "idx_daily_plans_on_user_id")
+  @@map("daily_plans")
+}
+
+model DailyPlanSlot {
+  id            String   @id @default(uuid()) @db.Uuid
+  planId        String   @map("plan_id") @db.Uuid
+  taskId        String   @map("task_id") @db.Uuid
+  position      Int
+  reasoningJson Json?    @map("reasoning_json") @db.JsonB
+  status        String   @default("pending") @db.VarChar(20)
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamptz()
+
+  plan DailyPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  task Task      @relation(fields: [taskId], references: [id], onDelete: Restrict)
+
+  @@unique([planId, position], map: "uq_plan_slots_plan_position")
+  @@index([taskId], map: "idx_plan_slots_on_task_id")
+  @@map("daily_plan_slots")
+}
+
+model UserFeedback {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  taskId       String?  @map("task_id") @db.Uuid
+  planId       String?  @map("plan_id") @db.Uuid
+  feedbackType String   @map("feedback_type") @db.VarChar(30)
+  reason       String?  @db.Text
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  user User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task Task?      @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  plan DailyPlan? @relation(fields: [planId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt], map: "idx_feedback_on_user_created")
+  @@index([taskId], map: "idx_feedback_on_task_id")
+  @@map("user_feedback")
+}
+
+model GuestSession {
+  id          String   @id @default(uuid()) @db.Uuid
+  anonymousId String   @unique @map("anonymous_id") @db.VarChar(64)
+  dataJson    Json     @default("{}") @map("data_json") @db.JsonB
+  expiresAt   DateTime @map("expires_at") @db.Timestamptz()
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@index([expiresAt], map: "idx_guest_sessions_on_expiry")
+  @@map("guest_sessions")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String?  @map("user_id") @db.Uuid
+  action     String   @db.VarChar(50)
+  entityType String   @map("entity_type") @db.VarChar(50)
+  entityId   String?  @map("entity_id") @db.Uuid
+  metadata   Json     @default("{}") @db.JsonB
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@index([userId, createdAt], map: "idx_audit_on_user_created")
+  @@index([entityType, entityId, createdAt], map: "idx_audit_on_entity")
+  @@map("audit_logs")
+}
