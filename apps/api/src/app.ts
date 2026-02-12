@@ -8,6 +8,9 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
+import { securityHeadersPlugin } from "./plugins/security-headers.js";
+import { rateLimitPlugin } from "./plugins/rate-limiter.js";
+import { csrfPlugin } from "./plugins/csrf-protection.js";
 import { authMiddleware } from "./plugins/auth.js";
 import { errorHandlerPlugin } from "./plugins/error-handler.js";
 import { validateEnv } from "./lib/env.js";
@@ -35,10 +38,13 @@ export async function buildApp() {
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
 
-  // Plugins
-  await app.register(cors, { origin: env.CORS_ORIGIN, credentials: true });
-  await app.register(cookie);
-  await app.register(sensible);
+  // Security & Infrastructure Plugins (order matters)
+  await app.register(securityHeadersPlugin); // 1. Security headers (helmet)
+  await app.register(cors, { origin: env.CORS_ORIGIN, credentials: true }); // 2. CORS
+  await app.register(rateLimitPlugin); // 3. Rate limiting
+  await app.register(cookie); // 4. Cookie parsing
+  await app.register(csrfPlugin); // 5. CSRF protection (after cookie)
+  await app.register(sensible); // 6. Error helpers
   await app.register(swagger, {
     openapi: {
       info: {

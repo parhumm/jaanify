@@ -1,0 +1,47 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+.next
+dist
+.turbo
+
+# Git
+.git
+.gitignore
+
+# Environment files (secrets!)
+.env
+.env.local
+.env.*.local
+
+# Documentation
+*.md
+LICENSE
+
+# Tests
+coverage
+__tests__
+*.test.ts
+*.spec.ts
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose*.yml
+Dockerfile*
+
+# jaan-to plugin workspace
+jaan-to/
+vendor/
+scorecards/
+gap-reports/
