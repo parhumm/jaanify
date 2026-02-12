@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaanify Landing Page — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design Tokens ─────────────────────────── */
+    :root {
+      --color-sage: oklch(0.55 0.08 150);
+      --color-sage-dark: oklch(0.45 0.08 150);
+      --color-sage-light: oklch(0.75 0.06 150);
+      --color-cream: oklch(0.97 0.01 80);
+      --color-cream-dark: oklch(0.93 0.02 80);
+      --color-terracotta: oklch(0.62 0.12 40);
+      --color-terracotta-dark: oklch(0.52 0.12 40);
+      --color-gold: oklch(0.72 0.12 85);
+      --color-gold-dark: oklch(0.58 0.12 85);
+      --color-text: oklch(0.20 0.02 260);
+      --color-bg: oklch(0.97 0.005 80);
+      --font-sans: "DM Sans", system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-sage: oklch(0.65 0.08 150);
+        --color-sage-dark: oklch(0.55 0.08 150);
+        --color-sage-light: oklch(0.40 0.06 150);
+        --color-cream: oklch(0.18 0.01 260);
+        --color-cream-dark: oklch(0.15 0.01 260);
+        --color-terracotta: oklch(0.70 0.12 40);
+        --color-terracotta-dark: oklch(0.60 0.12 40);
+        --color-gold: oklch(0.78 0.12 85);
+        --color-gold-dark: oklch(0.65 0.12 85);
+        --color-text: oklch(0.92 0.01 80);
+        --color-bg: oklch(0.14 0.01 260);
+      }
+    }
+
+    /* ── Reset & Base ──────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── Skip Link ─────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -100%; left: 16px;
+      padding: 8px 16px; border-radius: 8px;
+      background: var(--color-sage); color: white; font-size: 0.875rem;
+      z-index: 100;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ── Nav ────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(12px);
+      background: oklch(from var(--color-bg) l c h / 0.8);
+      border-bottom: 1px solid oklch(from var(--color-sage-light) l c h / 0.2);
+    }
+    .nav-inner {
+      max-width: 72rem; margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.25rem; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--color-sage-dark);
+    }
+    .nav-cta {
+      display: inline-flex; align-items: center;
+      padding: 0.625rem 1.25rem; border-radius: 0.5rem;
+      font-size: 0.875rem; font-weight: 500;
+      background: var(--color-sage); color: white;
+      transition: all 0.15s ease-out;
+    }
+    .nav-cta:hover { background: var(--color-sage-dark); }
+    .nav-cta:active { transform: scale(0.98); }
+    .nav-cta:focus-visible { outline: 2px solid var(--color-sage); outline-offset: 2px; }
+
+    /* ── Hero ───────────────────────────────────── */
+    .hero { position: relative; overflow: hidden; }
+    .hero-bg-circle {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .hero-bg-1 { top: -6rem; right: -6rem; width: 20rem; height: 20rem; background: oklch(from var(--color-sage-light) l c h / 0.1); }
+    .hero-bg-2 { top: 50%; left: -4rem; width: 12rem; height: 12rem; background: oklch(from var(--color-gold) l c h / 0.08); }
+    .hero-bg-3 { bottom: 0; right: 25%; width: 16rem; height: 16rem; background: oklch(from var(--color-terracotta) l c h / 0.06); }
+    .hero-inner {
+      position: relative; max-width: 72rem; margin: 0 auto;
+      padding: 5rem 1.5rem 6rem;
+    }
+    @media (min-width: 640px) { .hero-inner { padding: 7rem 1.5rem 8rem; } }
+    .hero-eyebrow {
+      font-size: 0.875rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--color-terracotta); margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      max-width: 36rem;
+    }
+    .hero h1 .accent { color: var(--color-sage); }
+    .hero-desc {
+      margin-top: 1.5rem; font-size: 1.125rem; line-height: 1.7;
+      color: oklch(from var(--color-text) l c h / 0.7); max-width: 32rem;
+    }
+    @media (min-width: 640px) { .hero-desc { font-size: 1.25rem; } }
+    .hero-actions { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.875rem 1.75rem; border-radius: 0.75rem;
+      font-size: 1rem; font-weight: 600;
+      background: var(--color-sage); color: white;
+      box-shadow: 0 4px 6px oklch(0 0 0 / 0.07);
+      transition: all 0.15s ease-out; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--color-sage-dark); box-shadow: 0 10px 15px oklch(0 0 0 / 0.1); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:focus-visible { outline: 2px solid var(--color-sage); outline-offset: 2px; }
+    .btn-primary svg { margin-left: 0.5rem; width: 1rem; height: 1rem; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.875rem 1.75rem; border-radius: 0.75rem;
+      font-size: 1rem; font-weight: 500;
+      background: var(--color-cream-dark); color: var(--color-text);
+      border: 1px solid oklch(from var(--color-sage-light) l c h / 0.3);
+      transition: all 0.15s ease-out; cursor: pointer;
+    }
+    .btn-secondary:hover { background: oklch(from var(--color-sage-light) l c h / 0.1); }
+    .btn-secondary:active { transform: scale(0.98); }
+    .btn-secondary:focus-visible { outline: 2px solid var(--color-sage); outline-offset: 2px; }
+    .hero-note { margin-top: 1.5rem; font-size: 0.875rem; color: oklch(from var(--color-text) l c h / 0.5); }
+
+    /* ── Hero Card ──────────────────────────────── */
+    .hero-card {
+      margin-top: 4rem; max-width: 24rem; margin-left: auto; margin-right: auto;
+      background: var(--color-cream); border-radius: 1rem; padding: 1.5rem;
+      border: 1px solid oklch(from var(--color-sage-light) l c h / 0.3);
+      box-shadow: 0 10px 15px oklch(0 0 0 / 0.1);
+    }
+    @media (min-width: 640px) {
+      .hero-card { margin-top: -16rem; margin-left: auto; margin-right: 0; }
+    }
+    .hero-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .hero-card-icon {
+      width: 2rem; height: 2rem; border-radius: 0.5rem;
+      background: oklch(from var(--color-sage) l c h / 0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-card-icon svg { width: 1rem; height: 1rem; color: var(--color-sage); }
+    .hero-card-label {
+      font-size: 0.75rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--color-sage-dark);
+    }
+    .hero-card p { font-size: 0.875rem; line-height: 1.6; color: oklch(from var(--color-text) l c h / 0.8); margin-bottom: 1rem; }
+    .hero-card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.75rem; padding: 0.25rem 0.625rem; border-radius: 9999px;
+      background: oklch(from var(--color-sage-light) l c h / 0.15);
+      color: var(--color-sage-dark); font-weight: 500;
+    }
+
+    /* ── Diagonal Divider ──────────────────────── */
+    .divider-diagonal {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 4rem;
+      background: var(--color-cream);
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+
+    /* ── Features ──────────────────────────────── */
+    .features { background: var(--color-cream); padding: 5rem 0 7rem; }
+    .features-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700; letter-spacing: -0.02em; text-align: center;
+    }
+    .section-title .accent { color: var(--color-sage); }
+    .section-title .accent-terra { color: var(--color-terracotta); }
+    .section-subtitle {
+      margin-top: 1rem; text-align: center; font-size: 1.125rem;
+      color: oklch(from var(--color-text) l c h / 0.6);
+      max-width: 28rem; margin-left: auto; margin-right: auto;
+    }
+    .features-grid {
+      margin-top: 4rem; display: grid; gap: 2rem;
+    }
+    @media (min-width: 640px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    .feature-card {
+      padding: 1.5rem; border-radius: 0.75rem;
+      background: var(--color-bg);
+      border: 1px solid oklch(from var(--color-sage-light) l c h / 0.2);
+      transition: all 0.2s ease-out;
+    }
+    .feature-card:hover {
+      border-color: oklch(from var(--color-sage-light) l c h / 0.4);
+      box-shadow: 0 4px 6px oklch(0 0 0 / 0.07);
+    }
+    .feature-card svg { width: 2.5rem; height: 2.5rem; margin-bottom: 1rem; }
+    .feature-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 0.875rem; line-height: 1.6; color: oklch(from var(--color-text) l c h / 0.6); }
+
+    /* ── How It Works ──────────────────────────── */
+    .how { padding: 5rem 0 7rem; }
+    .how-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+    .steps-grid { margin-top: 4rem; display: grid; gap: 2rem; }
+    @media (min-width: 640px) { .steps-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .step { text-align: center; }
+    @media (min-width: 640px) { .step { text-align: left; } }
+    .step-number {
+      font-size: 2.5rem; font-weight: 700;
+      color: oklch(from var(--color-sage-light) l c h / 0.4);
+    }
+    .step h3 { margin-top: 0.75rem; font-size: 1.25rem; font-weight: 600; }
+    .step p { margin-top: 0.5rem; font-size: 0.875rem; color: oklch(from var(--color-text) l c h / 0.6); line-height: 1.6; }
+
+    /* ── Trust ──────────────────────────────────── */
+    .trust { background: var(--color-cream); padding: 4rem 0; }
+    .trust-inner { max-width: 48rem; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    .trust blockquote {
+      font-size: 1.125rem; font-style: italic; line-height: 1.7;
+      color: oklch(from var(--color-text) l c h / 0.7);
+    }
+    @media (min-width: 640px) { .trust blockquote { font-size: 1.25rem; } }
+    .trust-cite { margin-top: 1rem; font-size: 0.875rem; font-weight: 500; color: var(--color-sage-dark); font-style: normal; }
+    .trust-badges {
+      margin-top: 3rem; display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 2rem; font-size: 0.875rem; color: oklch(from var(--color-text) l c h / 0.4);
+    }
+    .trust-badge { display: flex; align-items: center; gap: 0.5rem; }
+    .trust-badge svg { width: 1rem; height: 1rem; color: var(--color-sage); }
+
+    /* ── Final CTA ─────────────────────────────── */
+    .cta { padding: 6rem 0 8rem; position: relative; overflow: hidden; }
+    .cta-bg-1 { top: 25%; right: -4rem; width: 16rem; height: 16rem; background: oklch(from var(--color-sage-light) l c h / 0.08); }
+    .cta-bg-2 { bottom: 25%; left: -3rem; width: 12rem; height: 12rem; background: oklch(from var(--color-gold) l c h / 0.06); }
+    .cta-inner { position: relative; max-width: 36rem; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    .cta h2 {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 700; letter-spacing: -0.02em;
+    }
+    .cta-desc { margin-top: 1rem; font-size: 1.125rem; color: oklch(from var(--color-text) l c h / 0.6); }
+    .cta-action { margin-top: 2.5rem; }
+    .btn-lg {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 1rem 2rem; border-radius: 0.75rem;
+      font-size: 1.125rem; font-weight: 600;
+      background: var(--color-sage); color: white;
+      box-shadow: 0 4px 6px oklch(0 0 0 / 0.07);
+      transition: all 0.15s ease-out; border: none; cursor: pointer;
+    }
+    .btn-lg:hover { background: var(--color-sage-dark); box-shadow: 0 10px 15px oklch(0 0 0 / 0.1); }
+    .btn-lg:active { transform: scale(0.98); }
+    .btn-lg:focus-visible { outline: 2px solid var(--color-sage); outline-offset: 2px; }
+    .btn-lg svg { margin-left: 0.5rem; width: 1.25rem; height: 1.25rem; }
+
+    /* ── Footer ─────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid oklch(from var(--color-sage-light) l c h / 0.2);
+      padding: 2rem 0;
+    }
+    .footer-inner {
+      max-width: 72rem; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 1rem; font-size: 0.875rem;
+      color: oklch(from var(--color-text) l c h / 0.4);
+    }
+    @media (min-width: 640px) { .footer-inner { flex-direction: row; justify-content: space-between; } }
+    .footer-link { transition: color 0.15s; }
+    .footer-link:hover { color: var(--color-sage); }
+
+    /* ── Animations ─────────────────────────────── */
+    .fade-in {
+      opacity: 0; transform: translateY(1rem);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <a href="#features" class="skip-link">Skip to features</a>
+
+  <!-- Nav -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <span class="nav-logo">Jaanify</span>
+      <a href="#" class="nav-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-bg-circle hero-bg-1" aria-hidden="true"></div>
+    <div class="hero-bg-circle hero-bg-2" aria-hidden="true"></div>
+    <div class="hero-bg-circle hero-bg-3" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow fade-in">AI Task Manager</p>
+        <h1 class="fade-in">Give <span class="accent">soul</span> to your tasks</h1>
+        <p class="hero-desc fade-in">
+          The task manager that shows its work. AI plans your day with
+          transparent reasoning you can see, question, and trust.
+        </p>
+        <div class="hero-actions fade-in">
+          <a href="#" class="btn-primary">
+            Try Jaanify Free
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a href="#features" class="btn-secondary">See How It Works</a>
+        </div>
+        <p class="hero-note fade-in">No credit card required. Start in 60 seconds.</p>
+      </div>
+
+      <!-- Hero reasoning card -->
+      <div class="hero-card fade-in" role="img" aria-label="Example Reasoning Card showing AI task prioritization">
+        <div class="hero-card-header">
+          <div class="hero-card-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 7a1 1 0 112 0v4a1 1 0 11-2 0V7zm1 8a1 1 0 100-2 1 1 0 000 2z" />
+            </svg>
+          </div>
+          <span class="hero-card-label">AI Reasoning</span>
+        </div>
+        <p>
+          &ldquo;Scheduled <strong>Prepare Q1 report</strong> at 9 AM
+          &mdash; your peak focus window. Deadline proximity (2 days) and
+          cognitive load (high) both suggest morning priority.&rdquo;
+        </p>
+        <div class="hero-card-tags">
+          <span class="tag">Deadline: 2d</span>
+          <span class="tag">Focus: High</span>
+          <span class="tag">Energy: AM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-diagonal" aria-hidden="true"></div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features" aria-labelledby="features-heading">
+    <div class="features-inner">
+      <h2 id="features-heading" class="section-title fade-in">
+        Task management with <span class="accent">transparency</span>
+      </h2>
+      <p class="section-subtitle fade-in">
+        Every decision your AI planner makes is visible, explainable, and adjustable.
+      </p>
+      <div class="features-grid">
+        <article class="feature-card fade-in">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="4" y="8" width="40" height="32" rx="4" stroke="var(--color-sage)" stroke-width="2.5" />
+            <path d="M12 20h24M12 28h16" stroke="var(--color-sage)" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="38" cy="28" r="3" fill="var(--color-terracotta)" />
+          </svg>
+          <h3>Natural Language Input</h3>
+          <p>Type tasks the way you think. Jaanify parses deadlines, priorities, and categories from plain text.</p>
+        </article>
+        <article class="feature-card fade-in">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="6" y="6" width="36" height="36" rx="4" stroke="var(--color-sage)" stroke-width="2.5" />
+            <path d="M14 16h20M14 24h14" stroke="var(--color-sage)" stroke-width="2" stroke-linecap="round" />
+            <path d="M14 32h8" stroke="var(--color-terracotta)" stroke-width="2" stroke-linecap="round" />
+            <circle cx="34" cy="32" r="4" fill="var(--color-gold)" />
+          </svg>
+          <h3>Reasoning Cards</h3>
+          <p>See why your AI planner made each decision. Three tiers of transparency, from summary to full factor weights.</p>
+        </article>
+        <article class="feature-card fade-in">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="18" y="6" width="12" height="22" rx="6" stroke="var(--color-sage)" stroke-width="2.5" />
+            <path d="M12 24c0 6.627 5.373 12 12 12s12-5.373 12-12" stroke="var(--color-sage)" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M24 36v6" stroke="var(--color-terracotta)" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+          <h3>Voice Capture</h3>
+          <p>Speak your tasks. The AI transcribes and structures them into your daily plan — hands-free.</p>
+        </article>
+        <article class="feature-card fade-in">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="24" cy="24" r="18" stroke="var(--color-sage)" stroke-width="2.5" />
+            <path d="M24 14v10l7 7" stroke="var(--color-terracotta)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3>Smart Daily Plans</h3>
+          <p>Wake up to an AI-generated plan optimized for your energy, deadlines, and focus patterns.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how" aria-labelledby="how-heading">
+    <div class="how-inner">
+      <h2 id="how-heading" class="section-title fade-in">
+        Three steps to a <span class="accent-terra">smarter day</span>
+      </h2>
+      <div class="steps-grid">
+        <div class="step fade-in">
+          <span class="step-number">01</span>
+          <h3>Capture</h3>
+          <p>Type or speak your tasks naturally</p>
+        </div>
+        <div class="step fade-in">
+          <span class="step-number">02</span>
+          <h3>Enrich</h3>
+          <p>AI parses and structures each task</p>
+        </div>
+        <div class="step fade-in">
+          <span class="step-number">03</span>
+          <h3>Plan</h3>
+          <p>Get a transparent daily plan with reasoning</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section class="trust" aria-labelledby="trust-heading">
+    <div class="trust-inner">
+      <h2 id="trust-heading" class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;">
+        Why people trust Jaanify
+      </h2>
+      <blockquote>
+        &ldquo;I finally understand <em>why</em> my planner
+        suggests what it does. That changes everything.&rdquo;
+      </blockquote>
+      <p class="trust-cite">&mdash; Early beta tester</p>
+      <div class="trust-badges">
+        <span class="trust-badge">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          Open Source
+        </span>
+        <span class="trust-badge">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          Privacy First
+        </span>
+        <span class="trust-badge">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          WCAG AA Accessible
+        </span>
+        <span class="trust-badge">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          Works Offline
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="hero-bg-circle cta-bg-1" aria-hidden="true"></div>
+    <div class="hero-bg-circle cta-bg-2" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <h2 id="cta-heading">Ready to give your tasks <span class="accent">a soul</span>?</h2>
+      <p class="cta-desc">Join the beta. Free forever for early adopters.</p>
+      <div class="cta-action">
+        <a href="#" class="btn-lg">
+          Start Free &mdash; 60 Seconds
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2026 Jaanify. All rights reserved.</p>
+      <a href="https://github.com/parhumm/jaanify" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <!-- Scroll fade-in observer -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var els = document.querySelectorAll(".fade-in");
+      if (prefersReducedMotion) {
+        els.forEach(function (el) { el.classList.add("visible"); });
+        return;
+      }
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      els.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
+</body>
+</html>
