@@ -1,8 +1,8 @@
 # jaan.to Configuration {#config}
 
 > Configured for Jaanify — Smart AI Task Manager
-> Last Updated: 2026-02-11
-> Status: **Active** — Cycle 9
+> Last Updated: 2026-02-13
+> Status: **Active** — Cycle 10
 
 ---
 
@@ -91,7 +91,7 @@ Default set (7 languages):
 - **Project Type**: SaaS — AI Task Manager
 - **Product Name**: Jaanify
 - **Team Size**: Solo (AI-assisted via jaan-to)
-- **Stage**: Implementation (Cycle 9)
-- **jaan-to Version**: v6.1.0 (40 skill directories)
+- **Stage**: Activation & Polish (Cycle 10)
+- **jaan-to Version**: v6.1.1 (40 skill directories)
 - **Primary Domain**: Productivity / Task Management
 - **Target Platforms**: Web (Next.js), Android (Kotlin), API (Fastify)
