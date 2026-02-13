@@ -36,6 +36,7 @@ __pycache__/
 dist/
 build/
 *.log
+*.tsbuildinfo
 /.obsidian
 
 # Claude Code (skills tracked, settings/plans ignored)
