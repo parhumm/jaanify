@@ -358,3 +358,20 @@ Individual GitHub issues created for Jaanify backlog tracking:
 - **Created by:** `gaps-critical-issue`
 - **Date:** 2026-02-13
 - **Priorities included:** P2, P3
+
+### jaan-to Feature Requests (2026-02-13)
+
+Issues created on parhumm/jaan-to for new skills and enhancements:
+
+| Gap ID | Priority | jaan-to Issue | Jaanify Issue |
+|--------|----------|---------------|---------------|
+| L-13 | NEW | https://github.com/parhumm/jaan-to/issues/77 | — |
+| L-14 | NEW | https://github.com/parhumm/jaan-to/issues/78 | — |
+| L-06 | P2 | https://github.com/parhumm/jaan-to/issues/79 | https://github.com/parhumm/jaanify/issues/1 |
+| L-07 | P2 | https://github.com/parhumm/jaan-to/issues/80 | https://github.com/parhumm/jaanify/issues/2 |
+| L-10 | P3 | https://github.com/parhumm/jaan-to/issues/81 | https://github.com/parhumm/jaanify/issues/3 |
+| L-12 | P3 | https://github.com/parhumm/jaan-to/issues/82 | https://github.com/parhumm/jaanify/issues/4 |
+
+- **Created by:** `gaps-critical-issue`
+- **Date:** 2026-02-13
+- **Documented in:** `jaan-to/outputs/jaan-issues/05–10`
