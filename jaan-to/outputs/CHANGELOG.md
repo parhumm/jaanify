@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Activate full deployment pipeline — 5 GitHub secrets configured (DATABASE_URL, RAILWAY_TOKEN, VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID), Railway backend project provisioned with `api` service, Vercel frontend project created and linked to GitHub repo with preview deployments (resolves L-09)
+- Integrate marketing landing page into app root route — hero, features, how-it-works, social proof, and beta CTA now live at `/` (resolves L-11)
+- Set up branch protection on `main` with required CI status checks (detect-changes, lint, build, security), linear history enforcement, and force-push blocking
+
+### Fixed
+
+- Fix CI pipeline failure caused by pnpm version conflict — remove explicit `version` parameter from `pnpm/action-setup@v4` to let `package.json` `packageManager` field drive version selection
+- Add missing `babel-plugin-react-compiler` dependency to `apps/web` resolving Next.js production build failure in CI
+- Add `output: "standalone"` to `apps/web/next.config.ts` enabling minimal standalone server for Docker container builds
+
+## [0.2.0] - 2026-02-13
+
+### Added
+
 - Assemble scaffold outputs into runnable Turborepo monorepo with `apps/api` (Fastify v5), `apps/web` (Next.js 15), shared Prisma schema, pnpm workspace, and 80+ source files wired with TypeScript path aliases and turbo.json pipeline
 - Implement backend service logic for auth (Google OAuth2 + JWT with jose HS256 verification), tasks (CRUD with AI field parsing), daily plans (slot-based scheduling with AI reasoning), guest sessions, users, and feedback — replacing all TODO stubs with production code
 - Generate comprehensive test suite from BDD scenarios: 37 files covering Vitest unit tests (services, hooks), integration tests (API routes with MSW), and Playwright E2E specs (onboarding, task creation, daily plan, accessibility) with Fishery factories and page objects
@@ -90,27 +104,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### High Impact
 
-- **All generated artifacts now operational**: 58 files moved from `jaan-to/outputs/` into project locations — tests run, security plugins load, CI/CD workflows exist. Resolves the "code-to-tested" bottleneck (L-08).
-- **Runnable monorepo assembled**: Scaffold outputs wired into working Turborepo project with `apps/api` and `apps/web`, shared Prisma schema, and TypeScript path aliases. `pnpm turbo dev` starts both servers.
-- **Backend services implemented**: All 21 TODO stubs replaced with production logic — Google OAuth2 flow, JWT token management, task CRUD with AI parsing, daily plan generation. Resolves L-01 gap.
-- **Critical JWT vulnerability resolved**: E-DEV-001 fixed — auth now uses jose `jwtVerify` with HS256, issuer/audience validation. Combined with rate limiting, CSRF protection, and secure token storage.
+- **Deployment pipeline fully activated**: 5 GitHub secrets configured, Railway backend provisioned, Vercel frontend linked. CI pipeline verified working (lint, test, security all pass). Resolves L-09.
+- **All generated artifacts operational**: 58 files moved from `jaan-to/outputs/` into project locations — tests run, security plugins load, CI/CD workflows execute.
+- **Runnable monorepo assembled**: Scaffold outputs wired into working Turborepo project with `apps/api` and `apps/web`, shared Prisma schema, and TypeScript path aliases.
+- **Backend services implemented**: All 21 TODO stubs replaced with production logic — Google OAuth2 flow, JWT token management, task CRUD with AI parsing, daily plan generation.
+- **Critical JWT vulnerability resolved**: E-DEV-001 fixed — auth now uses jose `jwtVerify` with HS256, issuer/audience validation.
 - **GitHub Actions hardened**: All 11 actions across 2 workflows pinned to SHA digests. Supply chain attack surface eliminated.
-- **5-domain quality audit complete**: Full knowledge pack with 33 findings across dev, design, writing, product, and UX domains. Two critical launch gaps identified: no monetization path (L-06) and zero i18n infrastructure (L-07).
 
 ### Medium Impact
 
-- **Landing page created**: Marketing page with hero, features, and CTA sections ready for integration into root route. Consistent with existing design system.
-- **Deployment pipeline documented**: Step-by-step activation checklist for GitHub secrets, Railway, Vercel, and Turborepo remote cache (L-09).
-- **Test suite generated**: 37 test files with Vitest unit/integration tests and Playwright E2E specs. Coverage targets: 80% unit, 60% integration, 100% E2E scenario.
-- **CI/CD pipeline ready**: GitHub Actions CI with monorepo path filtering, service containers, and Trivy scanning. CD deploys to Railway (backend) + Vercel (frontend).
-- **Security hardening fixes**: 6 fix files with 27 regression tests covering OWASP Top 10 categories (A01, A02, A04, A05, A07).
-- **jaan-to v6.1.0 adopted**: 2 new skills (dev-output-integrate, devops-deploy-activate) completing the co-evolution loop for Issue #70.
+- **Landing page live at root route**: Marketing page with hero, features, and CTA now renders at `/` (L-11 fully resolved).
+- **Branch protection active**: `main` branch now requires passing CI checks before merge.
+- **CI build fixes applied**: pnpm version conflict resolved, babel-plugin-react-compiler installed, Next.js standalone output configured.
+- **Test suite generated**: 37 test files with Vitest unit/integration tests and Playwright E2E specs.
+- **Security hardening**: 6 fix files with 27 regression tests covering OWASP Top 10 categories.
 
 ### Low Impact
 
-- Skill invocation refactor delegates issue creation to jaan-issue-report for cleaner workflow.
-- Output path migration to v4.5.1 convention — no functional change, improves file organization.
-- YAML frontmatter stripping fix prevents rendering issues in GitHub issues.
+- Docker build now works with Next.js standalone output configuration.
+- Infra-scaffold output files synced with pnpm version fix.
 
 ---
 
@@ -122,9 +134,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Zero i18n infrastructure despite 7-language microcopy specs (E-WRT-001 — High)
 - Auth routing hardcoded to /onboarding for all visitors (E-UX-001 — High)
 - No Turbo remote cache configured in CI — missing TURBO_TOKEN/TURBO_TEAM for cross-PR caching
-- Next.js standalone output not yet configured in apps/web/next.config.ts (required for Docker build)
-- GitHub secrets not yet configured (0/5 required) — DATABASE_URL, RAILWAY_TOKEN, VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
-- Railway and Vercel CLI not installed locally — platform provisioning pending
+- Pre-existing TypeScript error in web app (React Query generic type mismatch)
+- **Rotate Supabase database password** — credentials were shared in plain text during pipeline activation setup
 
 ### Resolved Since 0.1.0
 
@@ -136,8 +147,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ~~No test files (L-03 — P1)~~ — 37 test files generated and integrated
 - ~~Generated artifacts stuck in outputs/ (L-08 — P1)~~ — 58 files integrated into project in Cycle 9
 - ~~GitHub Actions not pinned by SHA (supply chain risk)~~ — All 11 actions SHA-pinned in Cycle 9
+- ~~GitHub secrets not configured (0/5 required)~~ — All 5 secrets configured in Cycle 10
+- ~~Railway and Vercel CLIs not installed~~ — Both installed and authenticated in Cycle 10
+- ~~Next.js standalone output not configured~~ — Added to next.config.ts in Cycle 10
+- ~~CI build broken (pnpm version conflict)~~ — Fixed in Cycle 10
 
-### Launch Gap Summary (Updated Cycle 9)
+### Launch Gap Summary (Updated Cycle 10)
 
 | Gap | Priority | Status | Description |
 |-----|----------|--------|-------------|
@@ -149,24 +164,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | L-06 | P1 | Open | Monetization — no billing/pricing |
 | L-07 | P2 | Open | i18n Infrastructure — zero locale support |
 | L-08 | P1 | **Resolved** | Output Integration — 58 artifacts installed into project |
-| L-09 | P1 | **Partial** | Deploy Pipeline — SHA pinned, secrets/platforms pending |
-| L-11 | P3 | **Resolved** | Landing Page — marketing page designed and generated |
+| L-09 | P1 | **Resolved** | Deploy Pipeline — secrets configured, Railway + Vercel provisioned |
+| L-11 | P3 | **Resolved** | Landing Page — integrated into root route |
 
 ### Suggested Next Steps
 
-1. Configure 5 GitHub secrets using `gh secret set` (see activation report)
-2. Install Railway CLI and provision backend: `npm install -g @railway/cli && railway init`
-3. Install Vercel CLI and link frontend: `npm install -g vercel && vercel link`
-4. Copy landing page to app root: `cp jaan-to/outputs/frontend/design/04-jaanify-landing/04-jaanify-landing-code.tsx apps/web/src/app/LandingPage.tsx`
-5. Add `output: "standalone"` to `apps/web/next.config.ts` for Docker builds
-6. Define pricing model and scaffold Stripe integration (resolves L-06)
-7. Set up next.js i18n with next-intl or similar (resolves L-07)
+1. Rotate Supabase database password and update DATABASE_URL GitHub secret
+2. Trigger a full CD pipeline run after committing pending changes
+3. Define pricing model and scaffold Stripe integration (resolves L-06)
+4. Set up next.js i18n with next-intl or similar (resolves L-07)
+5. Fix React Query TypeScript error in web app
+6. Configure Turbo remote cache (TURBO_TOKEN/TURBO_TEAM)
 
 ---
 
-[unreleased]: https://github.com/parhumm/jaanify/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/parhumm/jaanify/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/parhumm/jaanify/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/parhumm/jaanify/releases/tag/v0.1.0
 
 ---
 
-> Generated by jaan.to | 2026-02-12 | Skill: release-iterate-changelog | Mode: auto-generate | Cycle: 9 | Status: Draft
+> Generated by jaan.to | 2026-02-13 | Skill: release-iterate-changelog | Mode: release 0.2.0 | Cycle: 10 | Status: Released
