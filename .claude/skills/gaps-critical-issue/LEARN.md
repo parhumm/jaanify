@@ -1,6 +1,6 @@
 # Lessons: gaps-critical-issue
 
-> Last updated: 2026-02-10
+> Last updated: 2026-02-13
 
 Accumulated lessons from past executions of issue report generation.
 
@@ -21,6 +21,8 @@ Special cases to check:
 ## Workflow
 
 Process improvements:
+
+- **2026-02-13 (Issues #1–#4)**: Skip local issue file creation — submit directly to GitHub via `gh issue create`. The `jaan-to/website/jaan-to/jaan-issues/` intermediary step is unnecessary when the user just wants issues on GitHub. Always default to direct submission unless explicitly asked for local files.
 
 - **2026-02-10 (Issue #53)**: Always link the project name **Jaanify** to its GitHub repo `https://github.com/parhumm/jaanify` using markdown link syntax `[Jaanify](https://github.com/parhumm/jaanify)` — every mention in the issue body should be a clickable link to the project repo.
 
