@@ -423,3 +423,36 @@ L-19 ──→ devops-deploy-activate v-next
 ---
 
 > **Bottom line:** Cycle 10 achieved the milestone that Cycle 9 set up: zero blockers. L-09 (the last P1 gap) is fully resolved — secrets configured, platforms provisioned, CI fixed, monitoring active. The total gap count rose from 5 to 10, but this is a positive signal: 7 new gaps are all skill improvement requests discovered by analyzing manual work, feeding the co-evolution loop. No new skills are needed. Jaanify is ready for beta launch. The jaan-to plugin has delivered everything needed to go from idea to deployable product across 10 co-evolution cycles.
+
+---
+
+## GitHub Issues
+
+### jaan-to Skill Improvement Issues (Cycle 10)
+
+| Gap IDs | Priority | Issue |
+|---------|----------|-------|
+| L-13, L-14, L-16, L-17 | P2/P3 | https://github.com/parhumm/jaan-to/issues/83 |
+| L-15, L-18, L-19 | P3 | https://github.com/parhumm/jaan-to/issues/84 |
+
+### Previously Filed Issues (still open)
+
+| Gap ID | Priority | Issue |
+|--------|----------|-------|
+| L-06 | P2 | https://github.com/parhumm/jaan-to/issues/79 (monetization skill) |
+| L-07 | P2 | https://github.com/parhumm/jaan-to/issues/80 (i18n skill) |
+| L-10 | P3 | https://github.com/parhumm/jaan-to/issues/81 (detect-dev re-audit) |
+
+### Jaanify Backlog Issues
+
+| Gap ID | Priority | Issue |
+|--------|----------|-------|
+| L-06 | P2 | https://github.com/parhumm/jaanify/issues/1 |
+| L-07 | P2 | https://github.com/parhumm/jaanify/issues/2 |
+| L-10 | P3 | https://github.com/parhumm/jaanify/issues/3 |
+| L-12 | P3 | https://github.com/parhumm/jaanify/issues/4 |
+
+- **Created by:** `gaps-critical-issue`
+- **Date:** 2026-02-13
+- **Priorities included:** P2, P3
+- **Gaps included:** L-13, L-14, L-15, L-16, L-17, L-18, L-19
