@@ -21,6 +21,9 @@ version: "3.0"
 # Options: merge (combine plugin + project), override (project only)
 learning_strategy: "merge"
 
+# Issue Report Submit Mode
+issue_report_submit: true
+
 # Language Preference
 language: "en"
 
