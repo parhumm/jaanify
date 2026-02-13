@@ -343,3 +343,18 @@ L-07 (i18n) ──→ Multi-language
 - **Date:** 2026-02-12
 - **Priorities assessed:** P0, P1
 - **Conclusion:** Co-evolution loop has caught up. No tooling gaps remain.
+
+### Jaanify Tracking Issues (2026-02-13)
+
+Individual GitHub issues created for Jaanify backlog tracking:
+
+| Gap ID | Priority | Issue |
+|--------|----------|-------|
+| L-06 | P2 | https://github.com/parhumm/jaanify/issues/1 |
+| L-07 | P2 | https://github.com/parhumm/jaanify/issues/2 |
+| L-10 | P3 | https://github.com/parhumm/jaanify/issues/3 |
+| L-12 | P3 | https://github.com/parhumm/jaanify/issues/4 |
+
+- **Created by:** `gaps-critical-issue`
+- **Date:** 2026-02-13
+- **Priorities included:** P2, P3
