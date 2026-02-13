@@ -2,7 +2,7 @@
 title: Jaanify Documentation
 doc_type: index
 created_date: 2026-02-11
-updated_date: 2026-02-11
+updated_date: 2026-02-13
 tags: [index, documentation, jaanify]
 related: []
 ---
@@ -29,6 +29,7 @@ Jaanify is a Smart AI Task Manager built for neurodivergent users, freelancers, 
 | [Getting Started](extending/getting-started.md) | Guide | Clone, install, configure, and run locally |
 | [API Reference](extending/api-reference.md) | Guide | 21 REST endpoints with auth, pagination, and errors |
 | [Deployment](extending/deployment.md) | Guide | Railway + Vercel deployment with GitHub Actions CI/CD |
+| [Production Operations](extending/production-operations.md) | Guide | Monitoring, secret rotation, and branch protection |
 
 ---
 
@@ -42,3 +43,4 @@ Jaanify is a Smart AI Task Manager built for neurodivergent users, freelancers, 
 | What are the API endpoints? | [API Reference](extending/api-reference.md) |
 | What's the database schema? | [Data Model](data-model.md) |
 | How do I deploy? | [Deployment](extending/deployment.md) |
+| How do I operate in production? | [Production Operations](extending/production-operations.md) |
