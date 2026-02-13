@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
+import LandingPage from "./LandingPage";
 
-export default async function HomePage() {
-  // TODO: Check auth/guest session state
-  redirect("/onboarding");
+export default function HomePage() {
+  return <LandingPage />;
 }
