@@ -1,6 +1,6 @@
 # Lessons: devops-infra-scaffold
 
-> Last updated: 2026-02-10
+> Last updated: 2026-02-15 (Cycle 11)
 
 > Plugin-side lessons. Project-specific lessons go in:
 > `$JAAN_LEARN_DIR/jaan-to:devops-infra-scaffold.learn.md`
@@ -36,6 +36,9 @@ Special cases to check and handle:
 - ARM-based CI runners (ubuntu-24.04-arm) need different Docker base images or multi-platform builds
 - Railway watch patterns must include all workspace dependencies, not just the target package
 - Fly.io `auto_stop_machines` can cause cold starts -- warn if latency-sensitive
+- pnpm monorepo Docker: `pnpm deploy --prod` creates standalone copy but loses Prisma generated client — copy full workspace node_modules instead
+- Docker COPY follows symlinks but pnpm cross-workspace symlinks break when directory hierarchy changes
+- Railway `watchPatterns` must include `docker/Dockerfile.*` and `railway.toml` to trigger rebuilds on infra changes
 
 ## Workflow
 
@@ -66,3 +69,6 @@ Things to avoid:
 - Committing `.env` in generated .gitignore exclusions -- make sure `.env*` pattern is in .gitignore
 - Using `latest` tag for Docker base images -- pin to specific versions (e.g., `node:20-alpine`)
 - Forgetting `NEXT_TELEMETRY_DISABLED=1` in Next.js Docker builds
+- Not including Dockerfile paths in Railway `watchPatterns` — Railway silently skips rebuilds for unmatched changes
+- Using `pnpm deploy --prod` with Prisma without re-generating client in deployed directory
+- Setting Docker HEALTHCHECK to hardcoded port when Railway overrides PORT env var
