@@ -1,0 +1,43 @@
+# Jaanify — Production Docker Compose Override
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up
+
+services:
+  api:
+    build:
+      target: runtime
+    command: node dist/server.js
+    restart: unless-stopped
+    volumes: []
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+
+  web:
+    build:
+      target: runtime
+    command: node apps/web/server.js
+    restart: unless-stopped
+    volumes: []
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+
+  postgres:
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+
+  redis:
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 128M

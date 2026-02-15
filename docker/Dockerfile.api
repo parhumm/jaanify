@@ -1,67 +1,57 @@
-# Jaanify API — Multi-stage Docker build
-# Stack: Node.js 22 + Fastify v5 + Prisma v6 + pnpm monorepo (Turborepo)
-#
-# Build: docker build -f docker/Dockerfile.api -t jaanify-api .
-# Run:   docker run -p 3000:3000 --env-file .env jaanify-api
+# Jaanify API — Multi-stage Dockerfile
+# Fastify v5 + Prisma v6 + Node.js 22
 
 # ── Stage 1: Dependencies ─────────────────────────────────────────────
 FROM node:22-alpine AS deps
-
-RUN corepack enable && corepack prepare pnpm@9 --activate
-
 WORKDIR /app
 
-# Copy package manifests for dependency install
-COPY pnpm-lock.yaml pnpm-workspace.yaml package.json turbo.json ./
-COPY apps/api/package.json ./apps/api/
-# Copy shared packages if any
-COPY packages/ ./packages/ 2>/dev/null || true
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
 
-# Install production + dev dependencies (dev needed for build)
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
-    pnpm install --frozen-lockfile
+# Copy workspace root files
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml turbo.json ./
+
+# Copy API package.json and prisma schema
+COPY apps/api/package.json apps/api/
+COPY apps/api/prisma/ apps/api/prisma/
+
+# Install dependencies (frozen lockfile for reproducibility)
+RUN pnpm install --frozen-lockfile --filter jaanify-api
 
 # ── Stage 2: Build ────────────────────────────────────────────────────
 FROM deps AS build
+WORKDIR /app
 
-# Copy source code
-COPY apps/api/ ./apps/api/
+# Copy API source code
+COPY apps/api/ apps/api/
 
-# Generate Prisma client
-RUN pnpm --filter api exec prisma generate
-
-# Build TypeScript
-RUN pnpm --filter api build
-
-# Prune to production dependencies only
-RUN pnpm --filter api deploy --prod /app/pruned
+# Generate Prisma client and build
+RUN pnpm --filter jaanify-api exec prisma generate
+RUN pnpm --filter jaanify-api build
 
 # ── Stage 3: Runtime ──────────────────────────────────────────────────
 FROM node:22-alpine AS runtime
-
-# Security: non-root user
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 fastify
-
 WORKDIR /app
 
-# Copy production dependencies and built output
-COPY --from=build --chown=fastify:nodejs /app/pruned/node_modules ./node_modules
-COPY --from=build --chown=fastify:nodejs /app/apps/api/dist ./dist
-COPY --from=build --chown=fastify:nodejs /app/apps/api/package.json ./
-
-# Copy Prisma schema + migrations for runtime migrate
-COPY --from=build --chown=fastify:nodejs /app/apps/api/prisma ./prisma
-
+# Security: run as non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 fastify
 USER fastify
 
+# Copy built output and dependencies
+COPY --from=build --chown=fastify:nodejs /app/apps/api/dist ./dist
+COPY --from=build --chown=fastify:nodejs /app/apps/api/prisma ./prisma
+COPY --from=build --chown=fastify:nodejs /app/apps/api/node_modules ./node_modules
+COPY --from=build --chown=fastify:nodejs /app/node_modules/.pnpm node_modules/.pnpm
+
+# Expose port and set env
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=4000
 ENV HOST=0.0.0.0
+EXPOSE 4000
 
-EXPOSE 3000
-
-HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
-  CMD wget -qO- http://localhost:3000/v1/health || exit 1
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -qO- http://localhost:4000/v1/health || exit 1
 
 CMD ["node", "dist/server.js"]

@@ -78,7 +78,7 @@ jobs:
       - name: Run Prisma Migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: pnpm --filter api exec prisma migrate deploy
+        run: pnpm --filter jaanify-api exec prisma migrate deploy
 
   # ── 3. Deploy Backend (Railway) ─────────────────────────────────────
   deploy-api:
