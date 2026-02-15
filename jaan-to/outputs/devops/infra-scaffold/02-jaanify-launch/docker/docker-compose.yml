@@ -1,0 +1,107 @@
+# Jaanify — Full-Stack Development Environment
+# Usage: docker compose up (all services)
+# Usage: docker compose up --profile backend (API + DB only)
+
+services:
+  # ── PostgreSQL ────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: jaanify-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: jaanify_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  # ── Redis ─────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: jaanify-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  # ── API (Fastify) ────────────────────────────────────────────────────
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+      target: deps
+    container_name: jaanify-api
+    command: pnpm --filter jaanify-api dev
+    volumes:
+      - ../apps/api/src:/app/apps/api/src
+      - ../apps/api/prisma:/app/apps/api/prisma
+      - /app/node_modules
+      - /app/apps/api/node_modules
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/jaanify_dev
+      REDIS_URL: redis://redis:6379
+      NODE_ENV: development
+      PORT: "4000"
+      HOST: "0.0.0.0"
+      JWT_SECRET: dev-secret-at-least-32-characters-long
+      REFRESH_TOKEN_SECRET: dev-refresh-secret-at-least-32-chars
+      CORS_ORIGIN: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles: ["backend", "full"]
+    networks:
+      - backend
+      - frontend
+
+  # ── Web (Next.js) ────────────────────────────────────────────────────
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.web
+      target: deps
+    container_name: jaanify-web
+    command: pnpm --filter jaanify-web dev
+    volumes:
+      - ../apps/web/src:/app/apps/web/src
+      - ../apps/web/public:/app/apps/web/public
+      - /app/node_modules
+      - /app/apps/web/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+      NODE_ENV: development
+    depends_on:
+      api:
+        condition: service_started
+    profiles: ["full"]
+    networks:
+      - frontend
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  backend:
+  frontend:
