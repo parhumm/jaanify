@@ -6,23 +6,23 @@ describe('Feature: RFC 9457 Error Factory', () => {
 
   describe('Scenario: Create not-found error', () => {
     it('should produce RFC 9457 ProblemDetails with status 404', () => {
-      const error = new BusinessError('not-found', 'Task with ID abc not found');
+      const error = new BusinessError('resource-not-found', 'Task with ID abc not found');
 
-      expect(error.type).toBe('https://api.jaanify.com/errors/not-found');
+      expect(error.type).toBe('https://api.jaanify.com/errors/resource-not-found');
       expect(error.status).toBe(404);
       expect(error.title).toBe('Not Found');
-      expect(error.detail).toBe('Task with ID abc not found');
+      expect(error.message).toBe('Task with ID abc not found');
     });
   });
 
   describe('Scenario: Create unauthorized error', () => {
     it('should produce RFC 9457 ProblemDetails with status 401', () => {
-      const error = new BusinessError('unauthorized', 'Invalid or expired refresh token');
+      const error = new BusinessError('authentication-required', 'Invalid or expired refresh token');
 
-      expect(error.type).toBe('https://api.jaanify.com/errors/unauthorized');
+      expect(error.type).toBe('https://api.jaanify.com/errors/authentication-required');
       expect(error.status).toBe(401);
-      expect(error.title).toBe('Unauthorized');
-      expect(error.detail).toBe('Invalid or expired refresh token');
+      expect(error.title).toBe('Authentication Required');
+      expect(error.message).toBe('Invalid or expired refresh token');
     });
   });
 
@@ -43,19 +43,19 @@ describe('Feature: RFC 9457 Error Factory', () => {
       );
 
       expect(error.status).toBe(409);
-      expect(error.detail).toBe('A daily plan already exists for today');
+      expect(error.message).toBe('A daily plan already exists for today');
     });
   });
 
-  describe('Scenario: Create external-service-error', () => {
-    it('should produce RFC 9457 ProblemDetails with status 502', () => {
+  describe('Scenario: Create openai-unavailable error', () => {
+    it('should produce RFC 9457 ProblemDetails with status 503', () => {
       const error = new BusinessError(
-        'external-service-error',
+        'openai-unavailable',
         'Google token exchange failed (400): invalid_grant',
       );
 
-      expect(error.status).toBe(502);
-      expect(error.detail).toContain('Google token exchange failed');
+      expect(error.status).toBe(503);
+      expect(error.message).toContain('Google token exchange failed');
     });
   });
 
@@ -63,7 +63,7 @@ describe('Feature: RFC 9457 Error Factory', () => {
 
   describe('Scenario: BusinessError extends Error', () => {
     it('should be catchable as a standard Error', () => {
-      const error = new BusinessError('not-found', 'test');
+      const error = new BusinessError('resource-not-found', 'test');
 
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toBeDefined();
@@ -75,11 +75,11 @@ describe('Feature: RFC 9457 Error Factory', () => {
   describe('Scenario: All error types produce valid URI', () => {
     it('should always produce a type starting with https://api.jaanify.com/errors/', () => {
       const errorTypes = [
-        'not-found',
-        'unauthorized',
+        'resource-not-found',
+        'authentication-required',
         'validation-error',
         'unique-constraint-violation',
-        'external-service-error',
+        'openai-unavailable',
       ] as const;
 
       for (const errorType of errorTypes) {

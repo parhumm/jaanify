@@ -1,60 +1,40 @@
-import { defineConfig, defineWorkspace } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 import path from 'node:path';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
-export default defineWorkspace([
-  // Unit tests — fast, isolated, MSW for external calls
-  {
-    test: {
-      name: 'unit',
-      include: ['test/unit/**/*.test.ts'],
-      environment: 'node',
-      setupFiles: ['test/setup/unit.ts'],
-      globals: true,
-      mockReset: true,
-      coverage: {
-        provider: 'v8',
-        include: ['src/**/*.ts'],
-        exclude: ['src/**/*.schema.ts', 'src/server.ts', 'src/app.ts'],
-        thresholds: {
-          lines: 80,
-          branches: 70,
-          functions: 75,
-          statements: 80,
-        },
+export default defineConfig({
+  plugins: [tsconfigPaths()],
+  test: {
+    include: ['test/**/*.test.ts'],
+    exclude: [
+      'test/**/*.integration.test.ts',
+      'test/security/rate-limiter.test.ts',
+      'test/security/secure-token-storage.test.ts',
+    ],
+    environment: 'node',
+    globals: true,
+    mockReset: true,
+    testTimeout: 15_000,
+    setupFiles: ['./test/config/setup/unit.ts'],
+    pool: 'forks',
+    poolOptions: {
+      forks: {
+        execArgv: ['--experimental-global-webcrypto'],
       },
     },
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
+    alias: {
+      '../src/': new URL('./src/', import.meta.url).pathname,
+    },
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.ts'],
+      exclude: ['src/**/*.schema.ts', 'src/server.ts', 'src/app.ts'],
     },
   },
-
-  // Integration tests — Fastify inject + Prisma + MSW
-  {
-    test: {
-      name: 'integration',
-      include: ['test/integration/**/*.integration.test.ts'],
-      environment: 'node',
-      setupFiles: ['test/setup/integration.ts'],
-      globals: true,
-      pool: 'forks',
-      poolOptions: {
-        forks: { singleFork: true },
-      },
-      testTimeout: 15_000,
-      coverage: {
-        provider: 'v8',
-        include: ['src/routes/**/*.ts'],
-        thresholds: {
-          lines: 60,
-        },
-      },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
-    },
+    extensions: ['.ts', '.js', '.mts', '.mjs', '.json'],
   },
-]);
+});

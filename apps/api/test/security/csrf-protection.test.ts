@@ -40,12 +40,9 @@ describe("E-DEV-005: CSRF Protection", () => {
       return { token };
     });
 
-    // Protected mutation endpoint
-    app.post("/v1/tasks", async (request, reply) => {
-      // Verify CSRF
-      try {
-        await request.csrfToken();
-      } catch {
+    // Transform CSRF errors into RFC 9457 format
+    app.setErrorHandler(async (error, _request, reply) => {
+      if (error.statusCode === 403 || error.message?.includes("csrf")) {
         return reply.status(403).send({
           type: "https://api.jaanify.com/errors/csrf-token-invalid",
           status: 403,
@@ -53,6 +50,24 @@ describe("E-DEV-005: CSRF Protection", () => {
           detail: "Missing or invalid CSRF token.",
         });
       }
+      return reply.status(error.statusCode ?? 500).send({ error: error.message });
+    });
+
+    // Add CSRF verification as a preHandler hook for POST routes
+    app.addHook("preHandler", async (request, reply) => {
+      if (request.method === "GET" || request.method === "HEAD" || request.method === "OPTIONS") {
+        return;
+      }
+      await new Promise<void>((resolve, reject) => {
+        (app as any).csrfProtection(request, reply, (err: Error | undefined) => {
+          if (err) reject(err);
+          else resolve();
+        });
+      });
+    });
+
+    // Protected mutation endpoint
+    app.post("/v1/tasks", async () => {
       return { id: "task-1", title: "Test task" };
     });
 

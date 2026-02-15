@@ -48,6 +48,9 @@ describe('Feature: Daily Plan Service', () => {
 
   beforeEach(async () => {
     vi.clearAllMocks();
+    mockPrisma.$transaction.mockImplementation(
+      (callback: (tx: typeof mockTx) => Promise<unknown>) => callback(mockTx),
+    );
     plansService = await import('../src/routes/daily-plans/daily-plans.service.js');
   });
 

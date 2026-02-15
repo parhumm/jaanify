@@ -219,6 +219,12 @@ describe('Feature: Task Service — CRUD & AI Parsing', () => {
         },
       }));
 
+      // Reset module registry so re-import picks up the new mock
+      vi.resetModules();
+
+      // Re-mock prisma after module reset
+      vi.doMock('../src/lib/prisma.js', () => ({ prisma: mockPrisma }));
+
       // Re-import to pick up new mock
       const freshModule = await import('../src/routes/tasks/tasks.service.js');
 
