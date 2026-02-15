@@ -5,7 +5,7 @@
 # Use Dockerfile for consistent builds
 dockerfilePath = "docker/Dockerfile.api"
 # Build from repo root (monorepo)
-watchPatterns = ["apps/api/**", "packages/**", "pnpm-lock.yaml"]
+watchPatterns = ["apps/api/**", "packages/**", "docker/Dockerfile.api", "pnpm-lock.yaml", "railway.toml"]
 
 [deploy]
 # Health check
