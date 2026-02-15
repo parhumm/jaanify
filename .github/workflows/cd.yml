@@ -79,6 +79,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: pnpm --filter jaanify-api exec prisma migrate deploy
+        continue-on-error: true # DB may be paused (Supabase free tier)
 
   # ── 3. Deploy Backend (Railway) ─────────────────────────────────────
   deploy-api:
