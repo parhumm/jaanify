@@ -38,6 +38,9 @@ build/
 .next/
 *.log
 *.tsbuildinfo
+
+# Vercel
+.vercel/
 /.obsidian
 
 # Claude Code (skills tracked, settings/plans ignored)

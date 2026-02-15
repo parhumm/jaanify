@@ -103,21 +103,28 @@ jobs:
           echo "url=$(railway status --json | jq -r '.url')" >> $GITHUB_OUTPUT
 
   # ── 4. Deploy Frontend (Vercel) ─────────────────────────────────────
-  # Vercel deployment is handled via Git integration (vercel.json at root).
-  # This job waits for the automatic deployment and reports its URL.
   deploy-web:
     needs: migrate
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: ${{ vars.WEB_URL }}
+      url: ${{ steps.deploy.outputs.url }}
     steps:
-      - name: Wait for Vercel Deployment
-        run: |
-          echo "Vercel deploys automatically via Git integration on push to main."
-          echo "Dashboard: https://vercel.com/parhumm/jaanify"
-          echo "url=${{ vars.WEB_URL }}" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy to Vercel (remote build)
         id: deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          DEPLOY_URL=$(vercel deploy --prod --yes --token=$VERCEL_TOKEN 2>&1 | tail -1)
+          echo "Deployed to: $DEPLOY_URL"
+          echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
 
   # ── 5. Smoke Test ───────────────────────────────────────────────────
   smoke-test:
