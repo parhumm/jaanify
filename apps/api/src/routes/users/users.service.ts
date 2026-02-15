@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import { prisma } from "../../lib/prisma.js";
 import type { UserUpdate } from "./users.schema.js";
 
@@ -11,7 +12,7 @@ export async function updateMe(userId: string, data: UserUpdate) {
     data: {
       name: data.name,
       avatarUrl: data.avatar_url,
-      preferencesJson: data.preferences_json ?? undefined,
+      preferencesJson: (data.preferences_json as Prisma.InputJsonValue) ?? undefined,
     },
   });
 }

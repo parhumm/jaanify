@@ -2,13 +2,13 @@ import { decodeJwt } from "jose";
 import { prisma } from "../../lib/prisma.js";
 import { BusinessError } from "../../lib/error-factory.js";
 import { generateTokenPair, verifyRefreshToken } from "../../lib/auth-tokens.js";
+import type { AuthTokens } from "../../lib/auth-tokens.js";
 import { validateEnv } from "../../lib/env.js";
 import type { z } from "zod";
 import type {
   googleAuthRequestSchema,
   registerRequestSchema,
 } from "./auth.schema.js";
-import type { AuthTokens } from "./auth.schema.js";
 
 type GoogleAuthRequest = z.infer<typeof googleAuthRequestSchema>;
 type RegisterRequest = z.infer<typeof registerRequestSchema>;
@@ -50,7 +50,7 @@ async function exchangeGoogleCode(
   if (!response.ok) {
     const errorBody = await response.text();
     throw new BusinessError(
-      "external-service-error",
+      "openai-unavailable",
       `Google token exchange failed (${response.status}): ${errorBody}`,
     );
   }
@@ -60,7 +60,7 @@ async function exchangeGoogleCode(
 
   if (typeof idToken !== "string") {
     throw new BusinessError(
-      "external-service-error",
+      "openai-unavailable",
       "Google token response did not include an id_token",
     );
   }
@@ -133,7 +133,7 @@ export async function googleAuth(data: GoogleAuthRequest): Promise<AuthTokens> {
 
   const tokens = await generateTokenPair({
     sub: user.id,
-    email: user.email,
+    email: user.email ?? undefined,
   });
 
   return tokens;
@@ -154,7 +154,7 @@ export async function refreshToken(
   currentRefreshToken: string,
 ): Promise<AuthTokens> {
   const payload = await verifyRefreshToken(currentRefreshToken).catch(() => {
-    throw new BusinessError("unauthorized", "Invalid or expired refresh token");
+    throw new BusinessError("authentication-required", "Invalid or expired refresh token");
   });
 
   const userId = payload.sub;
@@ -164,19 +164,19 @@ export async function refreshToken(
   });
 
   if (!user) {
-    throw new BusinessError("not-found", "User not found");
+    throw new BusinessError("resource-not-found", "User not found");
   }
 
   if (user.deletedAt !== null) {
     throw new BusinessError(
-      "unauthorized",
+      "authentication-required",
       "Account has been deactivated",
     );
   }
 
   const tokens = await generateTokenPair({
     sub: user.id,
-    email: user.email,
+    email: user.email ?? undefined,
   });
 
   return tokens;
@@ -241,11 +241,11 @@ export async function register(data: RegisterRequest): Promise<AuthTokens> {
     });
 
     if (!session) {
-      throw new BusinessError("not-found", "Guest session not found");
+      throw new BusinessError("resource-not-found", "Guest session not found");
     }
 
     if (session.expiresAt < new Date()) {
-      throw new BusinessError("not-found", "Guest session has expired");
+      throw new BusinessError("resource-not-found", "Guest session has expired");
     }
 
     // 2. Create the new user
@@ -287,7 +287,7 @@ export async function register(data: RegisterRequest): Promise<AuthTokens> {
     // 5. Generate token pair for the newly created user
     return generateTokenPair({
       sub: user.id,
-      email: user.email,
+      email: user.email ?? undefined,
     });
   });
 

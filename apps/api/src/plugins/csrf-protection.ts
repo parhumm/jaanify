@@ -82,7 +82,7 @@ async function csrfPluginFn(fastify: FastifyInstance) {
       if (csrfExemptPaths.some((p) => request.url.startsWith(p))) return;
 
       try {
-        await request.csrfToken();
+        await (fastify as any).csrfProtection(request, reply);
       } catch {
         return reply
           .status(403)

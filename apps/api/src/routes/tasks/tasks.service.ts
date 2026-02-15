@@ -1,5 +1,5 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "../../lib/prisma.js";
-import { BusinessError } from "../../lib/error-factory.js";
 import { validateEnv } from "../../lib/env.js";
 import type { TaskCreate, TaskUpdate, TaskListQuery, TaskParseRequest } from "./tasks.schema.js";
 
@@ -110,7 +110,7 @@ export async function createTask(userId: string, data: TaskCreate) {
   let enrichedCategory: string | null | undefined = data.category;
   let enrichedEnergy: "low" | "medium" | "high" | null | undefined = data.energy_level;
   let enrichedMinutes: number | null | undefined = data.estimated_minutes;
-  let reasoningJson: Record<string, unknown> | null = null;
+  let reasoningJson: Prisma.InputJsonValue | null = null;
 
   // When raw_input is provided, use AI parsing to enrich the task
   if (data.raw_input) {
@@ -133,7 +133,7 @@ export async function createTask(userId: string, data: TaskCreate) {
       enrichedMinutes = parsed.estimated_minutes;
     }
     if (parsed.reasoning) {
-      reasoningJson = { ...parsed.reasoning, confidence: parsed.confidence };
+      reasoningJson = { ...parsed.reasoning, confidence: parsed.confidence } as Prisma.InputJsonValue;
     }
   }
 
@@ -153,7 +153,7 @@ export async function createTask(userId: string, data: TaskCreate) {
       energyLevel: enrichedEnergy ?? null,
       estimatedMinutes: enrichedMinutes ?? null,
       priorityScore,
-      reasoningJson,
+      reasoningJson: reasoningJson ?? Prisma.DbNull,
     },
   });
 }

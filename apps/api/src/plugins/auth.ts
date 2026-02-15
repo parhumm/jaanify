@@ -25,7 +25,7 @@ const PUBLIC_PATHS = [
 
 async function authPluginFn(fastify: FastifyInstance) {
   fastify.decorateRequest("userId", "");
-  fastify.decorateRequest("jwtPayload", null);
+  fastify.decorateRequest("jwtPayload", null as unknown as jose.JWTPayload);
 
   fastify.addHook(
     "onRequest",

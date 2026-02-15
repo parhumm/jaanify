@@ -7,7 +7,7 @@ import { Button } from "@/components/atoms/Button";
 import { ReasoningCard } from "@/components/organisms/ReasoningCard";
 import { useOnboardingStore } from "@/stores/onboarding-store";
 import { useCreateGuestSession, useParseTask } from "@/hooks/api";
-import type { TaskParseResponse, ReasoningJson } from "@/types/api";
+import type { ReasoningJson } from "@/types/api";
 
 export function OnboardingContent() {
   const router = useRouter();

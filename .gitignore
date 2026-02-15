@@ -35,6 +35,7 @@ __pycache__/
 # Build
 dist/
 build/
+.next/
 *.log
 *.tsbuildinfo
 /.obsidian

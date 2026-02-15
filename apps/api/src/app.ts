@@ -11,7 +11,7 @@ import {
 import { securityHeadersPlugin } from "./plugins/security-headers.js";
 import { rateLimitPlugin } from "./plugins/rate-limiter.js";
 import { csrfPlugin } from "./plugins/csrf-protection.js";
-import { authMiddleware } from "./plugins/auth.js";
+import { authPlugin } from "./plugins/auth.js";
 import { errorHandlerPlugin } from "./plugins/error-handler.js";
 import { validateEnv } from "./lib/env.js";
 import { authRoutes } from "./routes/auth/index.js";
@@ -61,7 +61,7 @@ export async function buildApp() {
   await app.register(errorHandlerPlugin);
 
   // Auth middleware
-  await app.register(authMiddleware);
+  await app.register(authPlugin);
 
   // Health check
   app.get("/v1/health", async () => ({ status: "ok", timestamp: new Date().toISOString() }));

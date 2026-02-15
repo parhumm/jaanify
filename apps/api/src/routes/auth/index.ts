@@ -16,7 +16,8 @@ export async function authRoutes(fastify: FastifyInstance) {
 
   fastify.post("/auth/refresh", {
     handler: async (request, reply) => {
-      const tokens = await authService.refreshToken();
+      const body = request.body as { refresh_token: string };
+      const tokens = await authService.refreshToken(body.refresh_token);
       return reply.status(200).send(tokens);
     },
   });

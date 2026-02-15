@@ -25,7 +25,7 @@ import type { User, Task, DailyPlan, DailyPlanSlot, GuestSession } from "@prisma
 
 export interface UserResponse {
   id: string;
-  email: string;
+  email: string | null;
   name: string | null;
   avatar_url: string | null;
   auth_provider: string;
@@ -89,7 +89,7 @@ export interface DailyPlanResponse {
   id: string;
   date: string;
   status: string;
-  ai_model: string | null;
+  reasoning_method: string;
   created_at: string;
   slots?: DailyPlanSlotResponse[];
 }
@@ -98,9 +98,8 @@ export interface DailyPlanSlotResponse {
   id: string;
   position: number;
   task_id: string;
-  start_time: string | null;
-  end_time: string | null;
-  reasoning: string | null;
+  status: string;
+  reasoning_json: unknown;
 }
 
 export function formatDailyPlanResponse(
@@ -110,7 +109,7 @@ export function formatDailyPlanResponse(
     id: plan.id,
     date: plan.date.toISOString().split("T")[0]!,
     status: plan.status,
-    ai_model: plan.aiModel,
+    reasoning_method: plan.reasoningMethod,
     created_at: plan.createdAt.toISOString(),
     ...(plan.slots
       ? {
@@ -118,9 +117,8 @@ export function formatDailyPlanResponse(
             id: slot.id,
             position: slot.position,
             task_id: slot.taskId,
-            start_time: slot.startTime?.toISOString() ?? null,
-            end_time: slot.endTime?.toISOString() ?? null,
-            reasoning: slot.reasoning,
+            status: slot.status,
+            reasoning_json: slot.reasoningJson,
           })),
         }
       : {}),

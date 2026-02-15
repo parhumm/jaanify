@@ -3,7 +3,6 @@ import {
   useMutation,
   useQueryClient,
   queryOptions,
-  type UseQueryOptions,
   type UseMutationOptions,
 } from "@tanstack/react-query";
 import type {
@@ -148,7 +147,7 @@ export function useAuthLogout(
   });
 }
 
-export function useGetMe(options?: Partial<UseQueryOptions<UserResponse>>) {
+export function useGetMe(options?: { enabled?: boolean }) {
   return useQuery({
     ...meQueryOptions(),
     ...options,
@@ -184,7 +183,7 @@ export function useDeleteMe(
 
 export function useListTasks(
   params?: { status?: string; category?: string; cursor?: string; limit?: number },
-  options?: Partial<UseQueryOptions<TaskList>>
+  options?: { enabled?: boolean }
 ) {
   return useQuery({
     ...taskListQueryOptions(params),
@@ -194,7 +193,7 @@ export function useListTasks(
 
 export function useGetTask(
   id: string,
-  options?: Partial<UseQueryOptions<TaskResponse>>
+  options?: { enabled?: boolean }
 ) {
   return useQuery({
     ...taskDetailQueryOptions(id),
@@ -257,7 +256,7 @@ export function useParseTask(
 
 export function useListDailyPlans(
   params?: { cursor?: string; limit?: number },
-  options?: Partial<UseQueryOptions<DailyPlanList>>
+  options?: { enabled?: boolean }
 ) {
   return useQuery({
     ...planListQueryOptions(params),
@@ -267,7 +266,7 @@ export function useListDailyPlans(
 
 export function useGetDailyPlan(
   id: string,
-  options?: Partial<UseQueryOptions<DailyPlanResponse>>
+  options?: { enabled?: boolean }
 ) {
   return useQuery({
     ...planDetailQueryOptions(id),
@@ -348,7 +347,7 @@ export function useCreateGuestSession(
 
 export function useGetGuestSession(
   anonymousId: string,
-  options?: Partial<UseQueryOptions<GuestSessionResponse>>
+  options?: { enabled?: boolean }
 ) {
   return useQuery({
     ...guestSessionQueryOptions(anonymousId),

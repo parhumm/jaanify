@@ -30,7 +30,7 @@ export function PlanTaskRow({
         )}
         {slot.reasoning_json && (
           <ReasoningTier1
-            summary={(slot.reasoning_json as any).tier1}
+            summary={(slot.reasoning_json as unknown as Record<string, unknown>).tier1 as string}
             isExpanded={reasoningExpanded}
             onToggle={onToggleReasoning}
           />

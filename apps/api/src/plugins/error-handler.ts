@@ -1,4 +1,4 @@
-import type { FastifyInstance } from "fastify";
+import type { FastifyInstance, FastifyError } from "fastify";
 import {
   hasZodFastifySchemaValidationErrors,
   isResponseSerializationError,
@@ -6,7 +6,7 @@ import {
 import { Prisma } from "@prisma/client";
 
 export async function errorHandlerPlugin(fastify: FastifyInstance) {
-  fastify.setErrorHandler((error, request, reply) => {
+  fastify.setErrorHandler((error: FastifyError, request, reply) => {
     const requestId = request.id;
 
     if (hasZodFastifySchemaValidationErrors(error)) {

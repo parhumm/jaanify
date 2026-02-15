@@ -42,7 +42,7 @@ export function TaskInputForm({
   const [parsed, setParsed] = useState<TaskParseResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const autoResize = useCallback(() => {
     const el = textareaRef.current;
@@ -188,7 +188,7 @@ export function TaskInputForm({
         </p>
       )}
 
-      {(inputState === "parsed" || inputState === "error") && text.trim() && (
+      {(inputState === "parsed" || inputState === "error" || inputState === "saving") && text.trim() && (
         <ActionButtons
           onCancel={onCancel}
           onSave={handleSave}

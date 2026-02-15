@@ -18,17 +18,18 @@
  * ```
  */
 
-import type { FastifyInstance, RateLimitOptions } from "fastify";
+import type { FastifyInstance } from "fastify";
+import type { RateLimitPluginOptions } from "@fastify/rate-limit";
 import fp from "fastify-plugin";
 
 // ---------------------------------------------------------------------------
 // Global rate limit configuration (applies to all routes by default)
 // ---------------------------------------------------------------------------
 
-export const rateLimitConfig: RateLimitOptions = {
+export const rateLimitConfig: RateLimitPluginOptions = {
   max: 100,
   timeWindow: "1 minute",
-  errorResponseBuilder: (_request, context) => ({
+  errorResponseBuilder: (_request: any, context: any) => ({
     type: "https://api.jaanify.com/errors/rate-limit-exceeded",
     status: 429,
     title: "Too Many Requests",

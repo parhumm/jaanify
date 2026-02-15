@@ -17,14 +17,8 @@ interface DailyPlanComponentProps {
   onRefresh: () => void;
 }
 
-export function DailyPlanComponent({
-  plan,
-  tasks,
-  state,
-  onGenerate,
-  onAddTask,
-  onRefresh,
-}: DailyPlanComponentProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function DailyPlanComponent({ plan, tasks, state, onGenerate, onAddTask, onRefresh }: DailyPlanComponentProps) {
   const [expandedSlot, setExpandedSlot] = useState<string | null>(null);
 
   if (state === "loading") {

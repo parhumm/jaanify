@@ -1,7 +1,6 @@
 "use client";
 
 import { type ReactNode, useState, useId } from "react";
-import { cn } from "@/lib/cn";
 import { IconButton } from "@/components/atoms/IconButton";
 
 interface ParsedFieldProps {

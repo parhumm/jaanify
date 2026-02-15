@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "../../lib/prisma.js";
 import { BusinessError } from "../../lib/error-factory.js";
 import { validateEnv } from "../../lib/env.js";
@@ -104,7 +105,7 @@ export async function generatePlan(userId: string) {
 
       // 5. Try AI-powered ordering, fall back to priority_score order
       let orderedTaskIds: string[] = tasks.map((t) => t.id);
-      let slotReasonings: Map<string, Record<string, unknown>> = new Map();
+      let slotReasonings: Map<string, Prisma.InputJsonValue> = new Map();
       let reasoningMethod: "ai" | "rule_based" = "rule_based";
 
       let apiKey: string | undefined;
@@ -183,7 +184,7 @@ export async function generatePlan(userId: string) {
 
                     for (const item of parsed.ordered_tasks) {
                       if (validIds.has(item.task_id)) {
-                        slotReasonings.set(item.task_id, { reasoning: item.reasoning });
+                        slotReasonings.set(item.task_id, { reasoning: item.reasoning } as Prisma.InputJsonValue);
                       }
                     }
                   }
@@ -207,7 +208,7 @@ export async function generatePlan(userId: string) {
             planId: plan.id,
             taskId,
             position: i + 1,
-            reasoningJson: slotReasonings.get(taskId) ?? null,
+            reasoningJson: slotReasonings.get(taskId) ?? Prisma.DbNull,
             status: "pending",
           },
         });
