@@ -122,6 +122,7 @@ jobs:
   # ── 5. Smoke Test ───────────────────────────────────────────────────
   smoke-test:
     needs: [deploy-api, deploy-web]
+    if: always() && !cancelled()
     runs-on: ubuntu-latest
     steps:
       - name: Health Check (API)
