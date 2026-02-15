@@ -55,9 +55,10 @@ export default [
       ...jsxA11y.configs.recommended.rules,
       "jsx-a11y/no-autofocus": "warn",
       "no-undef": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
     },
   },
   {
-    ignores: [".next/", "node_modules/", "dist/"],
+    ignores: [".next/", "node_modules/", "dist/", "e2e/", "next-env.d.ts"],
   },
 ];
