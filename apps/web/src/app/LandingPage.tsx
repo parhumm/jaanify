@@ -252,7 +252,7 @@ export default function LandingPage() {
         </div>
 
         <div className="relative mx-auto max-w-5xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <FadeIn>
               <p className="text-sm font-medium tracking-widest uppercase text-(--color-terracotta) mb-4">
                 AI Task Manager
@@ -527,7 +527,7 @@ export default function LandingPage() {
           <div className="absolute bottom-1/4 -left-12 h-48 w-48 rounded-full bg-(--color-gold)/6" />
         </div>
 
-        <div className="relative mx-auto max-w-2xl px-6 text-center">
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
           <FadeIn>
             <h2
               id="cta-heading"

@@ -16,7 +16,7 @@ export function OnboardingLayout({
 }: OnboardingLayoutProps) {
   return (
     <div className="min-h-dvh bg-(--color-bg) flex flex-col">
-      <main className="flex-1 mx-auto max-w-[480px] w-full px-4 sm:max-w-[560px]">
+      <main className="flex-1 mx-auto max-w-[560px] w-full px-4 sm:max-w-2xl">
         {children}
       </main>
       <footer className="py-6">
