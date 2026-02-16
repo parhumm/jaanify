@@ -36,8 +36,10 @@ __pycache__/
 dist/
 build/
 .next/
+.turbo/
 *.log
 *.tsbuildinfo
+next-env.d.ts
 
 # Vercel
 .vercel/
