@@ -252,7 +252,7 @@ export default function LandingPage() {
         </div>
 
         <div className="relative mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl xl:max-w-4xl 2xl:max-w-5xl">
             <FadeIn>
               <p className="text-sm font-medium tracking-widest uppercase text-(--color-terracotta) mb-4">
                 AI Task Manager
@@ -271,7 +271,7 @@ export default function LandingPage() {
             </FadeIn>
 
             <FadeIn delay={200}>
-              <p className="mt-6 text-lg sm:text-xl leading-relaxed text-(--color-text)/70 max-w-lg">
+              <p className="mt-6 text-lg sm:text-xl leading-relaxed text-(--color-text)/70 max-w-lg sm:max-w-xl lg:max-w-2xl">
                 The task manager that shows its work. AI plans your day with
                 transparent reasoning you can see, question, and trust.
               </p>
@@ -333,7 +333,7 @@ export default function LandingPage() {
           <FadeIn delay={350} className="mt-16 sm:mt-20">
             <div
               className={cn(
-                "relative max-w-md mx-auto sm:mx-0 sm:ml-auto sm:-mt-64 sm:mr-0",
+                "relative max-w-md lg:max-w-lg xl:max-w-xl mx-auto sm:mx-0 sm:ml-auto sm:-mt-64 sm:mr-0",
                 "bg-(--color-cream) rounded-2xl p-6",
                 "border border-(--color-sage-light)/30",
                 "shadow-lg"
@@ -403,7 +403,7 @@ export default function LandingPage() {
               Task management with{" "}
               <span className="text-(--color-sage)">transparency</span>
             </h2>
-            <p className="mt-4 text-center text-(--color-text)/60 max-w-lg mx-auto text-lg">
+            <p className="mt-4 text-center text-(--color-text)/60 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto text-lg">
               Every decision your AI planner makes is visible, explainable,
               and adjustable.
             </p>
@@ -527,7 +527,7 @@ export default function LandingPage() {
           <div className="absolute bottom-1/4 -left-12 h-48 w-48 rounded-full bg-(--color-gold)/6" />
         </div>
 
-        <div className="relative mx-auto max-w-3xl px-6 text-center">
+        <div className="relative mx-auto max-w-3xl xl:max-w-4xl 2xl:max-w-5xl px-6 text-center">
           <FadeIn>
             <h2
               id="cta-heading"
