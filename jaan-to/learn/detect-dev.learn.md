@@ -36,6 +36,9 @@ Process improvements learned from past runs:
 - Group detections by confidence before presenting — high confidence items first builds trust
 - Read the existing context files BEFORE scanning — knowing what's already documented saves work
 - Run CI/CD security checks in a dedicated pass after pipeline detection — don't mix with general detection
+- **2026-02-16 (Cycle 11)**: Even in light mode, do a surface scan of CI/CD workflows for `continue-on-error: true`, unpinned dependencies, and missing permissions blocks — these are high-value findings that don't require deep analysis
+- **2026-02-16 (Cycle 11)**: Always include a delta section comparing to the previous audit when one exists — score changes tell a story that absolute scores don't
+- **2026-02-16 (Cycle 11)**: Check for dependency version mismatches across monorepo packages (e.g., different TypeScript versions in apps/api vs apps/web, vitest vs @vitest/coverage-v8 major version mismatch)
 
 ## Common Mistakes
 

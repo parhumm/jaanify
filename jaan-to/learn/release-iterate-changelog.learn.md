@@ -80,6 +80,15 @@ Process improvements learned from past runs:
 - Don't skip the regex step even if most commits are freeform
 - Don't rely solely on keywords — combine multiple signals
 
+### Find the Right Commit Boundary (2026-02-16)
+
+**Context**: Cycle 11 — when no git tags exist, find the last changelog update commit as the boundary.
+
+**What to do**:
+- If no tags: use `git log` to find the commit that last modified `CHANGELOG.md`
+- This gives a tighter boundary than "all commits since initial" which includes already-documented changes
+- For release mode: use the [Unreleased] section as the source, not re-analyzing all commits
+
 ## Common Mistakes
 
 Things to avoid based on research:

@@ -1,0 +1,15 @@
+last_audit:
+  timestamp: "2026-02-16T00:00:00Z"
+  commit: "f1bebd0"
+  branch: "main"
+  mode: "light"
+  incremental: false
+  platforms: ["all"]
+  findings_count:
+    critical: 0
+    high: 1
+    medium: 3
+    low: 2
+    informational: 5
+  overall_score: 8.1
+  files_written: ["summary.md"]

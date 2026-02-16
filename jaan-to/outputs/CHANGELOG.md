@@ -7,21 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-02-16
+
 ### Added
 
-- Activate full deployment pipeline — 5 GitHub secrets configured (DATABASE_URL, RAILWAY_TOKEN, VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID), Railway backend project provisioned with `api` service, Vercel frontend project created and linked to GitHub repo with preview deployments (resolves L-09)
-- Integrate marketing landing page into app root route — hero, features, how-it-works, social proof, and beta CTA now live at `/` (resolves L-11)
-- Set up branch protection on `main` with required CI status checks (detect-changes, lint, build, security), linear history enforcement, and force-push blocking
-- Add health monitoring workflow with 15-minute cron checks, automatic GitHub incident creation on API or web outage, deduplication via existing issue detection, and auto-close with resolution comment on recovery
-- Add secret rotation scheduling workflow with 90-day cron (quarterly) creating GitHub issues with rotation checklists for DATABASE_URL, RAILWAY_TOKEN, and VERCEL_TOKEN
-- Create production operations guide documenting branch protection rules, secret rotation procedures, and health monitoring configuration
-- Configure health check monitoring URLs (API_URL, WEB_URL) as GitHub repository variables for automated service monitoring
+- Deploy API to Railway and Web to Vercel — first production deployment with live health checks (`/v1/health` returns 200, Vercel returns 200)
+- Achieve first successful monorepo build — `pnpm build` compiles both `apps/api` and `apps/web` after resolving 31+ TypeScript errors
+- Pass full test suite — 77 tests across unit and integration suites (52 failures fixed via mock corrections, import fixes, and type alignment)
+- Upgrade jaan-to plugin from v6.1.1 to v6.3.0 — 2 new skills (`dev-verify`, `qa-test-run`), improvements to 4 existing skills, resolving GitHub issues #83, #84, #85, #78, #82, #81
+- Integrate 15 infrastructure files from v6.3.0 infra-scaffold — updated CI/CD workflows, Dockerfiles, docker-compose, environment configs
+
+### Changed
+
+- Migrate Vercel deployment from Git integration to Vercel CLI with token authentication — resolves monorepo Root Directory detection issues
+- Update CD workflow to use `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` secrets for programmatic deployment
 
 ### Fixed
 
-- Fix CI pipeline failure caused by pnpm version conflict — remove explicit `version` parameter from `pnpm/action-setup@v4` to let `package.json` `packageManager` field drive version selection
-- Add missing `babel-plugin-react-compiler` dependency to `apps/web` resolving Next.js production build failure in CI
-- Add `output: "standalone"` to `apps/web/next.config.ts` enabling minimal standalone server for Docker container builds
+- Resolve 31+ TypeScript compilation errors: missing `jose` dependency, `authMiddleware`/`authPlugin` export mismatch, invalid `ProblemType` strings, duplicate `AuthTokens` type definitions, and Prisma schema drift
+- Fix Docker runtime stage — preserve full pnpm workspace `node_modules/` structure to retain generated Prisma client (5 Dockerfile iterations)
+- Fix Railway deployment — add `docker/Dockerfile.api` and `railway.toml` to `watchPatterns` for automatic rebuild triggers
+- Fix Vercel deployment — correct Output Directory from `apps/web/.next` to `.next` (relative to Root Directory), move `vercel.json` to `apps/web/`
+- Fix CD pipeline Vercel deployment — replace broken Git integration with Vercel CLI deploy using `--prod --yes` flag
+- Fix CI lint failures — exclude `e2e/` directory and `next-env.d.ts` from ESLint and TypeScript compilation scopes
+- Fix 52 test failures — correct MSW mock handlers, align Prisma mock returns with schema types, fix factory definitions, and update import paths
+- Set Railway environment variables — `DATABASE_URL`, `JWT_SECRET`, `REFRESH_TOKEN_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `OPENAI_API_KEY`, `CORS_ORIGIN`
+
+### Security
+
+- Post-launch engineering audit (detect-dev) scores 8.1/10 — 38/39 GitHub Actions SHA-pinned, Docker non-root users, Vercel security headers, Fastify security middleware stack verified
+- Identify 6 CI/CD findings for remediation: `continue-on-error` masking security scan failures, unpinned `vercel@latest`, missing top-level workflow `permissions:` block
 
 ## [0.2.0] - 2026-02-13
 
@@ -108,27 +123,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### High Impact
 
-- **Deployment pipeline fully activated**: 5 GitHub secrets configured, Railway backend provisioned, Vercel frontend linked. CI pipeline verified working (lint, test, security all pass). Resolves L-09.
-- **All generated artifacts operational**: 58 files moved from `jaan-to/outputs/` into project locations — tests run, security plugins load, CI/CD workflows execute.
-- **Runnable monorepo assembled**: Scaffold outputs wired into working Turborepo project with `apps/api` and `apps/web`, shared Prisma schema, and TypeScript path aliases.
-- **Backend services implemented**: All 21 TODO stubs replaced with production logic — Google OAuth2 flow, JWT token management, task CRUD with AI parsing, daily plan generation.
-- **Critical JWT vulnerability resolved**: E-DEV-001 fixed — auth now uses jose `jwtVerify` with HS256, issuer/audience validation.
-- **GitHub Actions hardened**: All 11 actions across 2 workflows pinned to SHA digests. Supply chain attack surface eliminated.
+- **First production deployment**: Jaanify API live on Railway (`/v1/health` → 200 OK), Web live on Vercel (200 OK). Both services accessible at production URLs.
+- **First working build**: `pnpm build` succeeds for both `apps/api` and `apps/web` after resolving 31+ TypeScript errors from integration seams.
+- **Test suite green**: 77 tests passing across all suites — 52 failures diagnosed and fixed.
+- **Google OAuth configured**: Real `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` set on Railway with correct redirect URIs.
 
 ### Medium Impact
 
-- **Landing page live at root route**: Marketing page with hero, features, and CTA now renders at `/` (L-11 fully resolved).
-- **Branch protection active**: `main` branch now requires passing CI checks before merge.
-- **Health monitoring active**: 15-minute health checks with auto-incident creation and recovery tracking.
-- **Secret rotation scheduled**: Quarterly reminders for credential rotation with GitHub issue checklists.
-- **CI build fixes applied**: pnpm version conflict resolved, babel-plugin-react-compiler installed, Next.js standalone output configured.
-- **Test suite generated**: 37 test files with Vitest unit/integration tests and Playwright E2E specs.
-- **Security hardening**: 6 fix files with 27 regression tests covering OWASP Top 10 categories.
+- **Docker runtime fixed**: Prisma client now correctly available in production container after 5 Dockerfile iterations.
+- **CD pipeline operational**: Both Railway and Vercel deployments automated via GitHub Actions on push to `main`.
+- **jaan-to v6.3.0**: 2 new skills (`dev-verify` with build fix automation, `qa-test-run` with failure diagnosis) proven in production use.
 
 ### Low Impact
 
-- Docker build now works with Next.js standalone output configuration.
-- Infra-scaffold output files synced with pnpm version fix.
+- Railway `watchPatterns` now includes Dockerfile for automatic rebuilds.
+- CI excludes e2e/ and generated files from lint/typecheck scopes.
 
 ---
 
@@ -136,58 +145,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known Issues
 
-- No monetization path exists — zero billing, pricing, or tier enforcement code (E-PRD-001 — Critical)
-- Zero i18n infrastructure despite 7-language microcopy specs (E-WRT-001 — High)
-- Auth routing hardcoded to /onboarding for all visitors (E-UX-001 — High)
-- No Turbo remote cache configured in CI — missing TURBO_TOKEN/TURBO_TEAM for cross-PR caching
-- Pre-existing TypeScript error in web app (React Query generic type mismatch)
-- **Rotate Supabase database password** — credentials were shared in plain text during pipeline activation setup
+- No monetization path exists — zero billing, pricing, or tier enforcement code (L-06)
+- Zero i18n infrastructure despite 7-language microcopy specs (L-07)
+- `continue-on-error: true` on CI security scans and CD smoke tests masks failures (F-DEV-001)
+- Unpinned `vercel@latest` in CD workflow (F-DEV-003)
+- No top-level `permissions:` block in CI/CD workflows (F-DEV-005)
+- `@vitest/coverage-v8` major version mismatch with `vitest` (F-DEV-007)
 
-### Resolved Since 0.1.0
+### Resolved Since 0.2.0
 
-- ~~JWT auth middleware decodes tokens without cryptographic verification (E-DEV-001 — Critical)~~ — Fixed in Cycle 7
-- ~~No rate limiting on any endpoint (E-DEV-002 — High)~~ — Rate limiter fix integrated in Cycle 9
-- ~~Access tokens stored in localStorage, vulnerable to XSS (E-DEV-003 — High)~~ — Secure httpOnly cookie fix integrated in Cycle 9
-- ~~All 21 backend service handlers are TODO stubs (E-PRD-002 — High)~~ — All services implemented
-- ~~No CI/CD pipeline (L-05 — P1)~~ — GitHub Actions CI/CD generated and integrated
-- ~~No test files (L-03 — P1)~~ — 37 test files generated and integrated
-- ~~Generated artifacts stuck in outputs/ (L-08 — P1)~~ — 58 files integrated into project in Cycle 9
-- ~~GitHub Actions not pinned by SHA (supply chain risk)~~ — All 11 actions SHA-pinned in Cycle 9
-- ~~GitHub secrets not configured (0/5 required)~~ — All 5 secrets configured in Cycle 10
-- ~~Railway and Vercel CLIs not installed~~ — Both installed and authenticated in Cycle 10
-- ~~Next.js standalone output not configured~~ — Added to next.config.ts in Cycle 10
-- ~~CI build broken (pnpm version conflict)~~ — Fixed in Cycle 10
+- ~~31+ TypeScript compilation errors~~ — All resolved in Cycle 11 dev-verify
+- ~~52 test failures~~ — All fixed in Cycle 11 qa-test-run
+- ~~API not deployed (Railway returning 404)~~ — Live with all env vars configured
+- ~~Web not deployed (Vercel DEPLOYMENT_NOT_FOUND)~~ — Live via CLI deployment
+- ~~Docker runtime missing Prisma client~~ — Fixed by preserving pnpm workspace structure
+- ~~Railway not rebuilding on Dockerfile changes~~ — watchPatterns updated
 
-### Launch Gap Summary (Updated Cycle 10)
+### Launch Gap Summary (Updated Cycle 11)
 
 | Gap | Priority | Status | Description |
 |-----|----------|--------|-------------|
 | L-01 | P0 | **Resolved** | Service Implementation — production code replaces TODO stubs |
 | L-02 | P0 | **Resolved** | Integration/Wiring — monorepo assembled and runnable |
-| L-03 | P1 | **Resolved** | Test Generation — 37 test files with unit, integration, E2E |
+| L-03 | P1 | **Resolved** | Test Generation — 77 tests passing |
 | L-04 | P0 | **Resolved** | Security Hardening — JWT fixed, rate limit, CSRF, headers |
 | L-05 | P1 | **Resolved** | CI/CD Scaffold — GitHub Actions CI + CD pipelines |
 | L-06 | P1 | Open | Monetization — no billing/pricing |
 | L-07 | P2 | Open | i18n Infrastructure — zero locale support |
-| L-08 | P1 | **Resolved** | Output Integration — 58 artifacts installed into project |
-| L-09 | P1 | **Resolved** | Deploy Pipeline — secrets configured, Railway + Vercel provisioned |
+| L-08 | P1 | **Resolved** | Output Integration — artifacts installed into project |
+| L-09 | P1 | **Resolved** | Deploy Pipeline — Railway + Vercel live |
+| L-10 | P2 | **Resolved** | Security Re-audit — 8.1/10 post-launch score |
 | L-11 | P3 | **Resolved** | Landing Page — integrated into root route |
+| L-13 | P1 | **Resolved** | Health Monitoring — 15-min cron with incident management |
+| L-14 | P1 | **Resolved** | Secret Rotation — quarterly reminders |
+| L-15 | P1 | **Resolved** | Page Wiring — frontend routes connected |
+| L-16 | P2 | **Resolved** | pnpm CI Fix — packageManager field respected |
+| L-17 | P2 | **Resolved** | Next.js Standalone — Docker build consistent |
+| L-18 | P1 | **Resolved** | Compiler Plugin — React Compiler dependency added |
+| L-19 | P1 | **Resolved** | Repo Variables — health check URLs configured |
 
 ### Suggested Next Steps
 
-1. Rotate Supabase database password and update DATABASE_URL GitHub secret
-2. Trigger a full CD pipeline run after committing pending changes
-3. Define pricing model and scaffold Stripe integration (resolves L-06)
-4. Set up next.js i18n with next-intl or similar (resolves L-07)
-5. Fix React Query TypeScript error in web app
-6. Configure Turbo remote cache (TURBO_TOKEN/TURBO_TEAM)
+1. Remove `continue-on-error: true` from CI security scans (F-DEV-001)
+2. Pin `vercel` CLI version in CD workflow (F-DEV-003)
+3. Add top-level `permissions: {}` to CI/CD workflows (F-DEV-005)
+4. Define pricing model and scaffold Stripe integration (L-06)
+5. Set up Next.js i18n with next-intl (L-07)
+6. Fix `@vitest/coverage-v8` version mismatch (F-DEV-007)
 
 ---
 
-[unreleased]: https://github.com/parhumm/jaanify/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/parhumm/jaanify/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/parhumm/jaanify/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/parhumm/jaanify/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/parhumm/jaanify/releases/tag/v0.1.0
 
 ---
 
-> Generated by jaan.to | 2026-02-13 | Skill: release-iterate-changelog | Mode: auto-generate | Cycle: 10 | Status: Updated
+> Generated by jaan.to | 2026-02-16 | Skill: release-iterate-changelog | Mode: release v0.3.0 | Cycle: 11 | Status: Updated
