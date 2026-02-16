@@ -1,38 +1,47 @@
 # Scorecard: detect-pack
 
-> Tested: 2026-02-10 | jaan-to v5.0.0 (SHA: 5e22ff19) | Cycle 5
-> Skill version: v3.23.0 (introduced), v5.0.0 (boilerplate extraction + reference extraction)
-> Re-test reason: First run with all 5/5 domains available
+> Tested: 2026-02-16 | jaan-to v7.0.0 (SHA: c49ee8f) | Cycle 12
+> Skill version: v3.23.0 (introduced), v7.0.0 (reference extraction to detect-pack-reference.md)
+> Mode: Light
+> Previous: v5.0.0, Cycle 5, Score 4.4/5.0
 
 ---
 
-## Score: 4.4 / 5.0
+## Score: 4.5 / 5.0
 
 | Dimension | Weight | Score | Notes |
 |-----------|--------|-------|-------|
-| Functionality | 30% | 5/5 | Correctly consolidated all 5 domains. Risk heatmap, cross-domain patterns, gap mapping, top findings table all generated. |
-| Output Quality | 25% | 4/5 | Well-structured with YAML frontmatter, risk distribution analysis, cross-domain patterns. Score formula explained with domain-weighted note. |
-| Context Awareness | 20% | 5/5 | Correctly detected all 5 light-mode inputs. Mapped findings to existing launch gaps (L-01 through L-05) and identified 2 new gaps (L-06, L-07). |
-| Learning Integration | 15% | 3/5 | No LEARN.md existed (first full-coverage run). Pre-execution protocol loaded correctly. |
-| Workflow Efficiency | 10% | 4/5 | Light mode appropriate for consolidation. Auto-approval saved time. Single output file efficient for 5-domain summary. |
+| Functionality | 30% | 5/5 | Consolidated all 5 domains across 2 platforms. Risk heatmap, platform scores, cross-platform findings, domain executive summaries. Previous pack delta table. |
+| Output Quality | 25% | 5/5 | YAML frontmatter, risk heatmap with domain and platform views, cross-platform deduplication (monetization, analytics findings linked). |
+| Context Awareness | 20% | 4/5 | Correctly detected multi-platform mode with hybrid legacy dev. Identified hotspots (Product critical, Writing lowest). Previous pack comparison table included. |
+| Learning Integration | 15% | 4/5 | LEARN.md loaded (existed from C5). detect-pack-reference.md loaded from docs/extending/. Applied lessons: validate frontmatter first, domain scores from source. |
+| Workflow Efficiency | 10% | 4/5 | Light mode efficient for consolidation. Auto-approval saved time. Platform detection handled hybrid mode correctly. |
 
 ---
 
 ## Strengths
 
-1. Cross-domain pattern recognition — identified 3 systemic patterns (scaffold gap, security surface, spec-implementation disconnect) across independent domain findings
-2. Gap mapping table links every finding to existing or new launch gaps
-3. Score calculation transparency — showed both formula-based (9.58) and domain-weighted (5.6) with explanation of why domain-weighted is more meaningful
-4. Risk distribution narrative adds context beyond raw heatmap numbers
-5. Input mode table with per-domain commit SHAs enables staleness tracking
+1. Multi-platform consolidation handled correctly — api + web platform scores calculated independently
+2. Cross-platform finding deduplication — monetization and analytics findings linked across api/web platforms
+3. Previous pack delta table shows score progression across all domains
+4. Hotspot identification — correctly flagged Product (critical) and Writing (lowest score) as priority areas
+5. Platform scores table provides granular per-platform per-domain breakdown
 
 ## Issues
 
-1. Formula-based overall score (9.58) is misleading — too many low/info findings dilute severity. Domain-weighted average used instead.
-2. Light-mode consolidation doesn't include evidence index or unknowns backlog — would be valuable for planning
+1. UX domain frontmatter didn't include standard `findings_summary` breakdown — had to infer severity from content
+2. Dev domain still in legacy single-platform format — no per-platform dev scores available
 
-## v5.0.0 Quality Assessment
+## Regression Assessment (v7.0.0 Token Optimization)
 
-- **Boilerplate extraction**: Pre-execution protocol loaded correctly. No quality degradation detected.
-- **Reference extraction**: `detect-pack-reference.md` loaded correctly from `docs/extending/`.
-- **Conclusion**: v5.0.0 token optimization did NOT degrade detect-pack output quality.
+| Metric | C5 (v5.0.0) | C12 (v7.0.0) | Delta |
+|--------|-------------|--------------|-------|
+| Score | 4.4 | 4.5 | +0.1 |
+| Domains consolidated | 5/5 | 5/5 | Same |
+| Platform handling | Single | Multi (api + web) | Improved |
+| Cross-platform dedup | N/A | Present | New |
+| Reference loading | detect-pack-reference.md | detect-pack-reference.md | Verified |
+| Output structure | Single summary | Single summary (light) | Same |
+
+**Score delta**: +0.1 (within PASS threshold of +/-0.3)
+**Verdict**: **PASS** — v7.0.0 token optimization did NOT degrade detect-pack output quality. Multi-platform handling improved.
