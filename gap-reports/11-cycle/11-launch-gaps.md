@@ -353,11 +353,22 @@ L-25 ──────────────────────→ Faste
 
 ## GitHub Issues
 
-**No new issues created.** All 8 remaining gaps are P2-P3 (no P0 or P1 blockers). The 2 P2 gaps (L-06 Monetization, L-07 i18n) are deferred by user directive. The 6 P3 gaps are minor CI/CD hardening and quality improvements that can be addressed in the next cycle without upstream jaan-to changes.
+2 issues created on jaan-to repo for P3 skill improvement gaps:
+
+| Issue | Title | Gaps Covered |
+|-------|-------|-------------|
+| [#114](https://github.com/parhumm/jaan-to/issues/114) | `devops-infra-scaffold: harden generated CI/CD workflows` | L-20, L-21, L-22 |
+| [#115](https://github.com/parhumm/jaan-to/issues/115) | `dev-verify: detect dependency version mismatches across monorepo packages` | L-23 |
+
+Remaining gaps not filed (no upstream skill change needed):
+- L-06 (Monetization) — deferred by user directive
+- L-07 (i18n) — deferred by user directive
+- L-24 (Web Unit Tests) — run existing `qa-test-generate` skill
+- L-25 (Turbo Remote Cache) — run existing `devops-deploy-activate` Step 9
 
 Previous cycle issues (#83, #84, #85, #78, #82, #81) were all resolved in jaan-to v6.3.0.
 
 - **Created by:** `gaps-critical-issue`
 - **Date:** 2026-02-16
-- **Priorities checked:** P0, P1
-- **Result:** No qualifying gaps
+- **Priorities checked:** P0, P1 (expanded to P3 by user approval)
+- **Issues created:** 2 (#114, #115)
