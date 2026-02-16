@@ -351,10 +351,7 @@ jaan-to/
 
 > Every skill reads this file automatically. Set it up once, benefit everywhere.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip (skills still work, just less tailored) |
-| Full Track | Do this |
+> **Fast Track:** Skip (skills still work, just less tailored) | **Full Track:** Do this
 
 ---
 
@@ -371,19 +368,14 @@ Research your market, competitors, and technical landscape.
 ```
 
 **Questions the skill asks:**
-| Question | Sample Answer (Jaanify) |
-|----------|------------------------|
-| What aspect to focus on? | "Market gaps — specifically AI transparency in task management" |
-| Depth level? | "Comprehensive — include competitor analysis" |
+> **What aspect to focus on?** — "Market gaps — specifically AI transparency in task management"
+> **Depth level?** — "Comprehensive — include competitor analysis"
 
 **Output:** `jaan-to/outputs/research/01-ai-task-management-market.md`
 
 **Chain to next:** The insights inform your PRD writing.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip |
-| Full Track | Do this |
+> **Fast Track:** Skip | **Full Track:** Do this
 
 ---
 
@@ -396,12 +388,10 @@ Generate a complete Product Requirements Document.
 ```
 
 **Questions the skill asks:**
-| Question | Sample Answer (Jaanify) |
-|----------|------------------------|
-| What problem does this solve? | "Users don't trust AI task managers — they're black boxes. 84% want explainability." |
-| Who is the target user? | "Freelancers, knowledge workers, ADHD users — people managing their own work" |
-| Success metrics? | "Time-to-first-task <60s, Day 7 retention >40%, Task completion >70%" |
-| What's out of scope? | "Enterprise SSO, team features, native mobile app (MVP is PWA)" |
+> **What problem does this solve?** — "Users don't trust AI task managers — they're black boxes. 84% want explainability."
+> **Who is the target user?** — "Freelancers, knowledge workers, ADHD users — people managing their own work"
+> **Success metrics?** — "Time-to-first-task <60s, Day 7 retention >40%, Task completion >70%"
+> **What's out of scope?** — "Enterprise SSO, team features, native mobile app (MVP is PWA)"
 
 **Output:** `jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md`
 
@@ -414,10 +404,7 @@ Contains: Executive summary, problem statement, solution overview, success metri
 PRD="jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md"
 ```
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes — this is the foundation** |
-| Full Track | Yes |
+> **Fast Track:** Yes — this is the foundation | **Full Track:** Yes
 
 ---
 
@@ -442,10 +429,7 @@ Generate detailed user stories with Given/When/Then acceptance criteria.
 
 **Chain to next:** Stories provide acceptance criteria for `qa-test-cases`.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip |
-| Full Track | Do this |
+> **Fast Track:** Skip | **Full Track:** Do this
 
 ---
 
@@ -468,10 +452,7 @@ Generate user flow diagrams as GitHub-renderable Mermaid.
 
 **Chain to next:** Flowcharts inform `frontend-design` and `frontend-task-breakdown`.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip |
-| Full Track | Do this |
+> **Fast Track:** Skip | **Full Track:** Do this
 
 ---
 
@@ -484,10 +465,8 @@ Convert the PRD into structured backend development tasks.
 ```
 
 **Questions the skill asks:**
-| Question | Sample Answer (Jaanify) |
-|----------|------------------------|
-| Slicing strategy? | "Vertical — feature-complete slices" |
-| Export format? | "Markdown (default)" |
+> **Slicing strategy?** — "Vertical — feature-complete slices"
+> **Export format?** — "Markdown (default)"
 
 **Output:** `jaan-to/outputs/backend/task-breakdown/01-jaanify-mvp/01-jaanify-mvp.md`
 
@@ -499,10 +478,7 @@ Contains: 28 tasks, 7 vertical slices, critical path (8 tasks), 3 parallel track
 /jaan-to:backend-data-model "User, Task, DailyPlan, DailyPlanSlot, UserFeedback, AuditLog, GuestSession"
 ```
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes** |
-| Full Track | Yes |
+> **Fast Track:** Yes | **Full Track:** Yes
 
 ---
 
@@ -520,10 +496,7 @@ Contains: 68 tasks, 26 components (atoms, molecules, organisms, pages), state ma
 
 **Chain to next:** Tasks feed `frontend-scaffold`.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip (frontend-scaffold can work from PRD alone) |
-| Full Track | Do this |
+> **Fast Track:** Skip (frontend-scaffold can work from PRD alone) | **Full Track:** Do this
 
 ---
 
@@ -545,10 +518,7 @@ Contains: ER diagram (Mermaid), table definitions with constraints/indexes, Pris
 /jaan-to:backend-api-contract "User, Task, DailyPlan, GuestSession"
 ```
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip (scaffold generates a basic schema) |
-| Full Track | Do this |
+> **Fast Track:** Skip (scaffold generates a basic schema) | **Full Track:** Do this
 
 ---
 
@@ -568,10 +538,7 @@ Contains: 21 endpoints across 6 resource groups, JWT auth scheme, request/respon
 
 **Chain to next:** The API contract feeds `backend-scaffold`.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip |
-| Full Track | Do this |
+> **Fast Track:** Skip | **Full Track:** Do this
 
 ---
 
@@ -597,10 +564,7 @@ Generate production-ready backend code with routes, models, and services.
 
 **Chain to next:** Scaffold code goes to `dev-project-assemble` for wiring.
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes** |
-| Full Track | Yes |
+> **Fast Track:** Yes | **Full Track:** Yes
 
 ---
 
@@ -621,10 +585,7 @@ Generate React/Next.js components with TypeScript and API client hooks.
 
 **Chain to next:** Frontend code goes to `dev-project-assemble`.
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes** |
-| Full Track | Yes |
+> **Fast Track:** Yes | **Full Track:** Yes
 
 ---
 
@@ -644,10 +605,7 @@ Jaanify generated 3 screens: Dashboard, Task Input, Onboarding.
 
 **Chain to next:** Design specs feed `dev-project-assemble`.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip |
-| Full Track | Do this |
+> **Fast Track:** Skip | **Full Track:** Do this
 
 ---
 
@@ -675,10 +633,7 @@ Then verify the build:
 /jaan-to:dev-verify
 ```
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes** |
-| Full Track | Yes |
+> **Fast Track:** Yes | **Full Track:** Yes
 
 ---
 
@@ -698,10 +653,7 @@ Contains: 74 BDD test cases in Gherkin format, quality checklist (10-point), tra
 
 **Chain to next:** Test cases feed `qa-test-generate`.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip (qa-test-generate works from code alone) |
-| Full Track | Do this |
+> **Fast Track:** Skip (qa-test-generate works from code alone) | **Full Track:** Do this
 
 ---
 
@@ -725,10 +677,7 @@ Generate runnable Vitest and Playwright test files.
 /jaan-to:qa-test-run
 ```
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes** |
-| Full Track | Yes |
+> **Fast Track:** Yes | **Full Track:** Yes
 
 ---
 
@@ -744,10 +693,7 @@ Execute tests, diagnose failures, and auto-fix simple issues.
 
 **Jaanify result:** 77 tests passing on first run after auto-fixes.
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes** |
-| Full Track | Yes |
+> **Fast Track:** Yes | **Full Track:** Yes
 
 ---
 
@@ -761,10 +707,7 @@ Run security audit and generate fixes with regression tests.
 
 > Reads `detect-dev` findings if available, otherwise scans from scratch. Generates security fixes with test coverage.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip |
-| Full Track | Do this |
+> **Fast Track:** Skip | **Full Track:** Do this
 
 ---
 
@@ -787,10 +730,7 @@ Generate CI/CD workflows, Dockerfiles, and deployment configs.
 - Health monitoring workflow
 - Docker multi-stage build optimized for Node.js + pnpm
 
-| Track | Included |
-|-------|----------|
-| **Fast Track** | **Yes** |
-| Full Track | Yes |
+> **Fast Track:** Yes | **Full Track:** Yes
 
 ---
 
@@ -803,17 +743,12 @@ Activate deployment pipeline with platform provisioning.
 ```
 
 **Questions the skill asks:**
-| Question | Sample Answer (Jaanify) |
-|----------|------------------------|
-| Deployment platform? | "Railway (API) + Vercel (Web)" |
-| Environment? | "Production" |
+> **Deployment platform?** — "Railway (API) + Vercel (Web)"
+> **Environment?** — "Production"
 
 > Configures platform settings, environment variables, and deployment triggers.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip (deploy manually with Docker) |
-| Full Track | Do this |
+> **Fast Track:** Skip (deploy manually with Docker) | **Full Track:** Do this
 
 ---
 
@@ -827,10 +762,7 @@ Generate a changelog with user-impact notes.
 
 > Reads git history and generates a structured changelog.
 
-| Track | Included |
-|-------|----------|
-| Fast Track | Skip |
-| Full Track | Do this |
+> **Fast Track:** Skip | **Full Track:** Do this
 
 ---
 
