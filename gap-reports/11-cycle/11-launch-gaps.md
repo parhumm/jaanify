@@ -353,12 +353,13 @@ L-25 ──────────────────────→ Faste
 
 ## GitHub Issues
 
-2 issues created on jaan-to repo for P3 skill improvement gaps:
+3 issues created on jaan-to repo:
 
 | Issue | Title | Gaps Covered |
 |-------|-------|-------------|
 | [#114](https://github.com/parhumm/jaan-to/issues/114) | `devops-infra-scaffold: harden generated CI/CD workflows` | L-20, L-21, L-22 |
 | [#115](https://github.com/parhumm/jaan-to/issues/115) | `dev-verify: detect dependency version mismatches across monorepo packages` | L-23 |
+| [#116](https://github.com/parhumm/jaan-to/issues/116) | `dev-bug-fix: end-to-end bug diagnosis, fix, and verification workflow` | New skill (ad-hoc gap) |
 
 Remaining gaps not filed (no upstream skill change needed):
 - L-06 (Monetization) — deferred by user directive
@@ -371,4 +372,4 @@ Previous cycle issues (#83, #84, #85, #78, #82, #81) were all resolved in jaan-t
 - **Created by:** `gaps-critical-issue`
 - **Date:** 2026-02-16
 - **Priorities checked:** P0, P1 (expanded to P3 by user approval)
-- **Issues created:** 2 (#114, #115)
+- **Issues created:** 3 (#114, #115, #116)
