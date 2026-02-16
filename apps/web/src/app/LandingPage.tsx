@@ -271,7 +271,7 @@ export default function LandingPage() {
             </FadeIn>
 
             <FadeIn delay={200}>
-              <p className="mt-6 text-lg sm:text-xl leading-relaxed text-(--color-text)/70 max-w-lg sm:max-w-xl lg:max-w-2xl">
+              <p className="mt-6 text-lg sm:text-xl leading-relaxed text-(--color-text)/70">
                 The task manager that shows its work. AI plans your day with
                 transparent reasoning you can see, question, and trust.
               </p>
@@ -403,7 +403,7 @@ export default function LandingPage() {
               Task management with{" "}
               <span className="text-(--color-sage)">transparency</span>
             </h2>
-            <p className="mt-4 text-center text-(--color-text)/60 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto text-lg">
+            <p className="mt-4 text-center text-(--color-text)/60 max-w-2xl xl:max-w-3xl 2xl:max-w-4xl mx-auto text-lg">
               Every decision your AI planner makes is visible, explainable,
               and adjustable.
             </p>
@@ -475,7 +475,7 @@ export default function LandingPage() {
         className="bg-(--color-cream) py-16"
         aria-labelledby="trust-heading"
       >
-        <div className="mx-auto max-w-3xl xl:max-w-5xl px-6 text-center">
+        <div className="mx-auto max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl px-6 text-center">
           <FadeIn>
             <h2 id="trust-heading" className="sr-only">
               Why people trust Jaanify
