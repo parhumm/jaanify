@@ -93,7 +93,7 @@ export function TaskInputForm({
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-2xl mx-auto px-4">
+    <div className="flex flex-col gap-6 max-w-2xl lg:max-w-3xl mx-auto px-4">
       {inputState === "idle" && (
         <SuggestionChips
           suggestions={suggestions}

@@ -15,7 +15,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       </a>
       <main
         id="main-content"
-        className="mx-auto max-w-[640px] px-4 py-6 sm:max-w-3xl lg:max-w-5xl"
+        className="mx-auto max-w-[640px] px-4 py-6 sm:max-w-3xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl"
       >
         {children}
       </main>

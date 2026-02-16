@@ -59,7 +59,7 @@ export function OnboardingContent() {
   return (
     <OnboardingLayout currentStep={step - 1} totalSteps={4}>
       <OnboardingStep step={1} isActive={step === 1}>
-        <div className="text-center space-y-6 w-full max-w-sm">
+        <div className="text-center space-y-6 w-full max-w-sm sm:max-w-md lg:max-w-lg">
           <h1 className="text-3xl font-bold text-(--color-text)">
             What&apos;s on your mind?
           </h1>
@@ -92,7 +92,7 @@ export function OnboardingContent() {
       </OnboardingStep>
 
       <OnboardingStep step={2} isActive={step === 2}>
-        <div className="space-y-6 w-full max-w-sm">
+        <div className="space-y-6 w-full max-w-sm sm:max-w-md lg:max-w-lg">
           <div className="text-center">
             <h2 className="text-xl font-bold text-(--color-text) mb-2">
               Here&apos;s what we found
@@ -124,7 +124,7 @@ export function OnboardingContent() {
       </OnboardingStep>
 
       <OnboardingStep step={3} isActive={step === 3}>
-        <div className="space-y-6 w-full max-w-sm">
+        <div className="space-y-6 w-full max-w-sm sm:max-w-md lg:max-w-lg">
           <div className="text-center">
             <h2 className="text-xl font-bold text-(--color-text) mb-2">
               Your day, planned
@@ -169,7 +169,7 @@ export function OnboardingContent() {
       </OnboardingStep>
 
       <OnboardingStep step={4} isActive={step === 4}>
-        <div className="space-y-6 w-full max-w-sm text-center">
+        <div className="space-y-6 w-full max-w-sm sm:max-w-md lg:max-w-lg text-center">
           <h2 className="text-xl font-bold text-(--color-text)">
             Save your progress?
           </h2>

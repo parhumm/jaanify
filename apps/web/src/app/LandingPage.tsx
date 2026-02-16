@@ -220,7 +220,7 @@ export default function LandingPage() {
         className="sticky top-0 z-40 backdrop-blur-md bg-(--color-bg)/80 border-b border-(--color-sage-light)/20"
         aria-label="Main navigation"
       >
-        <div className="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+        <div className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-6 py-4 flex items-center justify-between">
           <span className="text-xl font-bold tracking-tight text-(--color-sage-dark)">
             Jaanify
           </span>
@@ -251,7 +251,7 @@ export default function LandingPage() {
           <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-(--color-terracotta)/6" />
         </div>
 
-        <div className="relative mx-auto max-w-5xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
+        <div className="relative mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
           <div className="max-w-3xl">
             <FadeIn>
               <p className="text-sm font-medium tracking-widest uppercase text-(--color-terracotta) mb-4">
@@ -394,7 +394,7 @@ export default function LandingPage() {
         className="bg-(--color-cream) py-20 sm:py-28"
         aria-labelledby="features-heading"
       >
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-6">
           <FadeIn>
             <h2
               id="features-heading"
@@ -439,7 +439,7 @@ export default function LandingPage() {
         className="py-20 sm:py-28"
         aria-labelledby="how-heading"
       >
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-6">
           <FadeIn>
             <h2
               id="how-heading"
@@ -475,7 +475,7 @@ export default function LandingPage() {
         className="bg-(--color-cream) py-16"
         aria-labelledby="trust-heading"
       >
-        <div className="mx-auto max-w-3xl px-6 text-center">
+        <div className="mx-auto max-w-3xl xl:max-w-5xl px-6 text-center">
           <FadeIn>
             <h2 id="trust-heading" className="sr-only">
               Why people trust Jaanify
@@ -577,7 +577,7 @@ export default function LandingPage() {
 
       {/* ── Footer ──────────────────────────────── */}
       <footer className="border-t border-(--color-sage-light)/20 py-8">
-        <div className="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-(--color-text)/40">
+        <div className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-(--color-text)/40">
           <p>&copy; 2026 Jaanify. All rights reserved.</p>
           <div className="flex gap-6">
             <a
