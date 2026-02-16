@@ -324,3 +324,23 @@ No gaps were resolved or discovered in Cycle 12 — this was intentional. The en
 ---
 
 > **Bottom line:** Cycle 12 proved that jaan-to v7.0.0's aggressive token optimization (net -1,673 lines across 22 skills) did not degrade output quality. All 9 regression-tested skills passed with an average score improvement of +0.11. The 8 remaining product gaps (P2:2, P3:6) are unchanged from Cycle 11 — no new issues introduced, no existing issues resolved. The project remains launch-ready for beta, and v7.0.0 is confirmed safe for production use. The co-evolution loop continues: 12 cycles, 43 skills cataloged, 42 tested, average 4.55/5.
+
+---
+
+## GitHub Issues
+
+No new issues created in Cycle 12. All existing gaps already have open issues from previous cycles:
+
+| Gap ID | Title | Existing Issue |
+|--------|-------|---------------|
+| L-06 | Monetization (Stripe) | [#79](https://github.com/parhumm/jaan-to/issues/79) (open) |
+| L-07 | i18n Infrastructure | [#80](https://github.com/parhumm/jaan-to/issues/80) (open) |
+| L-20, L-21, L-22 | CI/CD Hardening | [#114](https://github.com/parhumm/jaan-to/issues/114) (open) |
+| L-23 | Dependency Mismatches | [#115](https://github.com/parhumm/jaan-to/issues/115) (open) |
+| L-24 | Web Unit Tests | Addressable with existing `qa-test-generate` |
+| L-25 | Turbo Remote Cache | Addressable with existing `devops-deploy-activate` |
+
+- **Created by:** `gaps-critical-issue`
+- **Date:** 2026-02-16
+- **Priorities checked:** P0, P1 (none found)
+- **Issues created:** 0 (all gaps already tracked)
