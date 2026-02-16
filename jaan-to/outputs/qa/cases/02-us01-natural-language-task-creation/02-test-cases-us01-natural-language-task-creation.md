@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-Production-ready BDD/Gherkin test cases for US-01 Natural Language Task Creation covering 5 acceptance criteria with 52 test scenarios. Includes 16 positive tests (31%), 21 negative tests (40%), and 15 edge case tests (29%) across 5 priority categories (empty/null, boundary, error, concurrent, state transition). All tests use concrete test data values and include traceability tags.
+Production-ready BDD/Gherkin test cases for US-01 Natural Language Task Creation covering 5 acceptance criteria with 51 test scenarios. Includes 12 positive tests (24%), 20 negative tests (39%), and 19 edge case tests (37%) across 5 priority categories (empty/null, boundary, error, concurrent, state transition). All tests use concrete test data values and include traceability tags.
 
 ---
 
@@ -15,9 +15,9 @@ Production-ready BDD/Gherkin test cases for US-01 Natural Language Task Creation
 | Field | Value |
 |-------|-------|
 | Acceptance Criteria | 5 |
-| Total Test Cases | 52 |
-| Test Breakdown | Positive: 16 (31%), Negative: 21 (40%), Edge: 15 (29%) |
-| Edge Case Categories | Empty/Null: 5, Boundary: 4, Error: 3, Concurrent: 2, State: 1 |
+| Total Test Cases | 51 |
+| Test Breakdown | Positive: 12 (24%), Negative: 20 (39%), Edge: 19 (37%) |
+| Edge Case Categories | Empty/Null: 5, Boundary: 8, Error: 3, Concurrent: 2, State: 1 |
 | Format | BDD/Gherkin |
 | Generated | 2026-02-16 |
 | Skill | qa-test-cases |
@@ -29,11 +29,11 @@ Production-ready BDD/Gherkin test cases for US-01 Natural Language Task Creation
 
 | # | Acceptance Criterion | Test Count | Coverage |
 |---|---------------------|------------|----------|
-| AC1 | Successful Natural Language Parsing | 12 | 100% |
-| AC2 | Ambiguous Input with No Clear Deadline | 10 | 100% |
-| AC3 | Input with Multiple Tasks Detected | 10 | 100% |
-| AC4 | AI Parsing Service Unavailable | 10 | 100% |
-| AC5 | Empty or Whitespace-Only Input | 10 | 100% |
+| AC1 | Successful Natural Language Parsing | 22 | 100% |
+| AC2 | Ambiguous Input with No Clear Deadline | 6 | 100% |
+| AC3 | Input with Multiple Tasks Detected | 6 | 100% |
+| AC4 | AI Parsing Service Unavailable | 11 | 100% |
+| AC5 | Empty or Whitespace-Only Input | 6 | 100% |
 
 ---
 
@@ -590,11 +590,11 @@ TC-US01-001;NL Parse with deadline;App running, AI available;2;Observe fields;-;
 
 | Requirement | Acceptance Criterion | Test Cases | Count |
 |-------------|---------------------|------------|-------|
-| REQ-US01-AC1 | Successful NL Parsing | TC-US01-001 through TC-US01-012, plus boundary and edge cases | 28 |
-| REQ-US01-AC2 | Ambiguous Input / No Deadline | TC-US01-013 through TC-US01-017, plus negative | 10 |
-| REQ-US01-AC3 | Multiple Tasks Detected | TC-US01-018 through TC-US01-022, plus edge | 10 |
-| REQ-US01-AC4 | AI Service Unavailable | TC-US01-023 through TC-US01-030, plus boundary | 10 |
-| REQ-US01-AC5 | Empty/Whitespace Input | TC-US01-031 through TC-US01-035 | 10 |
+| REQ-US01-AC1 | Successful NL Parsing | 3 positive, 8 negative, 5 boundary, 6 edge | 22 |
+| REQ-US01-AC2 | Ambiguous Input / No Deadline | 3 positive, 3 negative | 6 |
+| REQ-US01-AC3 | Multiple Tasks Detected | 3 positive, 2 negative, 1 edge | 6 |
+| REQ-US01-AC4 | AI Service Unavailable | 2 positive, 4 negative, 3 boundary, 2 edge | 11 |
+| REQ-US01-AC5 | Empty/Whitespace Input | 1 positive, 3 negative, 2 edge | 6 |
 
 ---
 
@@ -665,7 +665,7 @@ Includes:
 - All scenarios have explicit preconditions
 - Expected results are measurable (thresholds, exact text)
 - Traceability tags present (@REQ-US01-AC1 through @REQ-US01-AC5)
-- Coverage distribution: 31% positive, 40% negative, 29% edge
+- Coverage distribution: 24% positive, 39% negative, 37% edge
 - All 5 edge case categories represented
 
 ---
@@ -690,13 +690,13 @@ Test case generation follows ISTQB standards and IEEE 829 specifications:
 **Industry Standard**: 70-80% code coverage
 
 **Our Coverage** (estimated based on test count and AC):
-- **Positive scenarios**: 31% (target: 30%)
-- **Negative scenarios**: 40% (target: 40%)
-- **Edge cases**: 29% (target: 30%)
+- **Positive scenarios**: 24% (target: 30%)
+- **Negative scenarios**: 39% (target: 40%)
+- **Edge cases**: 37% (target: 30%)
 
 **Edge Case Distribution**:
 1. Empty/Null States: 5 tests (32% of bugs)
-2. Boundary Values: 4 tests (28% of bugs)
+2. Boundary Values: 8 tests (28% of bugs)
 3. Error Conditions: 3 tests (22% of bugs)
 4. Concurrent Operations: 2 tests (12% of bugs)
 5. State Transitions: 1 test (6% of bugs)
