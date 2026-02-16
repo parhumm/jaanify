@@ -8,6 +8,8 @@ Jaanify is an AI-powered task manager that shows you *why* it makes each recomme
 
 Most AI task managers operate as black boxes — they reorder your priorities without explanation. Jaanify takes a different approach with **3-Tier Reasoning Cards**: progressive disclosure that lets you glance at a recommendation, explore the factors behind it, or audit the full reasoning chain.
 
+**Live demo:** [jaanify.vercel.app](https://jaanify.vercel.app/)
+
 **Built for:** Neurodivergent individuals (especially ADHD), freelancers, and solopreneurs who need transparency and trust from their tools.
 
 ### Core Features (MVP)
