@@ -114,7 +114,7 @@ GAPS TO INCLUDE ({total} gaps):
 Build a description from the filtered gaps:
 
 ```
-Jaanify launch readiness: {N} gaps at {priorities} priority blocking launch.
+YOUR_PROJECT_NAME launch readiness: {N} gaps at {priorities} priority blocking launch.
 
 Gaps:
 - L-01: {title} — {description}. Blocks: {blocks}

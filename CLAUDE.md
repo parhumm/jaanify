@@ -1,13 +1,13 @@
-# Jaanify — Project Rules
+# YOUR_PROJECT_NAME — Project Rules
 
 ## What Is This
-Jaanify ("To give soul to your tasks") is a Smart AI Task Manager being built
+YOUR_PROJECT_NAME is YOUR_PROJECT_DESCRIPTION being built
 EXCLUSIVELY using the jaan-to Claude Code plugin. This project serves dual purpose:
 1. Build a real, launchable product
 2. Stress-test jaan-to plugin through real production use
 
 ## Single Source of Truth
-- Product name is **Jaanify** — use this name everywhere, no aliases or alternatives
+- Product name is **YOUR_PROJECT_NAME** — use this name everywhere, no aliases or alternatives
 - This CLAUDE.md is the authoritative reference for project rules
 - jaan-to GitHub repo is the authoritative source for plugin state (not local folders)
 - Scorecards are the authoritative record of skill quality
@@ -15,7 +15,7 @@ EXCLUSIVELY using the jaan-to Claude Code plugin. This project serves dual purpo
 - When in doubt, check this file first — it overrides assumptions from previous sessions
 
 ## Repo
-- Public repo: https://github.com/parhumm/jaanify.git
+- Public repo: YOUR_REPO_URL
 - jaan-to submodule: `vendor/jaan-to/` → https://github.com/parhumm/jaan-to/ (main branch)
 - Always pull latest before scanning: `git submodule update --remote --merge vendor/jaan-to`
 
@@ -28,8 +28,8 @@ EXCLUSIVELY using the jaan-to Claude Code plugin. This project serves dual purpo
 ## Co-Evolution Loop
 This project follows an iterative co-evolution cycle with jaan-to:
 1. SCAN — Check https://github.com/parhumm/jaan-to/ for new/updated skills, agents, hooks
-2. REVIEW & TEST — Test new features with Jaanify context, score on scorecard
-3. BUILD — Advance Jaanify using all available jaan-to skills
+2. REVIEW & TEST — Test new features with YOUR_PROJECT_NAME context, score on scorecard
+3. BUILD — Advance YOUR_PROJECT_NAME using all available jaan-to skills
 4. GAP REPORT — Document missing skills, request top priorities from user
 5. User adds skills → loop back to step 1
 
@@ -51,6 +51,6 @@ This project follows an iterative co-evolution cycle with jaan-to:
 
 ## Folder Structure
 - vendor/jaan-to/ — Git submodule (read-only, always pull latest main before scanning)
-- jaan-to/ — Plugin workspace (outputs, templates, learn, context, docs)
+- jaan-to/ — Plugin workspace (created by /jaan-init)
 - scorecards/ — Per-skill scorecards (living documents, updated each cycle)
 - gap-reports/ — Per-cycle subfolders (NN-cycle/NN-{scan|gaps}.md)

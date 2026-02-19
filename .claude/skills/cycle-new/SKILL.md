@@ -2,9 +2,9 @@
 name: cycle-new
 description: |
   Autonomous Co-Evolution Loop executor — SCAN jaan-to for new skills,
-  REVIEW & TEST each against Jaanify, BUILD product using exact jaan-to skills,
-  GAP REPORT on what's missing. Goal: launch Jaanify to market and revenue.
-  Auto-triggers on: new cycle, next cycle, run cycle, advance jaanify, launch cycle
+  REVIEW & TEST each against YOUR_PROJECT_NAME, BUILD product using exact jaan-to skills,
+  GAP REPORT on what's missing. Goal: launch YOUR_PROJECT_NAME to market and revenue.
+  Auto-triggers on: new cycle, next cycle, run cycle, advance project, launch cycle
 allowed-tools: >-
   Read, Glob, Grep,
   Bash(git *), Bash(gh *),
@@ -19,7 +19,7 @@ user-invocable: true
 # cycle-new
 
 > Co-Evolution Loop executor: SCAN → REVIEW & TEST → BUILD → GAP REPORT.
-> Goal: Launch Jaanify to market and generate revenue using only jaan-to skills.
+> Goal: Launch YOUR_PROJECT_NAME to market and generate revenue using only jaan-to skills.
 
 ## Context Files
 
@@ -27,7 +27,7 @@ Read these before execution:
 - `.claude/skills/cycle-new/LEARN.md` — Past cycle lessons (loaded in Pre-Execution)
 - `.claude/skills/cycle-new/template.md` — Cycle plan output template
 - `$JAAN_CONTEXT_DIR/config.md` — Project configuration (cycle number, jaan-to version)
-- `$JAAN_CONTEXT_DIR/tech.md` — Tech stack (Fastify v5, React 19, Next.js 15, PostgreSQL 16)
+- `$JAAN_CONTEXT_DIR/tech.md` — Tech stack
 - `CLAUDE.md` — Project rules (**AUTHORITATIVE** — overrides all assumptions)
 
 ## Input
@@ -138,7 +138,7 @@ Read these files in parallel:
 Extract from PRD:
 - Total features defined (MVP scope)
 - Success metrics (what "launched" means)
-- Target users (neurodivergent individuals, freelancers, solopreneurs)
+- Target users
 
 Extract from latest launch-gaps:
 - Gap inventory with P0-P3 priorities
@@ -272,7 +272,7 @@ Build the complete gap-to-skill mapping table.
 
 # CO-EVOLUTION STEP 2: REVIEW & TEST
 
-> "Test new features with Jaanify context, score on scorecard"
+> "Test new features with YOUR_PROJECT_NAME context, score on scorecard"
 > — CLAUDE.md Co-Evolution Loop, Step 2
 
 ---
@@ -287,45 +287,23 @@ The execution queue is an ordered list of exact jaan-to skill invocations. Build
 
 For each P0 gap, add the mapped jaan-to skills from Step 1.6.
 
-Current P0 gaps and their skill mappings:
-
-| Gap | jaan-to Skill Invocations |
-|-----|--------------------------|
-| L-01 Service Implementation | 1. `/jaan-to:learn-add backend-scaffold "generate real business logic in service stubs instead of TODO comments; use Prisma queries from data model; implement auth flows with jose library"` |
-| | 2. `/jaan-to:pm-research-about "best practices for generating Fastify v5 service implementations from OpenAPI 3.1 + Prisma v6 schemas"` |
-| | 3. `/jaan-to:backend-scaffold` (re-run with updated learn feedback) |
-| L-02 Integration / Wiring | 1. `/jaan-to:learn-add frontend-scaffold "output individual component files instead of single bundled .tsx; generate app entry point and provider wiring"` |
-| | 2. `/jaan-to:pm-research-about "how to wire Next.js 15 App Router scaffold components into runnable project with path aliases and providers"` |
-| | 3. `/jaan-to:frontend-scaffold` (re-run with updated learn feedback) |
-| L-03 Test Stub Generation | 1. `/jaan-to:learn-add backend-scaffold "generate vitest test stubs for each route handler and service function alongside scaffold code"` |
-| | 2. `/jaan-to:learn-add frontend-scaffold "generate vitest + testing-library test stubs for each component alongside scaffold code"` |
-| | 3. `/jaan-to:qa-test-cases` (re-run if stale — check if BDD scenarios cover new scaffolded code) |
+Use the gap-to-skill mapping from Step 1.6 to populate the P0 skill queue.
 
 **Source 2 — P1 Gap Resolution**
 
-| Gap | jaan-to Skill Invocations |
-|-----|--------------------------|
-| L-04 Security Hardening | 1. `/jaan-to:learn-add backend-scaffold "replace decodeJwt with jose library for JWT verification; add @fastify/rate-limit middleware; use httpOnly cookies instead of localStorage for token storage; add CSRF protection"` |
-| | 2. `/jaan-to:detect-dev` (re-run after any code changes to verify fixes) |
-| L-05 CI/CD Scaffold | 1. `/jaan-to:pm-research-about "GitHub Actions CI/CD pipeline for Fastify v5 + Next.js 15 monorepo with Prisma migrations, Docker, PostgreSQL 16"` |
+Use the gap-to-skill mapping from Step 1.6 to populate the P1 skill queue.
 
 **Source 3 — New/Untested Skills**
 
-Skills from the catalog with NO scorecard (must test against Jaanify):
-- `/jaan-to:detect-design` — fills detect domain 2/5
-- `/jaan-to:detect-writing` — fills detect domain 3/5
-- `/jaan-to:detect-product` — fills detect domain 4/5
-- `/jaan-to:detect-ux` — fills detect domain 5/5
-- `/jaan-to:ux-flowchart-generate` — user flow + system flow Mermaid diagrams
-- `/jaan-to:docs-create` — project documentation generation
-- `/jaan-to:docs-update` — documentation staleness audit
+Skills from the catalog with NO scorecard (must test against YOUR_PROJECT_NAME).
+Glob `vendor/jaan-to/skills/*/SKILL.md` and cross-reference against `scorecards/*.md` to find untested skills.
 
-Only include skills relevant to Jaanify's current state and the bottleneck classification.
+Only include skills relevant to YOUR_PROJECT_NAME's current state and the bottleneck classification.
 
 **Source 4 — Market / GTM Skills (Revenue Focus)**
 
 The goal is market launch and revenue. Include GTM skills:
-- `/jaan-to:pm-research-about "Jaanify go-to-market strategy for AI task manager targeting neurodivergent users and freelancers"` (if not done previously)
+- `/jaan-to:pm-research-about "YOUR_PROJECT_NAME go-to-market strategy"` (if not done previously)
 - `/jaan-to:frontend-design` (landing page / marketing screens — if needed)
 - `/jaan-to:ux-microcopy-write` (if new screens added this cycle)
 - `/jaan-to:data-gtm-datalayer` (if new tracking events needed)
@@ -335,7 +313,7 @@ The goal is market launch and revenue. Include GTM skills:
 For each gap where an existing skill is insufficient, queue:
 - `/jaan-to:learn-add {skill-name} "{specific improvement request}"`
 
-These feed the co-evolution loop: jaan-to learns from Jaanify's needs.
+These feed the co-evolution loop: jaan-to learns from YOUR_PROJECT_NAME's needs.
 
 **Source 6 — Always-Run Closing Skills**
 
@@ -427,7 +405,7 @@ Child jaan-to skills retain their own HARD STOPs — approve those individually 
 
 # CO-EVOLUTION STEP 3: BUILD
 
-> "Advance Jaanify using all available jaan-to skills"
+> "Advance YOUR_PROJECT_NAME using all available jaan-to skills"
 > — CLAUDE.md Co-Evolution Loop, Step 3
 
 ---
@@ -559,7 +537,7 @@ Skill(learn-add, args: "{skill-name} \"{specific improvement request based on th
 
 Commit each: `chore(cycle-{N}): learn-add feedback for {skill-name}`
 
-This feeds the co-evolution loop — jaan-to improves from Jaanify's real-world usage.
+This feeds the co-evolution loop — jaan-to improves from YOUR_PROJECT_NAME's real-world usage.
 
 ---
 
@@ -694,7 +672,7 @@ Every cycle execution MUST satisfy all of these (from CLAUDE.md "Always Do" and 
 - [ ] SCAN: Submodule pulled to latest, version delta detected
 - [ ] SCAN: Scan report written to `gap-reports/{NN}-cycle/{NN}-scan.md`
 - [ ] SCAN: jaan-to version (tag + SHA) recorded in scan, every scorecard, and gap report
-- [ ] REVIEW & TEST: Each new/relevant skill tested against Jaanify context
+- [ ] REVIEW & TEST: Each new/relevant skill tested against YOUR_PROJECT_NAME context
 - [ ] REVIEW & TEST: Per-skill scorecard written for every skill invoked
 - [ ] BUILD: All queued skills executed — ONLY jaan-to plugin skills, no shortcuts
 - [ ] BUILD: Each task committed individually (never batched)

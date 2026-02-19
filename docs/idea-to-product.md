@@ -13,7 +13,7 @@ This guide shows the **exact skill sequence** to turn an idea into a deployed, t
 | **Fast Track** | 8 skills | Working code, tests, CI/CD — ship in a day |
 | **Full Track** | 20 skills | Research, PRD, stories, designs, BDD tests, security audit, analytics, deployment |
 
-**Real example:** This guide uses [Jaanify](https://github.com/parhumm/jaanify) (AI Task Manager) as the running example — a product built entirely with jaan-to across 11 development cycles.
+**Real example:** This guide uses YOUR_PROJECT_NAME (YOUR_PROJECT_DESCRIPTION) as the running example. Replace all `YOUR_*` placeholders with your own project details.
 
 ---
 
@@ -328,7 +328,7 @@ jaan-to/
 └── templates/              # Custom templates (optional)
 ```
 
-**Your one manual step** — Edit `jaan-to/context/tech.md` with your stack. Example from Jaanify:
+**Your one manual step** — Edit `jaan-to/context/tech.md` with your stack. Example:
 
 ```markdown
 ## Current Stack
@@ -364,11 +364,11 @@ This phase turns your idea into structured requirements.
 Research your market, competitors, and technical landscape.
 
 ```bash
-/jaan-to:pm-research-about "AI task management apps 2026 — competitors, pain points, market size"
+/jaan-to:pm-research-about "YOUR_MARKET_TOPIC — competitors, pain points, market size"
 ```
 
 **Questions the skill asks:**
-> **What aspect to focus on?** — "Market gaps — specifically AI transparency in task management"
+> **What aspect to focus on?** — "Market gaps — specifically YOUR_FOCUS_AREA"
 > **Depth level?** — "Comprehensive — include competitor analysis"
 
 **Output:** `jaan-to/outputs/research/01-ai-task-management-market.md`
@@ -384,16 +384,16 @@ Research your market, competitors, and technical landscape.
 Generate a complete Product Requirements Document.
 
 ```bash
-/jaan-to:pm-prd-write "AI Task Manager with natural language input, transparent AI reasoning cards, and 60-second onboarding"
+/jaan-to:pm-prd-write "YOUR_PRODUCT_PITCH"
 ```
 
 **Questions the skill asks:**
-> **What problem does this solve?** — "Users don't trust AI task managers — they're black boxes. 84% want explainability."
-> **Who is the target user?** — "Freelancers, knowledge workers, ADHD users — people managing their own work"
-> **Success metrics?** — "Time-to-first-task <60s, Day 7 retention >40%, Task completion >70%"
-> **What's out of scope?** — "Enterprise SSO, team features, native mobile app (MVP is PWA)"
+> **What problem does this solve?** — "Describe the core problem your product addresses"
+> **Who is the target user?** — "Define your primary user segments"
+> **Success metrics?** — "List measurable success criteria for your MVP"
+> **What's out of scope?** — "Define what's NOT in scope for the first version"
 
-**Output:** `jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md`
+**Output:** `jaan-to/outputs/pm/prd/01-your-project/01-your-project.md`
 
 Contains: Executive summary, problem statement, solution overview, success metrics, scope, user stories, tech constraints, rollback plan.
 
@@ -401,7 +401,7 @@ Contains: Executive summary, problem statement, solution overview, success metri
 
 ```bash
 # The PRD path becomes input for everything in Phase 2:
-PRD="jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md"
+PRD="jaan-to/outputs/pm/prd/01-your-project/01-your-project.md"
 ```
 
 > **Fast Track:** Yes — this is the foundation | **Full Track:** Yes
@@ -413,7 +413,7 @@ PRD="jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md"
 Generate detailed user stories with Given/When/Then acceptance criteria.
 
 ```bash
-/jaan-to:pm-story-write "jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md"
+/jaan-to:pm-story-write "jaan-to/outputs/pm/prd/01-your-project/01-your-project.md"
 ```
 
 > The skill reads the PRD and auto-extracts stories. `pm-prd-write` even offers to invoke this automatically at the end.
@@ -442,10 +442,10 @@ This phase breaks the PRD into technical specifications. Skills in this phase ca
 Generate user flow diagrams as GitHub-renderable Mermaid.
 
 ```bash
-/jaan-to:ux-flowchart-generate prd "jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md" userflow
+/jaan-to:ux-flowchart-generate prd "jaan-to/outputs/pm/prd/01-your-project/01-your-project.md" userflow
 ```
 
-**Output:** `jaan-to/outputs/ux/diagrams/01-jaanify-mvp-userflows/`
+**Output:** `jaan-to/outputs/ux/diagrams/01-your-project-userflows/`
 - Mermaid flowcharts with evidence maps
 - Confidence scoring on every node
 - Unknowns list for gaps
@@ -461,14 +461,14 @@ Generate user flow diagrams as GitHub-renderable Mermaid.
 Convert the PRD into structured backend development tasks.
 
 ```bash
-/jaan-to:backend-task-breakdown "jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md"
+/jaan-to:backend-task-breakdown "jaan-to/outputs/pm/prd/01-your-project/01-your-project.md"
 ```
 
 **Questions the skill asks:**
 > **Slicing strategy?** — "Vertical — feature-complete slices"
 > **Export format?** — "Markdown (default)"
 
-**Output:** `jaan-to/outputs/backend/task-breakdown/01-jaanify-mvp/01-jaanify-mvp.md`
+**Output:** `jaan-to/outputs/backend/task-breakdown/01-your-project/01-your-project.md`
 
 Contains: 28 tasks, 7 vertical slices, critical path (8 tasks), 3 parallel tracks, size estimates, dependency graph. Also available as Jira CSV, Linear markdown, or JSON.
 
@@ -487,10 +487,10 @@ Contains: 28 tasks, 7 vertical slices, critical path (8 tasks), 3 parallel track
 Convert the PRD into frontend component tasks with atomic design levels.
 
 ```bash
-/jaan-to:frontend-task-breakdown "jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md"
+/jaan-to:frontend-task-breakdown "jaan-to/outputs/pm/prd/01-your-project/01-your-project.md"
 ```
 
-**Output:** `jaan-to/outputs/frontend/task-breakdown/01-jaanify-mvp-frontend/01-jaanify-mvp-frontend.md`
+**Output:** `jaan-to/outputs/frontend/task-breakdown/01-your-project-frontend/01-your-project-frontend.md`
 
 Contains: 68 tasks, 26 components (atoms, molecules, organisms, pages), state machines, dependency graph.
 
@@ -508,7 +508,7 @@ Generate complete database schema with migration notes.
 /jaan-to:backend-data-model "User, Task, DailyPlan, DailyPlanSlot, UserFeedback, AuditLog, GuestSession"
 ```
 
-**Output:** `jaan-to/outputs/backend/data-model/02-jaanify-data-model/02-jaanify-data-model.md`
+**Output:** `jaan-to/outputs/backend/data-model/01-your-project-data-model/01-your-project-data-model.md`
 
 Contains: ER diagram (Mermaid), table definitions with constraints/indexes, Prisma schema, migration notes, soft delete strategy, GDPR retention rules.
 
@@ -531,8 +531,8 @@ Generate OpenAPI 3.1 specification with endpoint documentation.
 ```
 
 **Output:**
-- `jaan-to/outputs/backend/api-contract/01-jaanify-mvp/api.yaml` — Full OpenAPI spec
-- `jaan-to/outputs/backend/api-contract/01-jaanify-mvp/01-jaanify-mvp.md` — Quick-start guide
+- `jaan-to/outputs/backend/api-contract/01-your-project/api.yaml` — Full OpenAPI spec
+- `jaan-to/outputs/backend/api-contract/01-your-project/01-your-project.md` — Quick-start guide
 
 Contains: 21 endpoints across 6 resource groups, JWT auth scheme, request/response schemas, RFC 9457 error format, pagination, cURL examples.
 
@@ -551,16 +551,16 @@ This phase generates actual running code.
 Generate production-ready backend code with routes, models, and services.
 
 ```bash
-/jaan-to:backend-scaffold "jaan-to/outputs/backend/task-breakdown/01-jaanify-mvp/01-jaanify-mvp.md"
+/jaan-to:backend-scaffold "jaan-to/outputs/backend/task-breakdown/01-your-project/01-your-project.md"
 ```
 
-**Output:** `jaan-to/outputs/backend/scaffold/01-jaanify-mvp/`
-- `01-jaanify-mvp-prisma.prisma` — Database schema
-- `01-jaanify-mvp-routes.ts` — API route handlers
-- `01-jaanify-mvp-schemas.ts` — Zod validation schemas
-- `01-jaanify-mvp-services.ts` — Service layer (with TODO stubs)
-- `01-jaanify-mvp-middleware.ts` — Auth, error handling, logging
-- `01-jaanify-mvp-config.ts` — Environment configuration
+**Output:** `jaan-to/outputs/backend/scaffold/01-your-project/`
+- `01-your-project-prisma.prisma` — Database schema
+- `01-your-project-routes.ts` — API route handlers
+- `01-your-project-schemas.ts` — Zod validation schemas
+- `01-your-project-services.ts` — Service layer (with TODO stubs)
+- `01-your-project-middleware.ts` — Auth, error handling, logging
+- `01-your-project-config.ts` — Environment configuration
 
 **Chain to next:** Scaffold code goes to `dev-project-assemble` for wiring.
 
@@ -573,15 +573,15 @@ Generate production-ready backend code with routes, models, and services.
 Generate React/Next.js components with TypeScript and API client hooks.
 
 ```bash
-/jaan-to:frontend-scaffold "jaan-to/outputs/frontend/task-breakdown/01-jaanify-mvp-frontend/01-jaanify-mvp-frontend.md"
+/jaan-to:frontend-scaffold "jaan-to/outputs/frontend/task-breakdown/01-your-project-frontend/01-your-project-frontend.md"
 ```
 
-**Output:** `jaan-to/outputs/frontend/scaffold/01-jaanify-mvp/`
-- `01-jaanify-mvp-types.ts` — TypeScript interfaces
-- `01-jaanify-mvp-hooks.ts` — TanStack Query hooks
-- `01-jaanify-mvp-components.tsx` — React components
-- `01-jaanify-mvp-pages.tsx` — Next.js App Router pages
-- `01-jaanify-mvp-config.ts` — API client configuration
+**Output:** `jaan-to/outputs/frontend/scaffold/01-your-project/`
+- `01-your-project-types.ts` — TypeScript interfaces
+- `01-your-project-hooks.ts` — TanStack Query hooks
+- `01-your-project-components.tsx` — React components
+- `01-your-project-pages.tsx` — Next.js App Router pages
+- `01-your-project-config.ts` — API client configuration
 
 **Chain to next:** Frontend code goes to `dev-project-assemble`.
 
@@ -594,14 +594,14 @@ Generate React/Next.js components with TypeScript and API client hooks.
 Create interactive, production-grade UI component previews.
 
 ```bash
-/jaan-to:frontend-design "Jaanify dashboard with task list, reasoning cards, and daily plan sidebar"
+/jaan-to:frontend-design "YOUR_PROJECT_NAME dashboard with YOUR_SCREEN_DESCRIPTION"
 ```
 
 **Output:** For each screen:
-- `01-jaanify-dashboard-preview.html` — Working HTML preview you can open in a browser
-- `01-jaanify-dashboard.md` — Implementation guide with component specs
+- `01-your-project-dashboard-preview.html` — Working HTML preview you can open in a browser
+- `01-your-project-dashboard.md` — Implementation guide with component specs
 
-Jaanify generated 3 screens: Dashboard, Task Input, Onboarding.
+You can generate multiple screens per invocation (e.g., Dashboard, Detail View, Onboarding).
 
 **Chain to next:** Design specs feed `dev-project-assemble`.
 
@@ -619,7 +619,7 @@ Wire all scaffold outputs into a runnable project structure.
 
 > Reads all scaffold outputs automatically. Generates entry points, package.json configs, tsconfig, and wiring code.
 
-**Output:** `jaan-to/outputs/dev/project-assemble/01-jaanify-mvp/01-jaanify-mvp.md`
+**Output:** `jaan-to/outputs/dev/project-assemble/01-your-project/01-your-project.md`
 
 Contains: Project structure plan, entry point wiring, dependency list, build commands.
 
@@ -644,10 +644,10 @@ Then verify the build:
 Generate BDD/Gherkin test scenarios from the PRD's acceptance criteria.
 
 ```bash
-/jaan-to:qa-test-cases "jaan-to/outputs/pm/prd/01-jaanify-mvp/01-jaanify-mvp.md"
+/jaan-to:qa-test-cases "jaan-to/outputs/pm/prd/01-your-project/01-your-project.md"
 ```
 
-**Output:** `jaan-to/outputs/qa/cases/01-jaanify-core-flows/01-jaanify-core-flows.md`
+**Output:** `jaan-to/outputs/qa/cases/01-your-project-core-flows/01-your-project-core-flows.md`
 
 Contains: 74 BDD test cases in Gherkin format, quality checklist (10-point), traceability tags (@REQ-{id}), 30%+ negative test coverage.
 
@@ -662,10 +662,10 @@ Contains: 74 BDD test cases in Gherkin format, quality checklist (10-point), tra
 Generate runnable Vitest and Playwright test files.
 
 ```bash
-/jaan-to:qa-test-generate "jaan-to/outputs/qa/cases/01-jaanify-core-flows/01-jaanify-core-flows.md"
+/jaan-to:qa-test-generate "jaan-to/outputs/qa/cases/01-your-project-core-flows/01-your-project-core-flows.md"
 ```
 
-**Output:** `jaan-to/outputs/qa/test-generate/01-jaanify-core-flows/`
+**Output:** `jaan-to/outputs/qa/test-generate/01-your-project-core-flows/`
 - `unit/` — Service-level unit tests
 - `integration/` — API endpoint tests
 - `e2e/` — Playwright page objects + tests
@@ -691,7 +691,7 @@ Execute tests, diagnose failures, and auto-fix simple issues.
 
 > Auto-detects test framework from your project. Runs tests, reports results, offers to fix failures.
 
-**Jaanify result:** 77 tests passing on first run after auto-fixes.
+> Test count and pass rate depend on your project's scope and complexity.
 
 > **Fast Track:** Yes | **Full Track:** Yes
 
@@ -725,7 +725,7 @@ Generate CI/CD workflows, Dockerfiles, and deployment configs.
 
 **Output:** GitHub Actions workflows, Docker Compose, Dockerfiles — all customized to your stack.
 
-**Jaanify generated:**
+**Example output:**
 - CI pipeline (lint, test, build, security scan)
 - Health monitoring workflow
 - Docker multi-stage build optimized for Node.js + pnpm
@@ -843,27 +843,27 @@ These skills can run in the same session simultaneously:
 
 ---
 
-## Real-World Example: Jaanify
+## Real-World Example
 
-Jaanify was built entirely with jaan-to across 11 development cycles. Here's the condensed path:
+Here's a condensed path showing how a typical project progresses through co-evolution cycles:
 
-| Cycle | Skills Used | What Was Built |
+| Cycle | Skills Used | What Gets Built |
 |-------|------------|----------------|
-| 1 | pm-research-about, pm-prd-write, pm-story-write | Market research, MVP PRD, 7 user stories |
-| 2 | ux-flowchart-generate, backend-task-breakdown, frontend-task-breakdown | User flows, 28 backend tasks, 68 frontend tasks |
-| 3 | backend-data-model, backend-api-contract | 7-entity PostgreSQL schema, 21-endpoint OpenAPI spec |
-| 4-5 | backend-scaffold, frontend-scaffold, frontend-design | Full API code, React components, 3 interactive previews |
-| 6-7 | dev-project-assemble, dev-output-integrate | Turborepo monorepo with apps/api and apps/web wired |
-| 8-9 | qa-test-cases, qa-test-generate, qa-test-run | 74 BDD cases, runnable tests, 77 tests passing |
-| 10 | devops-infra-scaffold, devops-deploy-activate | GitHub Actions CI, Docker, Railway + Vercel config |
-| 11 | sec-audit-remediate, dev-verify, release-iterate-changelog | Security fixes, first green build, changelog v0.3.0 |
+| 1 | pm-research-about, pm-prd-write, pm-story-write | Market research, MVP PRD, user stories |
+| 2 | ux-flowchart-generate, backend-task-breakdown, frontend-task-breakdown | User flows, backend tasks, frontend tasks |
+| 3 | backend-data-model, backend-api-contract | Database schema, OpenAPI spec |
+| 4-5 | backend-scaffold, frontend-scaffold, frontend-design | Full API code, React components, interactive previews |
+| 6-7 | dev-project-assemble, dev-output-integrate | Monorepo wired with all generated code |
+| 8-9 | qa-test-cases, qa-test-generate, qa-test-run | BDD test cases, runnable tests passing |
+| 10 | devops-infra-scaffold, devops-deploy-activate | CI/CD pipeline, Docker, deployment config |
+| 11 | sec-audit-remediate, dev-verify, release-iterate-changelog | Security fixes, green build, changelog |
 
-**Result:**
-- Full-stack AI Task Manager (Next.js 15 + Fastify 5 + PostgreSQL 16)
-- 42 TypeScript source files (web) + 33 (API)
-- 77 tests passing, CI pipeline green
+**Typical result:**
+- Full-stack application (YOUR_TECH_STACK)
+- Generated source files for both frontend and backend
+- Tests passing, CI pipeline green
 - Docker containerized, deployment configured
-- 42 skill scorecards tracking quality
+- Per-skill scorecards tracking quality
 
 ---
 
@@ -882,4 +882,4 @@ Once your MVP is live, use these skills to iterate:
 
 ---
 
-*Generated with [jaan-to](https://github.com/parhumm/jaan-to) v6.3.1 | [Jaanify](https://github.com/parhumm/jaanify) project*
+*Generated with [jaan-to](https://github.com/parhumm/jaan-to) | YOUR_PROJECT_NAME project*
