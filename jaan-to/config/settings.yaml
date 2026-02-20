@@ -27,6 +27,9 @@ issue_report_submit: true
 # Language Preference
 language: "en"
 
+# Agent Teams (required for team-ship skill)
+agent_teams_enabled: true
+
 # Tech Stack Configuration
 # Edit jaan-to/context/tech.md to define your project's tech stack
 # Skills will automatically reference it in generated outputs
