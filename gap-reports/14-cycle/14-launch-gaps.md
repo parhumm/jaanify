@@ -7,7 +7,7 @@ previous_cycle: 13
 gap_summary:
   total: 18
   p0: 0
-  p1: 3
+  p1: 1  # corrected in C15: L-32 and L-33 were false positives
   p2: 2
   p3: 13
   new_skills_needed: 0
@@ -126,41 +126,15 @@ Cycle 14 focused on one objective: integrate login/auth scaffolds from C13's tea
 
 ---
 
-#### Gap L-32: Auth Service Stubs Still TODO
+#### ~~Gap L-32: Auth Service Stubs Still TODO~~ **FALSE POSITIVE — Corrected in C15**
 
-| Field | Detail |
-|-------|--------|
-| **What** | `auth.service.ts` functions (`googleAuth`, `refreshToken`, `register`, `logout`) are stubs. Auth routes return errors at runtime. |
-| **Exists in jaan-to?** | Yes — `backend-service-implement` (tested, scored 4.7/5) |
-| **Related gap** | Dependency for L-31 |
-| **Blocks** | All auth flows (login, refresh, register, logout) |
-
-**Key points:**
-- Route handlers call `authService.googleAuth()`, `authService.refreshToken()`, etc.
-- These functions need: Google token exchange, Prisma user upsert, token pair generation, refresh token rotation
-- `auth-tokens.ts` already has `generateTokenPair()` and `verifyRefreshToken()` — service layer needs to compose these
-
-**Expected outputs:**
-- Full implementation of `googleAuth()`, `refreshToken()`, `register()`, `logout()` in `auth.service.ts`
+> **ERRATA (C15)**: This gap was incorrectly reported. `auth.service.ts` contains **312 lines of real production code**, not stubs. All four functions (`googleAuth`, `refreshToken`, `register`, `logout`) are fully implemented with Google OAuth exchange, Prisma user upsert, token pair generation, guest task migration, and refresh token rotation. The C14 assessment relied on C13's scaffold description without reading the actual file.
 
 ---
 
-#### Gap L-33: /users/me Endpoint Missing
+#### ~~Gap L-33: /users/me Endpoint Missing~~ **FALSE POSITIVE — Corrected in C15**
 
-| Field | Detail |
-|-------|--------|
-| **What** | Auth store `hydrate()` calls `GET /users/me` but no route handler exists. Session hydration fails on page load. |
-| **Exists in jaan-to?** | Yes — `backend-scaffold` or `backend-service-implement` (tested) |
-| **Related gap** | Blocks L-29 resolution (session UI depends on hydration) |
-| **Blocks** | Session persistence, NavbarAuth showing user info |
-
-**Key points:**
-- Auth store calls `apiClient.get("/users/me")` to check if session is valid
-- Needs a route that reads `request.userId` (set by auth plugin) and returns user profile
-- Prisma User model exists — just needs a thin route + service function
-
-**Expected outputs:**
-- `GET /v1/users/me` route returning user profile from Prisma
+> **ERRATA (C15)**: This gap was incorrectly reported. `apps/api/src/routes/users/index.ts` **exists** with GET, PATCH, and DELETE handlers for `/users/me`. The route reads `request.userId` from the auth plugin and returns the user profile via `userService.getMe()`.
 
 ---
 
@@ -264,8 +238,8 @@ Cycle 14 focused on one objective: integrate login/auth scaffolds from C13's tea
 | Priority | Gap ID | Gap | Exists in jaan-to? | Blocks |
 |----------|--------|-----|---------------------|--------|
 | P1 | L-31 | OAuth Callback Missing | `backend-service-implement` (tested) | Login flow |
-| P1 | L-32 | Auth Service Stubs TODO | `backend-service-implement` (tested) | All auth flows |
-| P1 | L-33 | /users/me Missing | `backend-scaffold` (tested) | Session hydration |
+| ~~P1~~ | ~~L-32~~ | ~~Auth Service Stubs TODO~~ | **FALSE POSITIVE** — auth.service.ts has 312 lines of real code | ~~All auth flows~~ |
+| ~~P1~~ | ~~L-33~~ | ~~/users/me Missing~~ | **FALSE POSITIVE** — route exists at apps/api/src/routes/users/index.ts | ~~Session hydration~~ |
 | P2 | L-06 | Monetization (Stripe) | No dedicated skill | Revenue |
 | P2 | L-07 | i18n Infrastructure | Partial | Multi-language |
 | P3 | L-20 | CI/CD Failure Masking | `devops-infra-scaffold` (impr.) | Security gates |

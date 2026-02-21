@@ -91,8 +91,8 @@
 | Gap ID | Priority | Gap | Source |
 |--------|----------|-----|--------|
 | L-31 | P1 | Google OAuth callback route missing | Login page generates OAuth URL but `/login/callback` handler doesn't exist |
-| L-32 | P2 | Auth service stubs still TODO | `auth.service.ts` functions (googleAuth, refreshToken, register, logout) need real implementation |
-| L-33 | P2 | /users/me endpoint missing | Auth store `hydrate()` calls `GET /users/me` but no route handler exists |
+| ~~L-32~~ | ~~P2~~ | ~~Auth service stubs still TODO~~ | **FALSE POSITIVE (C15)** — auth.service.ts has 312 lines of real production code |
+| ~~L-33~~ | ~~P2~~ | ~~/users/me endpoint missing~~ | **FALSE POSITIVE (C15)** — route exists at apps/api/src/routes/users/index.ts |
 | L-34 | P3 | Node.js v18 vs v22 engine mismatch | Local Node v18.20.6 vs `engines: >=22.0.0` — builds pass but production should match |
 | L-35 | P3 | Integration manifest not generated | dev-output-integrate still doesn't write `.last-integration-manifest` |
 
