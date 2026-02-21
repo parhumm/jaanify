@@ -20,3 +20,11 @@ export const authTokensSchema = z.object({
   expires_in: z.number().int(),
 });
 export type AuthTokens = z.infer<typeof authTokensSchema>;
+
+// Response schema for route handlers (no refresh_token in body — cookie only)
+export const authResponseSchema = z.object({
+  access_token: z.string(),
+  token_type: z.literal("Bearer"),
+  expires_in: z.number().int(),
+});
+export type AuthResponse = z.infer<typeof authResponseSchema>;

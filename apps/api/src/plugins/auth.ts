@@ -2,6 +2,7 @@ import type { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import fp from "fastify-plugin";
 import * as jose from "jose";
 import { verifyAccessToken } from "../lib/auth-tokens.js";
+import { ACCESS_COOKIE_NAME } from "../lib/secure-cookies.js";
 
 declare module "fastify" {
   interface FastifyRequest {
@@ -39,9 +40,22 @@ async function authPluginFn(fastify: FastifyInstance) {
       // Allow routes explicitly marked as public via route config
       if (request.routeOptions.config?.public === true) return;
 
-      // Extract Authorization header
+      // Extract token from header OR cookie
+      let token: string | undefined;
+
+      // Priority 1: Authorization header (API clients, mobile apps)
       const authHeader = request.headers.authorization;
-      if (!authHeader) {
+      if (authHeader?.startsWith("Bearer ")) {
+        token = authHeader.slice(7);
+      }
+
+      // Priority 2: Access token cookie (browser with HttpOnly cookies)
+      if (!token) {
+        token = request.cookies?.[ACCESS_COOKIE_NAME];
+      }
+
+      // No token found in either location
+      if (!token) {
         return reply
           .status(401)
           .header("Content-Type", "application/problem+json")
@@ -50,27 +64,10 @@ async function authPluginFn(fastify: FastifyInstance) {
             status: 401,
             title: "Authentication Required",
             detail:
-              "Missing Authorization header. Expected: Bearer <token>",
+              "Missing access token. Provide via Authorization header or cookie.",
             instance: request.url,
           });
       }
-
-      // Validate Bearer scheme
-      if (!authHeader.startsWith("Bearer ")) {
-        return reply
-          .status(401)
-          .header("Content-Type", "application/problem+json")
-          .send({
-            type: "https://api.jaanify.com/errors/authentication-required",
-            status: 401,
-            title: "Authentication Required",
-            detail:
-              "Invalid Authorization scheme. Expected: Bearer <token>",
-            instance: request.url,
-          });
-      }
-
-      const token = authHeader.slice(7);
 
       try {
         const payload = await verifyAccessToken(token);

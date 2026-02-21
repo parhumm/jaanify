@@ -85,59 +85,91 @@ export function clearRefreshTokenCookie(
   });
 }
 
-// ── FRONTEND: In-memory token store pattern ──────────────────────────
+// ── Access token cookie helpers ──────────────────────────────────────
+
+import type { AuthTokens } from "./auth-tokens.js";
+
+export const ACCESS_COOKIE_NAME = "jaanify_access";
+export const REFRESH_COOKIE_NAME = "jaanify_refresh";
+
+export interface AccessCookieOptions {
+  /** Cookie name. Default: "jaanify_access" */
+  name?: string;
+  /** Cookie max-age in seconds. Default: 900 (15 minutes) */
+  maxAge?: number;
+  /** Cookie domain. Default: undefined (current host) */
+  domain?: string;
+  /** Cookie path. Default: "/" (sent on all requests for middleware check) */
+  path?: string;
+}
+
+const ACCESS_DEFAULTS: Required<AccessCookieOptions> = {
+  name: ACCESS_COOKIE_NAME,
+  maxAge: 900, // 15 minutes — matches ACCESS_TOKEN_TTL
+  domain: "",
+  path: "/",
+};
 
 /**
- * FRONTEND GUIDANCE (TypeScript/React pattern):
+ * Set the access token as an HttpOnly Secure SameSite=Lax cookie.
  *
- * Replace localStorage usage with an in-memory store:
- *
- * ```ts
- * // stores/auth-store.ts (Zustand)
- * import { create } from "zustand";
- *
- * interface AuthState {
- *   accessToken: string | null;
- *   setAccessToken: (token: string | null) => void;
- * }
- *
- * export const useAuthStore = create<AuthState>((set) => ({
- *   accessToken: null,
- *   setAccessToken: (token) => set({ accessToken: token }),
- * }));
- *
- * // api-client.ts — Axios interceptor
- * import axios from "axios";
- * import { useAuthStore } from "./stores/auth-store";
- *
- * const api = axios.create({ baseURL: "/api/v1", withCredentials: true });
- *
- * api.interceptors.request.use((config) => {
- *   const token = useAuthStore.getState().accessToken;
- *   if (token) config.headers.Authorization = `Bearer ${token}`;
- *   return config;
- * });
- *
- * // On 401, attempt silent refresh via httpOnly cookie:
- * api.interceptors.response.use(
- *   (res) => res,
- *   async (error) => {
- *     if (error.response?.status === 401 && !error.config._retry) {
- *       error.config._retry = true;
- *       const { data } = await axios.post("/api/v1/auth/refresh", {}, { withCredentials: true });
- *       useAuthStore.getState().setAccessToken(data.access_token);
- *       error.config.headers.Authorization = `Bearer ${data.access_token}`;
- *       return api(error.config);
- *     }
- *     return Promise.reject(error);
- *   }
- * );
- * ```
- *
- * KEY RULES:
- * - NEVER use localStorage.setItem("jaanify_access_token", ...)
- * - NEVER use localStorage.getItem("jaanify_access_token")
- * - Access token lives in Zustand store (or module-level variable)
- * - Refresh token lives in httpOnly cookie (set by backend)
- * - On page refresh, access token is null → silent refresh via cookie
+ * SameSite=Lax allows the cookie to be sent on top-level navigations
+ * (GET requests), which is needed for Next.js middleware to check
+ * session existence on page load.
  */
+export function setAccessTokenCookie(
+  reply: FastifyReply,
+  accessToken: string,
+  options?: AccessCookieOptions,
+): void {
+  const opts = { ...ACCESS_DEFAULTS, ...options };
+
+  reply.setCookie(opts.name, accessToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    maxAge: opts.maxAge,
+    path: opts.path,
+    ...(opts.domain ? { domain: opts.domain } : {}),
+  });
+}
+
+/**
+ * Clear the access token cookie.
+ */
+export function clearAccessTokenCookie(
+  reply: FastifyReply,
+  options?: AccessCookieOptions,
+): void {
+  const opts = { ...ACCESS_DEFAULTS, ...options };
+
+  reply.clearCookie(opts.name, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    path: opts.path,
+    ...(opts.domain ? { domain: opts.domain } : {}),
+  });
+}
+
+// ── Convenience wrappers ────────────────────────────────────────────
+
+/**
+ * Set both access and refresh token cookies.
+ * Call this after generating a token pair in any auth route.
+ */
+export function setAuthCookies(
+  reply: FastifyReply,
+  tokens: AuthTokens,
+): void {
+  setAccessTokenCookie(reply, tokens.access_token);
+  setRefreshTokenCookie(reply, tokens.refresh_token!);
+}
+
+/**
+ * Clear both auth cookies. Call this during logout.
+ */
+export function clearAuthCookies(reply: FastifyReply): void {
+  clearAccessTokenCookie(reply);
+  clearRefreshTokenCookie(reply);
+}

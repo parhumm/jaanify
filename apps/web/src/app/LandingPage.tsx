@@ -2,15 +2,17 @@
 
 import { useRef, useEffect, useState, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import NavbarAuth from "@/components/NavbarAuth";
+import { useAuthStore } from "@/stores/auth-store";
 
-/* ────────────────────────────────────────────────
-   Jaanify Landing Page
-   "Give soul to your tasks"
-
-   Sections: Hero → Features → How It Works → CTA
-   Palette: sage / cream / terracotta (from globals.css tokens)
-   Font: DM Sans (loaded via layout.tsx)
-   ──────────────────────────────────────────────── */
+/**
+ * Updated LandingPage with auth-aware navbar
+ *
+ * Changes from original LandingPage.tsx:
+ * 1. Import NavbarAuth and useAuthStore
+ * 2. Navbar: added NavbarAuth component next to "Get Started" button
+ * 3. Hydrate auth state on mount so NavbarAuth can show Sign In / avatar
+ */
 
 // ── Scroll-triggered fade-in hook ──────────────
 function useFadeIn<T extends HTMLElement>() {
@@ -205,6 +207,13 @@ const steps = [
 
 // ── Main Landing Page Component ─────────────────
 export default function LandingPage() {
+  const hydrate = useAuthStore((s) => s.hydrate);
+
+  // Hydrate auth state on mount so NavbarAuth knows if user is signed in
+  useEffect(() => {
+    hydrate();
+  }, [hydrate]);
+
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
       {/* Skip to content */}
@@ -224,18 +233,23 @@ export default function LandingPage() {
           <span className="text-xl font-bold tracking-tight text-(--color-sage-dark)">
             Jaanify
           </span>
-          <a
-            href="/onboarding"
-            className={cn(
-              "inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-medium",
-              "bg-(--color-sage) text-white",
-              "hover:bg-(--color-sage-dark) active:scale-[0.98]",
-              "transition-all duration-150 ease-out",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-sage) focus-visible:ring-offset-2"
-            )}
-          >
-            Get Started
-          </a>
+
+          {/* ---- Auth-aware right side ---- */}
+          <div className="flex items-center gap-3">
+            <NavbarAuth />
+            <a
+              href="/onboarding"
+              className={cn(
+                "inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-medium",
+                "bg-(--color-sage) text-white",
+                "hover:bg-(--color-sage-dark) active:scale-[0.98]",
+                "transition-all duration-150 ease-out",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-sage) focus-visible:ring-offset-2"
+              )}
+            >
+              Get Started
+            </a>
+          </div>
         </div>
       </nav>
 
@@ -306,8 +320,10 @@ export default function LandingPage() {
                     />
                   </svg>
                 </a>
+
+                {/* "Sign In" as secondary hero CTA */}
                 <a
-                  href="#features"
+                  href="/login"
                   className={cn(
                     "inline-flex items-center justify-center px-7 py-3.5 rounded-xl text-base font-medium",
                     "bg-(--color-cream-dark) text-(--color-text)",
@@ -317,7 +333,7 @@ export default function LandingPage() {
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-sage) focus-visible:ring-offset-2"
                   )}
                 >
-                  See How It Works
+                  Sign In
                 </a>
               </div>
             </FadeIn>
