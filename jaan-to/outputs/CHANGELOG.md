@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-02-20
+
+### Added
+
+- Login/auth UX fix initiative via team-ship orchestration (Cycle 13)
+- Login page scaffold: dedicated `/login` route with Google OAuth, ADHD-friendly minimal design, redirect parameter support (F-01, F-05)
+- Auth middleware scaffold: Next.js middleware protecting `/dashboard` and `/tasks/*` routes with redirect to `/login` (F-03)
+- Auth store scaffold: Zustand store with session hydration, login/logout, and user state management (F-04)
+- Navbar auth component scaffold: user avatar + dropdown when authenticated, "Sign In" button when not (F-02, F-06)
+- Landing page updates scaffold: "Sign In" button added to navbar alongside "Get Started" (F-02)
+- API client updates scaffold: cookie-based auth replacing localStorage token handling (F-07)
+- Backend task breakdown: 9 tasks identified for cookie-based token management, OAuth callback updates, and session handling
+- Backend scaffold: HttpOnly cookie wrappers (setAuthCookies/clearAuthCookies), route modifications for cookie-based auth
+- PRD-02: Login/Auth UX Fix — 7 features (F-01 through F-07), 5 user stories (US-08 through US-12)
+- Research: Next.js 15 auth best practices, WCAG 2.2 SC 3.3.8 accessible authentication, ADHD-friendly login patterns
+
+### Changed
+
+- Upgrade jaan-to plugin from v7.0.0 to v7.2.0 — 1 new skill (team-ship), Agent Skills open standard compatibility, 13 security findings remediated
+- Update config.md to Cycle 13, enable agent_teams_enabled for team-ship
+
+### Security
+
+- Backend cookie strategy: `jaanify_access` (HttpOnly, Secure, SameSite=Lax, 15min) + `jaanify_refresh` (HttpOnly, Secure, SameSite=Strict, 7d)
+- Migration from localStorage token storage to HttpOnly cookies (XSS mitigation)
+- WCAG 2.2 SC 3.3.8 compliant accessible authentication (no cognitive function tests)
+
 ## [0.3.0] - 2026-02-16
 
 ### Added
