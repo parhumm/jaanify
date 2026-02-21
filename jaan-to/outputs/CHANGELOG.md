@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-02-21
+
+### Added
+
+- OAuth callback page (`/login/callback`): handles Google OAuth redirect, exchanges code for tokens via API, hydrates user session, redirects to destination (Cycle 15)
+- App-level auth hydration: `Providers.tsx` calls `hydrate()` on mount so sessions persist across page refreshes via HttpOnly cookies
+
+### Fixed
+
+- Corrected C14 gap analysis: L-32 (auth service stubs) and L-33 (/users/me missing) were false positives — both were already fully implemented
+- Auth flow now complete end-to-end: Continue with Google → Google consent → callback → /dashboard
+
+### Changed
+
+- Upgrade jaan-to submodule to v7.3.0-1-g06cb107 (Codex multi-runtime support)
+
 ## [0.5.0] - 2026-02-21
 
 ### Added
