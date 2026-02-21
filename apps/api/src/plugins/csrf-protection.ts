@@ -73,11 +73,16 @@ async function csrfPluginFn(fastify: FastifyInstance) {
       const mutationMethods = ["POST", "PUT", "PATCH", "DELETE"];
       if (!mutationMethods.includes(request.method)) return;
 
-      // Skip CSRF for auth endpoints that use OAuth code exchange
-      // (no cookie-based session at that point)
+      // Skip CSRF for auth endpoints — these are protected by SameSite
+      // cookie policy (Strict for refresh, Lax for access) which is the
+      // primary CSRF defense layer. Double-submit tokens can't work for
+      // these flows because: OAuth code exchange has no prior session,
+      // and token refresh happens automatically without user interaction.
       const csrfExemptPaths = [
         "/v1/auth/google",
         "/v1/auth/register",
+        "/v1/auth/refresh",
+        "/v1/auth/logout",
       ];
       if (csrfExemptPaths.some((p) => request.url.startsWith(p))) return;
 
