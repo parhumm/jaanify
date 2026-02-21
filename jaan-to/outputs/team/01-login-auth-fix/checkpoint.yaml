@@ -1,0 +1,55 @@
+# Team checkpoint — enables --resume
+team_id: "01-login-auth-fix"
+track: "fast"
+initiative: "Fix Jaanify login/auth UX: add login page with Google OAuth, wire auth flow, add auth guards on protected routes, add session state to navbar"
+created_at: "2026-02-20T14:08:00Z"
+updated_at: "2026-02-20T14:30:00Z"
+
+phase: 4
+status: "completed"
+
+roles:
+  pm:
+    status: "done"
+    model: "inherit"
+    outputs:
+      prd_path: "jaan-to/outputs/pm/prd/02-login-auth/02-prd-login-auth.md"
+      stories_path: "jaan-to/outputs/pm/stories/02-login-auth/02-stories-login-auth.md"
+      research_path: "jaan-to/outputs/pm/research/02-login-auth/02-login-auth-research.md"
+    completed_skills: [pm-research-about, pm-prd-write, pm-story-write]
+    shutdown: true
+    note: "Lead handled PM work directly due to WebSearch permission issues"
+
+  backend:
+    status: "done"
+    model: "opus"
+    outputs:
+      task_breakdown_path: "jaan-to/outputs/backend/tasks/02-login-auth/02-task-breakdown-login-auth.md"
+      scaffold_path: "jaan-to/outputs/backend/scaffold/02-login-auth/02-login-auth-scaffold.ts"
+    completed_skills: [backend-task-breakdown, backend-scaffold]
+    shutdown: true
+
+  frontend:
+    status: "done"
+    model: "opus"
+    outputs:
+      scaffold_path: "jaan-to/outputs/frontend/scaffold/02-login-auth/"
+    completed_skills: [frontend-scaffold]
+    shutdown: true
+
+  qa:
+    status: "deferred"
+    note: "Scaffolds need integration into apps/ before test generation"
+
+  devops:
+    status: "skipped"
+    note: "Infrastructure already exists (Docker, CI/CD, workflows)"
+
+pending_roles: []
+
+artifacts:
+  prd_path: "jaan-to/outputs/pm/prd/02-login-auth/02-prd-login-auth.md"
+  entities: "User, Session"
+  total_output_lines: 2200
+  total_files: 8
+  commits: ["5175f65", "462345a", "f66c20e"]
