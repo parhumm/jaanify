@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { googleAuthRequestSchema, authResponseSchema, registerRequestSchema } from "./auth.schema.js";
+import { googleAuthRequestSchema, authResponseSchema, registerRequestSchema, problemDetailSchema } from "./auth.schema.js";
 import * as authService from "./auth.service.js";
 import { setAuthCookies, clearAuthCookies } from "../../lib/secure-cookies.js";
 import { getRefreshToken } from "../../lib/cookie-helpers.js";
@@ -30,7 +30,7 @@ export async function authRoutes(fastify: FastifyInstance) {
   // POST /auth/refresh — Read cookie, set new cookies
   fastify.post("/auth/refresh", {
     schema: {
-      response: { 200: authResponseSchema },
+      response: { 200: authResponseSchema, 401: problemDetailSchema },
     },
     handler: async (request, reply) => {
       const body = request.body as { refresh_token?: string } | undefined;

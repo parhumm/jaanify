@@ -28,3 +28,12 @@ export const authResponseSchema = z.object({
   expires_in: z.number().int(),
 });
 export type AuthResponse = z.infer<typeof authResponseSchema>;
+
+// RFC 9457 Problem Details error response
+export const problemDetailSchema = z.object({
+  type: z.string(),
+  status: z.number().int(),
+  title: z.string(),
+  detail: z.string(),
+  instance: z.string(),
+});
