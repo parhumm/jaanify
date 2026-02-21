@@ -56,8 +56,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check for session cookie
-  const sessionCookie = request.cookies.get("access_token");
+  // Check for session cookie (matches backend ACCESS_COOKIE_NAME)
+  const sessionCookie = request.cookies.get("jaanify_access");
 
   if (!sessionCookie?.value) {
     const loginUrl = new URL("/login", request.url);
