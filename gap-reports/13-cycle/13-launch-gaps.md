@@ -342,4 +342,24 @@ G-TS-01 → G-TS-02 → G-TS-03 → Mature team-ship
 
 ---
 
+## GitHub Issues
+
+| Gap ID | Title | Issue |
+|--------|-------|-------|
+| L-06 | Monetization (Stripe) | [#79](https://github.com/parhumm/jaan-to/issues/79) (open, deferred) |
+| L-07 | i18n Infrastructure | [#80](https://github.com/parhumm/jaan-to/issues/80) (open, deferred) |
+| L-20/21/22 | CI/CD Hardening | [#114](https://github.com/parhumm/jaan-to/issues/114) (open) |
+| L-23 | Dependency Mismatches | [#115](https://github.com/parhumm/jaan-to/issues/115) (open) |
+| G-TS-01–05 | team-ship improvements | [#149](https://github.com/parhumm/jaan-to/issues/149) (**NEW — C13**) |
+| L-30 | Scaffold Integration | Addressable with existing `dev-output-integrate` |
+| L-24 | Web Unit Tests | Addressable with existing `qa-test-generate` |
+| L-25 | Turbo Remote Cache | Addressable with existing `devops-deploy-activate` |
+
+- **Created by:** `gaps-critical-issue` → `gh issue create`
+- **Date:** 2026-02-20
+- **Priorities checked:** P0, P1, P3 (team-ship findings)
+- **Issues created:** 1 ([#149](https://github.com/parhumm/jaan-to/issues/149))
+
+---
+
 > **Bottom line:** Cycle 13 responded to a user-reported P0: "I can't find login and use." The team-ship skill orchestrated a multi-role team that produced 8 scaffold files (~2200 lines) covering login page, auth middleware, auth store, navbar session state, and cookie-based token management. These scaffolds are ready but NOT yet integrated — `dev-output-integrate` is the single step between the current state and a working login flow. team-ship scored 3.6/5 in its first test, revealing 5 improvement areas (permission delegation, brownfield mode, stuck-agent recovery, model enforcement, QA flow). The co-evolution loop continues: 13 cycles, 44 skills cataloged, 43 tested, average 4.53/5.
