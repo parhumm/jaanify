@@ -393,7 +393,7 @@ G-TS-01 → G-TS-02 → G-TS-03 → Mature team-ship
 | L-20/21/22 | CI/CD Hardening | [#114](https://github.com/parhumm/jaan-to/issues/114) (open) |
 | L-23 | Dependency Mismatches | [#115](https://github.com/parhumm/jaan-to/issues/115) (open) |
 | G-TS-01–05 | team-ship improvements | [#149](https://github.com/parhumm/jaan-to/issues/149) (open) |
-| L-31/32/33 | Auth service implementation | To be created via `gaps-critical-issue` |
+| L-31/32/33 | Auth service implementation | [#151](https://github.com/parhumm/jaan-to/issues/151) (**NEW — C14**) |
 | L-34/35 | Version + manifest | P3 — no issue needed |
 
 ---
