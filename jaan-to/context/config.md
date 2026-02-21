@@ -91,7 +91,7 @@ Default set (7 languages):
 - **Project Type**: SaaS — AI Task Manager
 - **Product Name**: Jaanify
 - **Team Size**: Solo (AI-assisted via jaan-to)
-- **Stage**: Launch (Cycle 14)
-- **jaan-to Version**: v7.2.0-1-g3c10276 (44 skill directories)
+- **Stage**: Launch (Cycle 15)
+- **jaan-to Version**: v7.3.0-1-g06cb107 (44 skill directories)
 - **Primary Domain**: Productivity / Task Management
 - **Target Platforms**: Web (Next.js), Android (Kotlin), API (Fastify)
